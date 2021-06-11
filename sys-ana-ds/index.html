@@ -1,0 +1,2767 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"megalomania.icu","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="课是很水 内容却很实用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="系统分析设计—提纲">
+<meta property="og:url" content="https://megalomania.icu/sys-ana-ds/index.html">
+<meta property="og:site_name" content="Megalomania">
+<meta property="og:description" content="课是很水 内容却很实用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/1.jpg">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/2.jpg">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/3.jpg">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/4.jpg">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/5.jpg">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/6.jpg">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/7.jpg">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/8.jpg">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/9.jpg">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/10.jpg">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/11.jpg">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/12.jpg">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/13.jpg">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210508002035837.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210508002319716.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210508003207712.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210508003252730.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210508003427192.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210508003630384.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210508005033134.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210508010810665.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210508010937427.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210508011032587.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210508011113076.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210508202958661.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210508203109627.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210508204932015.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210508205021432.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210508205119187.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210508205713335.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210508210234668.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509212711389.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509212850392.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509213018462.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509213213183.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509213336957.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509213405022.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509213449543.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509213533259.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509083107920.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509213616096.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509213656471.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210508214256262.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210508215208019.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210508215430602.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210508221100033.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509001529707.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509001901359.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509090116825.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509090807207.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509091201477.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509091805313.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509092012769.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509092104264.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509092727973.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509093015234.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509093241885.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509124719077.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509125144993.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509125914206.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509130601041.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509142926329.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509143651995.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509143846461.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509144032824.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509165624277.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509165714095.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509171441946.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509171622919.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509171808463.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509202631083.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509202833580.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509203200343.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509204236343.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509205137253.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509205230251.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509205409552.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509205514965.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509205828918.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509205954962.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509210743974.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509210853231.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509211028899.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509211111361.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509211235645.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509211247963.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509211845608.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509212239709.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509212305735.png">
+<meta property="og:image" content="https://cdn.megalomania.icu/xtfxsj_images/image-20210509212341592.png">
+<meta property="article:published_time" content="2021-06-11T05:42:34.000Z">
+<meta property="article:modified_time" content="2021-06-11T06:08:37.100Z">
+<meta property="article:author" content="Shaw Wei">
+<meta property="article:tag" content="复习">
+<meta property="article:tag" content="软件工程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.megalomania.icu/xtfxsj_images/1.jpg">
+
+<link rel="canonical" href="https://megalomania.icu/sys-ana-ds/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>系统分析设计—提纲 | Megalomania</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <a target="_blank" rel="noopener" href="https://github.com/Shaw-W" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Megalomania</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">C.E.P.J.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+    
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://megalomania.icu/sys-ana-ds/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Shaw Wei">
+      <meta itemprop="description" content="Just do it.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Megalomania">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          系统分析设计—提纲
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-06-11 13:42:34 / 修改时间：14:08:37" itemprop="dateCreated datePublished" datetime="2021-06-11T13:42:34+08:00">2021-06-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">软件工程</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/sys-ana-ds/" class="post-meta-item leancloud_visitors" data-flag-title="系统分析设计—提纲" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>30k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>28 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>课是很水</p>
+<p>内容却很实用</p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="Chapter-1-概述"><a href="#Chapter-1-概述" class="headerlink" title="Chapter 1. 概述"></a>Chapter 1. 概述</h1><h2 id="一、系统的概念与特征"><a href="#一、系统的概念与特征" class="headerlink" title="一、系统的概念与特征"></a>一、系统的概念与特征</h2><p>系统是一组为实现某些结果相互联系、相互作用的部件的集合体。</p>
+<ol>
+<li><strong>系统具有整体性</strong>。整体性是系统的最基本特征，也是观察和分析系统最基本的思想和方法。系统是一个整体，它不是各个部分的简单相加，系统的整体功能是各部分在孤立状态下所没有的。<strong>一般来说，系统的整体功能大于组成系统的各部分的功能之和。</strong></li>
+<li><strong>系统具有目的性</strong>。任何系统都具有某种目的，都要实现一定的功能，这也是区别不同系统的标志。系统的目的一般通过更具体的目标来实现，系统的多个目标有时不完全一致，甚至互相矛盾，这就需要协调，寻求平衡或折中的办法，从而收到整体最佳效果。</li>
+<li><strong>系统具有相关性</strong>。变化统内各部分之间存在着相互依赖和相互制约的特定关系，某一个部分的变化会影响其他部分实现功能。</li>
+<li><strong>系统具有环境适应性</strong>。任何系统都存在于一定的环境中，必然要与外界进行物质、能量和信息的交换，外界环境的变化会相应地引起系统功能和内部组成的变化。<strong>系统具有适应环境的变化，保持原有功能的特性。</strong></li>
+<li><strong>系统具有层次性</strong>。系统无论大小，都可以分解为一系列的子系统，并存在一定的层次结构。<strong>系统各个层次具有独自的功能，他们通过相互联系、相互作用共同完成系统的功能。</strong></li>
+</ol>
+<h2 id="二、系统分析与设计方法"><a href="#二、系统分析与设计方法" class="headerlink" title="二、系统分析与设计方法"></a>二、系统分析与设计方法</h2><h3 id="1-软件危机"><a href="#1-软件危机" class="headerlink" title="1. 软件危机"></a>1. 软件危机</h3><p>缺乏管理软件过程的能力，主要体现在：</p>
+<ol>
+<li>延时</li>
+<li>超出成本</li>
+<li>新的技术和工具的好处难以体现</li>
+</ol>
+<h3 id="2-系统分析与设计"><a href="#2-系统分析与设计" class="headerlink" title="2. 系统分析与设计"></a>2. 系统分析与设计</h3><p>系统的特性归纳了我们分析、解决问题应遵循的基本原则，构成了系统的基本思想。</p>
+<ul>
+<li><strong>系统分析（System Analysis）</strong> 是对一种业务问题域的学习活动，能够在系统解决方案中为提升系统性能和明确业务需求提供良好的建议。 <strong><em>（理解问题域）</em></strong></li>
+<li><strong>系统设计（System Design）</strong> 是对系统分析中已确定的业务需求的说明或者构建一种相关技术的解决方案。 <strong><em>（求可行解）</em></strong></li>
+<li><strong>系统分析与设计的过程本质是一种认知活动</strong>，把设想中的结构落在一个抽象问题域上，对从各种用户那里得到的不同信息进行加工；作出一个逻辑的、一致的规格说明，以产生一个成功的系统。</li>
+</ul>
+<h3 id="3-系统分析的步骤"><a href="#3-系统分析的步骤" class="headerlink" title="3. 系统分析的步骤"></a>3. 系统分析的步骤</h3><ol>
+<li><strong>明确问题，设立目标</strong>：明确要研究问题的性质和范围，提出所要达到的目标，明确约束条件。</li>
+<li><strong>收集资料，制定方案</strong>：收集相关资料，制定解决问题的各种备选方案，预计可能产生的各种结果。</li>
+<li><strong>分析计算，评价比较</strong>：对资料和数据做必要的计算，进行各子系统的分析，再进行系统的整体分析，将各种方案进行评价对比，选择最佳方案。</li>
+<li><strong>检验核实，作出决策</strong>：如果对制定的方案不满意，还可按上述程序反复进行，直到获的满意为止。</li>
+</ol>
+<h2 id="三、软件研发趋势"><a href="#三、软件研发趋势" class="headerlink" title="三、软件研发趋势"></a>三、软件研发趋势</h2><h3 id="1-软件工程"><a href="#1-软件工程" class="headerlink" title="1. 软件工程"></a>1. 软件工程</h3><ul>
+<li>1968年秋，<strong>讨论和制定摆脱“软件危机”的对策</strong>，第一次提出了软件工程。</li>
+<li>软件工程研究和应用如何以系统性的、规范化的、可定量的<strong>过程化方法</strong>去开发和维护软件，以及如何把经过时间考验而证明正确的<strong>管理技术</strong>和当前能够得到的最好的<strong>技术方法</strong>结合起来的学科。</li>
+</ul>
+<h3 id="2-软件工程中的根本和次要问题"><a href="#2-软件工程中的根本和次要问题" class="headerlink" title="2. 软件工程中的根本和次要问题"></a>2. 软件工程中的根本和次要问题</h3><p>现代软件系统中无法规避的内在特性：<strong>复杂性、一致性、可变性和不可见性</strong>。其中<strong>复杂性和可变性是根本问题</strong>。</p>
+<ol>
+<li><strong>复杂性</strong><ul>
+<li>规模上，<strong>软件实体可能比任何由人类创造的其他实体更复杂</strong>；</li>
+<li><strong>软件拥有大量的状态</strong>（gcc运行的瞬间有千万个状态值）,这使得构思、描述和测试非常困难；</li>
+<li>复杂性导致技术实现上的困难，从而又引发<strong>管理上的问题</strong>，它使得全面理解问题变得困难，引起大量的学习和理解上的负担，使开发慢慢演变成灾难。</li>
+</ul>
+</li>
+<li><strong>可变性</strong><ul>
+<li>软件是<strong>纯粹思维活动的产物，可以无限扩展</strong>，并且，<strong>软件的修改更容易</strong>；</li>
+<li><strong>客户对系统功能的要求随时可能变化</strong>，而软件修改更容易，因此往往软件被更改；</li>
+<li>软件的设计和实现<strong>随着技术、开发语言、方法、人的经验习惯等随时可能变化</strong>。</li>
+</ul>
+</li>
+<li><strong>一致性</strong><ul>
+<li>不同人有不同的经验和惯例，而软件工程师必须掌握由不同人设计的系统，其中很多<strong>系统复杂度是随心所欲、毫无规则可言的</strong>；</li>
+<li>新开发的软件，必须遵循各种接口，<strong>软件开发的目标就是兼容性</strong>，很多复杂性来自保持与其他接口的一致性，这是非常困难的。</li>
+</ul>
+</li>
+<li><strong>不可见性</strong><ul>
+<li><strong>软件是不可见的，无法可视化</strong>，难以给人全面、直观的感受，不同于建筑业、机械业等；</li>
+<li>当前的软件表达方式（数据流图、流程控制图等）和建模方法，都<strong>无法详尽展现软件</strong>，无法让不同的人理解一致，这严重阻碍了交流从而<strong>限制了设计和实现过程</strong>。</li>
+</ul>
+</li>
+</ol>
+<h3 id="3-研发趋势"><a href="#3-研发趋势" class="headerlink" title="3. 研发趋势"></a>3. 研发趋势</h3><ol>
+<li>传统IT软件厂商向云服务转型；</li>
+<li>云计算时代软件发生变化；</li>
+<li>多语言混合编程成为常态，新语言不断涌现；</li>
+<li>企业自身软件交付需应对来自市场、协助、开放与安全的多重挑战；</li>
+<li>软件企业的竞争已经从单一产品竞争演进到生态联盟竞争。</li>
+</ol>
+<h2 id="四、DevOps研发模式"><a href="#四、DevOps研发模式" class="headerlink" title="四、DevOps研发模式"></a>四、DevOps研发模式</h2><p>DevOps是软件开发、运维和质量保证三个部门之间的沟通、协作和集成所采用的流程、方法和体系的一个集合，它是人们为了及时生产软件产品或服务，以满足某个业务目标，对开发与运维之间相互依存关系的一利新的理解。</p>
+<h3 id="1-兴起的驱动因素"><a href="#1-兴起的驱动因素" class="headerlink" title="1. 兴起的驱动因素"></a>1. 兴起的驱动因素</h3><ul>
+<li>业务诉求：业务负责人要求加快产品交付的诉求；</li>
+<li>能力基础：大规模使用敏捷软件开发过程与方法；</li>
+<li>技术基础：虚拟化和云计算基础设施日益普遍；</li>
+<li>工程基础：数据中心自动化技术和配置管理工具的普及。</li>
+</ul>
+<h3 id="2-定义DevOps"><a href="#2-定义DevOps" class="headerlink" title="2. 定义DevOps"></a>2. 定义DevOps</h3><p>DevOps是一套实践方法，在保证高质量的前提下缩短系统变更从提交到部署至生产环境的时间。</p>
+<ul>
+<li>部署对系统的变更时，质量很重要：保证方法有上生产环境前跑通自动化测试用例、先让一小部分用户对生产环境的变更进行测试、对新部署的代码密切监控。</li>
+<li>交付机制是高质量的：交付机制应具备高度的可靠性和可重复性。</li>
+<li>两个时间很重要：一是开发人员提交新开发的代码的时间；另一个是代码部署到生产环境的时间。</li>
+<li>目标导向：不拘泥于实践的形式或者是否使用工具，目标是减少从提交代码到部署到生产环境之间的时间。</li>
+<li>不局限于用户测试和部署实践：在需求阶段就包含运维人员的视角，是非常重要的。</li>
+</ul>
+<h3 id="3-DevOps的五个要素"><a href="#3-DevOps的五个要素" class="headerlink" title="3. DevOps的五个要素"></a>3. DevOps的五个要素</h3><ul>
+<li>文化：建立一体化的全功能团队，打破开发（Dev）与技术运营（Ops）隔阂；</li>
+<li>自动化：自动化一切可以自动化的；</li>
+<li>精益：以精益的方式小步快跑，持续改善；</li>
+<li>度量：建立有效的监控与度量手段快速获得反馈，推动产品和团队的持续改进；</li>
+<li>分享：不同职能、不同产品之间分享经验。</li>
+</ul>
+<h3 id="4-DevOps生命周期过程"><a href="#4-DevOps生命周期过程" class="headerlink" title="4. DevOps生命周期过程"></a>4. DevOps生命周期过程</h3><p><img src="https://cdn.megalomania.icu/xtfxsj_images/1.jpg" alt="1"></p>
+<h3 id="5-DevOps与敏捷"><a href="#5-DevOps与敏捷" class="headerlink" title="5. DevOps与敏捷"></a>5. DevOps与敏捷</h3><p>DevOps是敏捷理念从开发领域向运维领域的延伸。</p>
+<ul>
+<li>计划阶段：运维人员为开发人员提供需求，并制定发布计划；</li>
+<li>编码/构建/验证阶段：Scrum、极限编程和精益生产，持续集成、自动化测试等；</li>
+<li>部署阶段：开发团队负责部署、监控部署过程，以及部署后的运行。</li>
+</ul>
+<h1 id="Chapter-2-系统规划"><a href="#Chapter-2-系统规划" class="headerlink" title="Chapter 2. 系统规划"></a>Chapter 2. 系统规划</h1><h2 id="一、系统规划概述"><a href="#一、系统规划概述" class="headerlink" title="一、系统规划概述"></a>一、系统规划概述</h2><h3 id="1-系统开发生命周期"><a href="#1-系统开发生命周期" class="headerlink" title="1. 系统开发生命周期"></a>1. 系统开发生命周期</h3><p><img src="https://cdn.megalomania.icu/xtfxsj_images/2.jpg" alt="2"></p>
+<h3 id="2-系统规划定义"><a href="#2-系统规划定义" class="headerlink" title="2. 系统规划定义"></a>2. 系统规划定义</h3><ul>
+<li><strong>系统规划</strong>指根据组织的战略目标和用户提出的需求，从用户的现状出发，经过调查，对所要开发信息系统的技术方案、实施过程、阶段划分、开发组织和开发队伍、投资规模、资金来源及工作进度，用系统的、科学的、发展的观点进行全面规划。<ul>
+<li>系统规划是系统开发的前提条件</li>
+<li>系统规划是系统开发的纲领</li>
+<li>系统规划是系统开发成功的保证</li>
+<li>系统规划是系统验收评价的标准</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-系统规划的必要性"><a href="#3-系统规划的必要性" class="headerlink" title="3. 系统规划的必要性"></a>3. 系统规划的必要性</h3><p>系统规划是信息系统建设成功的关键，它比具体项目的开发更为重要：</p>
+<ul>
+<li>好的系统规划+好的开发=优秀的信息系统</li>
+<li>好的系统规划+差的开发=好的信息系统</li>
+<li>差的系统规划+好的开发=差的信息系统</li>
+<li>差的系统规划+差的开发=混乱的信息系统</li>
+</ul>
+<h3 id="4-系统规划概述"><a href="#4-系统规划概述" class="headerlink" title="4. 系统规划概述"></a>4. 系统规划概述</h3><p>从系统的全局出发，在总体上确定管理信息系统的体系结构</p>
+<ul>
+<li><p>提出系统开发的优先顺序</p>
+</li>
+<li><p>进行计算机的逻辑配置</p>
+</li>
+</ul>
+<p>根据目前的计算机发展情况和网络技术，提出计算机的逻辑配置方案。这里只是逻辑配置，在开发的后期要根据实际情况进行调整。</p>
+<h2 id="二、系统规划步骤"><a href="#二、系统规划步骤" class="headerlink" title="二、系统规划步骤"></a>二、系统规划步骤</h2><h3 id="1-系统总体规划的原则"><a href="#1-系统总体规划的原则" class="headerlink" title="1. 系统总体规划的原则"></a>1. 系统总体规划的原则</h3><ul>
+<li><strong>支持组织的总目标</strong></li>
+<li>着眼高层管理，兼顾各管理层要求</li>
+<li>着眼于企业过程，不依存组织机构</li>
+<li><strong>在结构上信息系统有良好的整体性</strong></li>
+<li><strong>便于实施</strong></li>
+</ul>
+<h3 id="2-系统规划的主要阶段"><a href="#2-系统规划的主要阶段" class="headerlink" title="2. 系统规划的主要阶段"></a>2. 系统规划的主要阶段</h3><table>
+<thead>
+<tr>
+<th align="left">序号</th>
+<th align="left">主要阶段</th>
+<th>主要任务</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">确定规划的基本问题</td>
+<td>明确信息系统规划的年限、方式、方法和策略</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">初步调查当前系统，收集初始信息</td>
+<td>收集来自企业内部和外部环境中与战略规划有关的信息</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">评价系统现状、分解系统明确功能</td>
+<td>分析信息系统目标、开发方法、功能结构、信息部门的情况等，识别系统现存的设备，软件及其质量</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">确定新系统初步目标</td>
+<td>明确信息系统应具有的功能、服务的范围和质量等</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">识别系统约束条件、限制因素</td>
+<td>根据企业或组织的人力、物力、财力及信息设备资源等方面的限制，定义信息系统的约束条件和政策</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left">拟定系统实现方案</td>
+<td>根据资源的约束情况，拟定实现方案，确定总体开发顺序</td>
+</tr>
+<tr>
+<td align="left">7</td>
+<td align="left">可行性分析，论证系统实现方案</td>
+<td>分析系统开发的必要性和开发的系统在经济、技术、社会等方面的可行性</td>
+</tr>
+<tr>
+<td align="left">8</td>
+<td align="left">提出项目的实施进度计划</td>
+<td>估算项目成本、人员要求等，编制项目的实施进度计划，列出开发进度表</td>
+</tr>
+<tr>
+<td align="left">9</td>
+<td align="left">编写系统规划报告</td>
+<td>书写信息系统规划报告</td>
+</tr>
+<tr>
+<td align="left">10</td>
+<td align="left">上报领导审批</td>
+<td>将系统规划上报领导审批</td>
+</tr>
+</tbody></table>
+<h3 id="3-总体规划的步骤"><a href="#3-总体规划的步骤" class="headerlink" title="3. 总体规划的步骤"></a>3. 总体规划的步骤</h3><ol>
+<li>系统总体规划的准备阶段</li>
+<li>组织结构调查</li>
+<li>定义管理目标</li>
+<li>识别管理功能</li>
+<li>定义数据类</li>
+<li>定义信息系统结构</li>
+<li>确定子系统实施顺序</li>
+<li>计算机逻辑配置</li>
+</ol>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/3.jpg" alt="3"></p>
+<h2 id="三、系统规划模型与方法"><a href="#三、系统规划模型与方法" class="headerlink" title="三、系统规划模型与方法"></a>三、系统规划模型与方法</h2><h3 id="1-诺兰模型（Nolan）"><a href="#1-诺兰模型（Nolan）" class="headerlink" title="1. 诺兰模型（Nolan）"></a>1. 诺兰模型（Nolan）</h3><p>把计算机应用到一个单位（企业、部门）的管理中去，一般要经历从初级到不断成熟的成长过程。<strong>诺兰（Nolan)总结了这一规律，于1973年首次提出了信息系统发展的阶段理论，被称为诺兰阶段模型</strong>。到1980年，诺兰进一步完善该模型，把信息系统的成长过程划分为六个不同阶段：</p>
+<table>
+<thead>
+<tr>
+<th align="center">初装</th>
+<th align="center">蔓延</th>
+<th align="center">控制</th>
+<th align="center">集成</th>
+<th align="center">数据管理</th>
+<th align="center">成熟</th>
+</tr>
+</thead>
+</table>
+<h4 id="（1）计算机应用发展的6个阶段"><a href="#（1）计算机应用发展的6个阶段" class="headerlink" title="（1）计算机应用发展的6个阶段"></a>（1）计算机应用发展的6个阶段</h4><ol>
+<li>初装：购置第一台计算机并初步开发管理应用程序</li>
+<li>蔓延：信息系统从少数部门扩散到多数部门</li>
+<li>控制：无序发展，引起领导重视，对整个企业的信息系统建设统筹规划</li>
+<li>集成：建立集中式的数据库及能够充分利用和管理各种信息的系统</li>
+<li>数据管理：数据的集中利用，为管理提供决策依据</li>
+<li>成熟：能满足各管理层次的要求，从而真正实现信息资源的管理</li>
+</ol>
+<h4 id="（2）计算机系统发展过程中的增长要素"><a href="#（2）计算机系统发展过程中的增长要素" class="headerlink" title="（2）计算机系统发展过程中的增长要素"></a>（2）计算机系统发展过程中的增长要素</h4><ul>
+<li>计算机硬件软件资源：无外存→分布式</li>
+<li>应用方式：批处理→实时联机</li>
+<li>计划控制：短期的、随机的→长期的、战略的</li>
+<li>信息系统在组织中的地位：附属于其他部门→独立</li>
+<li>领导模式：信息系统部门参与→共同决定战略规划</li>
+<li>用户意识：作业管理级→上层管理级</li>
+</ul>
+<h4 id="（3）诺兰阶段模型的应用"><a href="#（3）诺兰阶段模型的应用" class="headerlink" title="（3）诺兰阶段模型的应用"></a>（3）诺兰阶段模型的应用</h4><ul>
+<li>诊断信息系统当前所处的阶段：选择信息系统开发的时机</li>
+<li>对系统的规划作出安排：控制系统发展的方向，并且对处于不同阶段上的各个子系统制定不同的发展策略</li>
+</ul>
+<h3 id="2-能力成熟度模型（CMM）"><a href="#2-能力成熟度模型（CMM）" class="headerlink" title="2. 能力成熟度模型（CMM）"></a>2. 能力成熟度模型（CMM）</h3><p>能力成熟度模型（Capability Maturity Model,CMM）是用来评估组织的信息系统开发以及管理过程和产品的成熟度等级的框架。它由5个开发成熟度等级构成，利用一组被称为关键过程领域的指导方针进行度量。</p>
+<ul>
+<li>Level 1 一 <strong>初始级</strong> Initial：系统开发项目没有规定的过程可以遵循；</li>
+<li>Level 2 一 <strong>可重复级</strong> Repeatable：组织已经建立了项目管理过程和实践来跟踪项目费用、进度和功能，重点在项目管理；</li>
+<li>Level 3 一 <strong>已定义级</strong> Defined：组织已经购买或开发了一个标准的系统开发过程（或称为方法学），所有项目都是用这个软件开发过程来开发和维护信息系统和软件；</li>
+<li>Level 4 一 <strong>已管理级</strong> Managed：组织建立了可度量的质量和生产率目标；</li>
+<li>Level 5 — <strong>优化级</strong> Optimizing：根据第4级建立的度量和数据分析，标准化的系统开发过程被连续地监督和改进。</li>
+</ul>
+<h4 id="（1）CMM的作用和目的"><a href="#（1）CMM的作用和目的" class="headerlink" title="（1）CMM的作用和目的"></a>（1）CMM的作用和目的</h4><ul>
+<li>CMM涵盖了有关计划、设计和管理软件开发和维护的实践，软件机构只要遵循这些实践，就能够提高该机构的能力，以满足成本、进度计划、功能及质量等目标。</li>
+<li>CMM指导软件机构控制开发和维护软件的过程，并发展成为具有优秀的软件工程和管理的机构文化。</li>
+<li>CMM的目的是引导软件机构，在确定其过程成熟度以及改进软件过程和软件质量方面遇到的几个关键问题的过程中，选择过程改进策略。</li>
+</ul>
+<h4 id="（2）CMM的用途"><a href="#（2）CMM的用途" class="headerlink" title="（2）CMM的用途"></a>（2）CMM的用途</h4><p>想改进生产过程，采取如下策略和步骤：</p>
+<ol>
+<li>确定软件企业当前所处的过程成熟度级别；</li>
+<li>了解对改进软件生产质量和加强生产过程控制起关键作用的因素；</li>
+<li>将工作重点集中在有限几个关键目标上，有效达到改进机构软件生产过程的效果，进而可持续地改进其软件生产能力。</li>
+</ol>
+<h4 id="（3）CMM的主要特点"><a href="#（3）CMM的主要特点" class="headerlink" title="（3）CMM的主要特点"></a>（3）CMM的主要特点</h4><ul>
+<li>基于实际实践</li>
+<li>较好地反映了实践的情况</li>
+<li>反映了软件过程改进和软件过程评估执行人员的需求</li>
+<li>形成文档</li>
+<li>文档可以公开使用</li>
+</ul>
+<h4 id="（4）引进CMM的主要意义"><a href="#（4）引进CMM的主要意义" class="headerlink" title="（4）引进CMM的主要意义"></a>（4）引进CMM的主要意义</h4><ul>
+<li>对软件公司<ul>
+<li>提高软件公司软件开发的管理能力，因为CMM可提供软件公司自我评估的方法和自我提高的手段。</li>
+<li>提高软件生产率。</li>
+<li>提高软件质量。</li>
+<li>提高软件公司的国内和国际竞争力。</li>
+</ul>
+</li>
+<li>对软件项目发包单位和软件用户<ul>
+<li>提供了对软件开发商开发管理水平的评估手段，有助于软件开发项目的风险识别。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-关键成功因素法"><a href="#3-关键成功因素法" class="headerlink" title="3. 关键成功因素法"></a>3. 关键成功因素法</h3><ul>
+<li><strong>关键成功因素法</strong>就是通过分析找出使得企业成功的关键因素，然后再围绕这些关键因素来确定系统的需求，并进行规划。</li>
+<li><strong>关键成功因素</strong>是指在一个组织中的若干能够决定组织在竞争中能否获胜的因素，它们也是企业最需要得到的决策信息，是值得管理者重点关注的活动因素。</li>
+<li><strong>关键成功因素</strong>决定了组织所需的关键信息集合。</li>
+</ul>
+<h4 id="（1）关键成功因素法的步骤"><a href="#（1）关键成功因素法的步骤" class="headerlink" title="（1）关键成功因素法的步骤"></a>（1）关键成功因素法的步骤</h4><ul>
+<li>了解组织的目标</li>
+<li>识别所有的成功因素</li>
+<li>确定关键成功因素</li>
+<li>明确各关键成功因素的性能指标和评价标准</li>
+</ul>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/4.jpg" alt="4"></p>
+<h4 id="（2）头脑风暴"><a href="#（2）头脑风暴" class="headerlink" title="（2）头脑风暴"></a>（2）头脑风暴</h4><ul>
+<li>自由发表意见</li>
+</ul>
+<h4 id="（3）头脑风暴后"><a href="#（3）头脑风暴后" class="headerlink" title="（3）头脑风暴后"></a>（3）头脑风暴后</h4><ul>
+<li>合并问题的同类项</li>
+<li>对问题进行排序</li>
+<li>组合问题</li>
+<li>评论问题，认证问题的可行性</li>
+</ul>
+<h2 id="四、鱼骨图"><a href="#四、鱼骨图" class="headerlink" title="四、鱼骨图"></a>四、鱼骨图</h2><ul>
+<li><p>问题的特性总是受到一些因素的影响，我们通过头脑风暴法找出这些因素，并将它们与特性值一起，按相互关联性整理而成的层次分明、条理清楚，并标出重要因素的图形就叫“特性要因图”、“因果图”。</p>
+</li>
+<li><p>因其形状很像鱼骨，是一种发现问题“根本原因”的方法，是一种透过现象看本质的分析方法，也既称为“鱼骨图”或者“鱼刺图”。</p>
+</li>
+</ul>
+<h3 id="1-鱼骨图的三种类型"><a href="#1-鱼骨图的三种类型" class="headerlink" title="1. 鱼骨图的三种类型"></a>1. 鱼骨图的三种类型</h3><ol>
+<li>整理问题型：各要素与特性值间不存在原因关系，而是结构构成团系；</li>
+<li>原因型：鱼头在右，特性值通常以“为什么……”来写；</li>
+<li>对策型：鱼头在左，特性值通常以“如何提高/改善……”来写。</li>
+</ol>
+<h3 id="2-鱼骨图结构"><a href="#2-鱼骨图结构" class="headerlink" title="2. 鱼骨图结构"></a>2. 鱼骨图结构</h3><p>鱼骨图由鱼脊、大骨、中骨和小骨组成；</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/5.jpg" alt="5"></p>
+<h3 id="3-鱼骨图的使用步骤"><a href="#3-鱼骨图的使用步骤" class="headerlink" title="3. 鱼骨图的使用步骤"></a>3. 鱼骨图的使用步骤</h3><ol>
+<li>查找要解决的问题；</li>
+<li>把问题写在鱼骨的头上；</li>
+<li>召集同事共同讨论问题出现的可能原因，尽可能多地找出问题；</li>
+<li>把相同的问题分组，在鱼骨上标出；</li>
+<li>根据不同问题征求大家的意见，总结出正确的原因；</li>
+<li>拿出任何一个问题，研究为什么会产生这样的问题？</li>
+<li>针对问题的答案再问为什么？这样至少深入五个层次（连续问五个问题）;</li>
+<li>当深入到第五个层次后，认为无法继续进行时，列出这些问题的原因，而后列出至少20个解决方法。</li>
+</ol>
+<h3 id="4-鱼骨图实例"><a href="#4-鱼骨图实例" class="headerlink" title="4. 鱼骨图实例"></a>4. 鱼骨图实例</h3><h4 id="（1）例1"><a href="#（1）例1" class="headerlink" title="（1）例1"></a>（1）例1</h4><p><img src="https://cdn.megalomania.icu/xtfxsj_images/6.jpg" alt="6"></p>
+<h4 id="（2）例2"><a href="#（2）例2" class="headerlink" title="（2）例2"></a>（2）例2</h4><p><img src="https://cdn.megalomania.icu/xtfxsj_images/7.jpg" alt="7"></p>
+<h1 id="Chapter-3-系统需求分析"><a href="#Chapter-3-系统需求分析" class="headerlink" title="Chapter 3. 系统需求分析"></a>Chapter 3. 系统需求分析</h1><h2 id="一、系统需求概述"><a href="#一、系统需求概述" class="headerlink" title="一、系统需求概述"></a>一、系统需求概述</h2><ul>
+<li><strong>什么是需求？</strong><ul>
+<li>需求：<strong>需即需要，求即欲求</strong>，即个体客观或主观上的一种<strong>诉求</strong>。一般源自于<strong>用户理想上与现实的差距</strong>所致，“欲望得不到满足，便产生了需求”。</li>
+</ul>
+</li>
+<li><strong>基于场景的需求才是真需求</strong><ul>
+<li>基于场景的需求，及后续研发的功能，才能站住脚，甚至迎来爆发。</li>
+</ul>
+</li>
+<li><strong>什么是刚需？</strong><ul>
+<li>刚需：某一类人的<strong>必要要求</strong><ul>
+<li>这里就有两个关键词：<strong>某类人</strong>和<strong>必要</strong>，也就是<strong>独特性</strong>和<strong>必要性</strong></li>
+<li>举例：就比如李雷饿了，那他就得吃，饿了的人（独特性）就得吃（必要性）,这就是刚需</li>
+</ul>
+</li>
+<li><strong>不能把实操工具当刚需</strong></li>
+</ul>
+</li>
+<li><strong>有些需求是可以被创造的</strong><ul>
+<li><strong>好的产品用来满足需求，而厉害的产品则创造了需求。</strong></li>
+</ul>
+</li>
+<li><strong>什么是需求分析？</strong><ul>
+<li>需求分析：<strong>深度理解用户需求，挖掘用户的深层次需求。</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="二、获取需求"><a href="#二、获取需求" class="headerlink" title="二、获取需求"></a>二、获取需求</h2><ul>
+<li><p>需求分析三大步骤</p>
+<ul>
+<li>获取需求→用户画像→分析整合</li>
+</ul>
+</li>
+<li><p>需求的来源和要素</p>
+<ul>
+<li>竞品展示</li>
+<li>甲方任务</li>
+<li>用户反馈</li>
+<li>突发奇想</li>
+</ul>
+</li>
+<li><p>常见需求挖掘的思维方法</p>
+<ul>
+<li>极致思维</li>
+<li>逆向思维</li>
+<li>打破常规</li>
+<li>联想思维</li>
+<li>跨界思维</li>
+</ul>
+</li>
+<li><p><strong>如何获取需求？</strong></p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/8.jpg" alt="8"></p>
+</li>
+</ul>
+<h3 id="1-用户研究"><a href="#1-用户研究" class="headerlink" title="1. 用户研究"></a>1. 用户研究</h3><ul>
+<li><strong>首要目的分析用户需求</strong>，研究方法基本来源于社会科学和计算机科学领域。研究方法大致可以根据数据收集方式分为两类：<strong>定性研究和定量研究</strong>。</li>
+<li>定性研究：了解用户<strong>大概有什么需求</strong></li>
+<li>定量研究：了解不同需求的用户<strong>占比及优先级</strong></li>
+</ul>
+<ol>
+<li>用户访谈</li>
+<li>可用性测试</li>
+<li>调查问卷</li>
+<li>数据分析</li>
+</ol>
+<h3 id="2-市场分析"><a href="#2-市场分析" class="headerlink" title="2. 市场分析"></a>2. 市场分析</h3><ul>
+<li><strong>SWOT分析</strong>：将对企业/产品内外部条件各方面内容进行综合和概况，进而分析组织的优劣势、面临的机会威胁的一种方法（较为宏观和主观）。</li>
+<li>将公司的战略与公司内部资源、外部环境有机的结合起来。</li>
+<li>对应外部的机会与威胁，平衡内部的优势和劣势。</li>
+</ul>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/9.jpg" alt="9"></p>
+<h3 id="3-价值曲线评价法"><a href="#3-价值曲线评价法" class="headerlink" title="3. 价值曲线评价法"></a>3. 价值曲线评价法</h3><ul>
+<li>定义：通过评价一个公司各关键要素的业绩表现，来评价顾客总体感知服务质量的方法。这里的<strong>各关键要素，也是行业顾客总体评估的各种维度/价值点</strong></li>
+</ul>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/10.jpg" alt="10"></p>
+<h3 id="4-竞品分析"><a href="#4-竞品分析" class="headerlink" title="4. 竞品分析"></a>4. 竞品分析</h3><ul>
+<li>竞品：竞争的产品，竞争对手的产品</li>
+<li>竞品分析：对竞争的产品进行比较和分析</li>
+</ul>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/11.jpg" alt="11"></p>
+<h3 id="5-数据分析"><a href="#5-数据分析" class="headerlink" title="5. 数据分析"></a>5. 数据分析</h3><p>从运营数据报告中获取需求，一般针对已上线的产品/业务，通过现产品的运营监控，为产品迭代提供一定依据。通常来自于采集运营数据（如UV、PV、浏览轨迹、转化率等）和市场、客服等其他合作部门的建议反馈。</p>
+<h3 id="6-用户反馈"><a href="#6-用户反馈" class="headerlink" title="6. 用户反馈"></a>6. 用户反馈</h3><ul>
+<li>产品在上线之后，通过各种渠道获取尽可能多的用户反馈或者邀请用户面对面进行产品的评测。通过用户反馈了解产品还没有满足的需求还有产品中的伪需求或者说是见余的功能是最直接最有效的方式。因为这群用户是你最珍贵的种子用户。</li>
+<li>挖掘用户隐性要求</li>
+</ul>
+<h2 id="三、用户画像"><a href="#三、用户画像" class="headerlink" title="三、用户画像"></a>三、用户画像</h2><ul>
+<li>用户画像的目的：具备产品核心定位后，融入用户角色，不断对产品核心理念做修正的一个过程。</li>
+<li>用户画像是很关键的一步，可以帮助产品经理模拟用户的使用场景，继而得出用户需求，以此作为产品迭代的依据。</li>
+<li>用户画像的主要思路就是：<strong>谁+在什么场景下+做什么</strong></li>
+<li>用户画像（Persona）：针对目标群体<strong>真实</strong>特征进行的<strong>勾勒</strong>，是深刻理解<strong>真实数据</strong>的基础上得出的一个<strong>虚拟用户</strong>。</li>
+<li>用户画像的过程:</li>
+</ul>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/12.jpg" alt="12"></p>
+<ul>
+<li>用户画像的应用<ul>
+<li>帮助定位产品目标</li>
+<li>帮助产品设计</li>
+</ul>
+</li>
+</ul>
+<h2 id="四、分析整合"><a href="#四、分析整合" class="headerlink" title="四、分析整合"></a>四、分析整合</h2><ul>
+<li>根据前面的需求获取+用户画像，可以很好的描述用户需求。</li>
+</ul>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/13.jpg" alt="13"></p>
+<ul>
+<li>用户提出的需求不一定是用户真正的需求：<ul>
+<li>第一，用户没有很强的产品意识，很多都是模棱两可的感觉。</li>
+<li>第二，用户是贪婪的，他们往往会提很多自私的要求。</li>
+</ul>
+</li>
+<li>有些需求可能是低频率的需求甚至是违背商业规则的需求</li>
+</ul>
+<h1 id="Chapter-4-系统项目管理"><a href="#Chapter-4-系统项目管理" class="headerlink" title="Chapter 4. 系统项目管理"></a>Chapter 4. 系统项目管理</h1><h2 id="一、项目管理概念"><a href="#一、项目管理概念" class="headerlink" title="一、项目管理概念"></a>一、项目管理概念</h2><ul>
+<li>项目是一个（临时的）唯一的、复杂的和关联的具有同一目标或者目的并且必须在特定时间里、在预算内、按照规格说明要求完成的活动序列。</li>
+<li><strong>信息系统项目管理</strong>是指在指定时间内用最少的费用开发可接受的系统的管理过程，具体内容包括确定范围、计划、人员安排、组织、指导和控制。</li>
+<li>项目开发的四大阶段和任务<ol>
+<li><strong>项目发起</strong>：项目发起的核心是评估项目的大小、范围和复杂性，以及建立支持后续项目活动的规程。</li>
+<li><strong>项目规划</strong>：项目规划的核心是定义清楚的、离散的活动以及完成每个活动需要做的工作。</li>
+<li><strong>项目执行</strong>：项目执行的核心是将项目发起阶段和规划阶段的计划付诸行动。</li>
+<li><strong>项目终结</strong>：项目终结的核心是把项目带到结束。</li>
+</ol>
+</li>
+<li>项目组织是按照项目的目标以一定的形式组建起来的，由组织各部门调集专业人才，并指派项目负责人在特定时间内完成任务。<ol>
+<li>单纯型项目组织：小组成员全职投入项目；</li>
+<li>职能型项目组织：项目建立在职能部门中；</li>
+<li>矩阵型组织项目：项目成员由不同职能部门提供，项目经理决定工作内容和时间，部门经理决定人员和技术。</li>
+</ol>
+</li>
+</ul>
+<h2 id="二、项目进度计划管理"><a href="#二、项目进度计划管理" class="headerlink" title="二、项目进度计划管理"></a>二、项目进度计划管理</h2><ul>
+<li>项目进度管理又称为时间管理、工期管理，是指为保证项目各项工作及项目总任务按时完成所需要的一系列的工作与过程，具体包括项目进度计划编制及实施进度控制。</li>
+<li>时间、费用、质量构成了项目管理的三大目标。其中，费用发生在项目的各项作业中，质量取决于每个作业过程，工期则依赖于进度系列上的时间保证，这些目标均能通过进度控制加以掌握，所以进度控制是项目控制工作的首要内容，是项目的灵魂。</li>
+</ul>
+<h3 id="1-项目进度管理的相关术语"><a href="#1-项目进度管理的相关术语" class="headerlink" title="1. 项目进度管理的相关术语"></a>1. 项目进度管理的相关术语</h3><ol>
+<li>项目活动</li>
+<li>工程进度</li>
+<li>工期</li>
+<li>活动之间的顺序关系</li>
+<li>活动之间的依赖关系</li>
+</ol>
+<h3 id="2-软件项目进度管理的特点"><a href="#2-软件项目进度管理的特点" class="headerlink" title="2. 软件项目进度管理的特点"></a>2. 软件项目进度管理的特点</h3><ul>
+<li>软件项目具有规模大、建设的一次性和结构与技术复杂等特点，主要表现在以下几方面。<ol>
+<li>软件项目进度管理是一个动态过程。</li>
+<li>项目进度计划和控制是复杂的系统工程。</li>
+<li>软件项目进度管理有明显的阶段性。</li>
+<li>软件项目进度管理的风险性大。</li>
+</ol>
+</li>
+</ul>
+<h3 id="3-软件项目进度管理的内容"><a href="#3-软件项目进度管理的内容" class="headerlink" title="3. 软件项目进度管理的内容"></a>3. 软件项目进度管理的内容</h3><ul>
+<li>软件项目进度管理的内容很多，主要包括：<ol>
+<li>定义为达到项目目标所需要的各种活动；</li>
+<li>项目活动内容的安排；估算工期，对工作顺序、活动工期和所需资源进行分析并制定项目进度计划；</li>
+<li>对项目进度的管理与控制等。</li>
+</ol>
+</li>
+<li>这些相关过程与活动既相互影响，又相互关联。</li>
+</ul>
+<h3 id="4-项目进度描述工具"><a href="#4-项目进度描述工具" class="headerlink" title="4. 项目进度描述工具"></a>4. 项目进度描述工具</h3><ol>
+<li><p>甘特图</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210508002035837.png" alt="image-20210508002035837"></p>
+</li>
+<li><p>网络工程图</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210508002319716.png" alt="image-20210508002319716"></p>
+<ul>
+<li>关键路径：最长的一条路线。</li>
+</ul>
+</li>
+<li><p>里程碑</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210508003207712.png" alt="image-20210508003207712"></p>
+</li>
+<li><p>资源图</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210508003252730.png" alt="image-20210508003252730"></p>
+</li>
+</ol>
+<h3 id="5-小结"><a href="#5-小结" class="headerlink" title="5. 小结"></a>5. 小结</h3><ul>
+<li>项目管理必须执行四项目主要活动：<strong>项目发起、项目规划、项目执行和项目终结</strong>。</li>
+<li>甘特图和网络图是用于规划和控制项目的十分有力的图形化技术。</li>
+<li><strong>甘特图采用横道来表示活动的开发、工期和结束。</strong></li>
+<li><strong>网络图则是一项关键路径规划技术，显示活动之间的相互关系</strong>。网络图采用概率方法估计关键路径和期限，这种能力使其成为在十分复杂的项目管理中广泛应用的技术。</li>
+</ul>
+<h2 id="三、敏捷项目管理"><a href="#三、敏捷项目管理" class="headerlink" title="三、敏捷项目管理"></a>三、敏捷项目管理</h2><ul>
+<li>软件更像一个活着的植物，软件开发是自底向上逐步有序的生长过程，类似于植物自然生长。</li>
+<li>敏捷开发遵循软件客观规律，不断的进行迭代增量开发，最终交付符合客户价值的产品。</li>
+<li>核心：迭代开发</li>
+</ul>
+<h3 id="1-敏捷宣言"><a href="#1-敏捷宣言" class="headerlink" title="1. 敏捷宣言"></a>1. 敏捷宣言</h3><p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210508003427192.png" alt="image-20210508003427192"></p>
+<ul>
+<li>敏捷宣言本质是揭示一种更好的软件开发方式，启迪人们重新思考软件开发中的价价值和如何更好的工作。</li>
+</ul>
+<h3 id="2-敏捷开发原则"><a href="#2-敏捷开发原则" class="headerlink" title="2. 敏捷开发原则"></a>2. 敏捷开发原则</h3><p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210508003630384.png" alt="image-20210508003630384"></p>
+<ul>
+<li><p>敏捷=理念+优秀时间+具体应用</p>
+<ol>
+<li>理念（敏捷核心思想）</li>
+<li>优秀实践（敏捷的经验积累）</li>
+<li>具体应用（能够结合自身灵活应用才是真正敏捷）</li>
+</ol>
+</li>
+</ul>
+<h3 id="3-深入理解敏捷理念"><a href="#3-深入理解敏捷理念" class="headerlink" title="3. 深入理解敏捷理念"></a>3. 深入理解敏捷理念</h3><ul>
+<li>深入理解“聚焦客户价值”<ul>
+<li>标识和消除软件开发中的浪费</li>
+<li>交付刚刚好的系统</li>
+<li>随时构建质量，不容忍缺陷</li>
+<li>及时消除技术债务，持续保持快速响应</li>
+</ul>
+</li>
+<li>深入理解“适应变化”<ul>
+<li>认请“客户是逐步发现真正需求”</li>
+<li>小批量是快速交付的关键</li>
+<li>通过达代计划不断调整以适应需求变化</li>
+<li>应持续保持良好的软件架构</li>
+<li>利用多层次反馈不断调整以逼近目标</li>
+</ul>
+</li>
+<li>深入理解“激发团队”<ul>
+<li>认清团队的基本事实</li>
+<li>敏捷方式下管理者的转变</li>
+<li>敏捷方式下团队成员的转变</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-敏捷团队组成"><a href="#4-敏捷团队组成" class="headerlink" title="4. 敏捷团队组成"></a>4. 敏捷团队组成</h3><ul>
+<li>敏捷团队包括3个核心角色：PO(Product Owner)、Scrum Master(Scrum教练）和Team(开发产品）。</li>
+</ul>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210508005033134.png" alt="image-20210508005033134"></p>
+<h2 id="四、精益项目管理"><a href="#四、精益项目管理" class="headerlink" title="四、精益项目管理"></a>四、精益项目管理</h2><h3 id="1-精益软件开发七项原则"><a href="#1-精益软件开发七项原则" class="headerlink" title="1. 精益软件开发七项原则"></a>1. 精益软件开发七项原则</h3><ol>
+<li>消除浪费</li>
+<li>内建质量<ul>
+<li>传统软件开发<ul>
+<li>遵循了与传统的美国汽车制造同样的模式：让缺陷一路溜滑到最后，由QA来检测捕获。</li>
+</ul>
+</li>
+<li>精益的方法<ul>
+<li>在编写实现功能特征的代码时，就编写能够验证错误的测试。</li>
+<li>这些测试能够防止因引入未经检测的缺陷而造成的后续修改。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>创建知识<ul>
+<li>找到记录团队知识的办法<ul>
+<li>这样当下一次需要它时，能够轻松地找到它。</li>
+<li>通常说来，在离知识源头最近的地方存储相应部分的知识，是最好的做法。</li>
+<li>发挥最佳的判断能力，并尝试保持良好的平衡。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>推迟决策</li>
+</ol>
+<ul>
+<li>只有拥有大部分可用的信息时，才能做出最好的决定。</li>
+<li>如果不必立刻做出一个特别的决定，那就等具备更多的知识和信息以后再去做。<ul>
+<li>但是也不要等得太久</li>
+<li>同时，暂时不做决定不应该阻碍项目其他方面的进展</li>
+</ul>
+</li>
+<li>例如，基于集合的设计（set-based design)<ul>
+<li>同时探寻多个解决方案</li>
+<li>最终选择最好的那个，确保最大的成功<ul>
+<li>这看起来似乎是浪费</li>
+<li>但事实上，如果作出了错误的选择<ul>
+<li>可能大大降低成功程度</li>
+<li>造成丧失机会的严重浪费</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ol start="5">
+<li><p>快速交付</p>
+<ul>
+<li>以较短的迭代，以小批量的方式开发功能特征，并快速交付给客户<ul>
+<li>在相关联需求（associated requirements)能够调整前，这些功能特征就被实现并交付给客户了</li>
+<li>客户有机会在使用这些功能特征（现在它们是具体的了）后，提供反馈意见，并在其他需求实现前就能进行调整变更</li>
+<li>每一个短迭代完成时，都提供了一个机会，可以基于真实的反馈和使用，对需求进行调整和重新排定优先级。</li>
+<li>最终的成果是，获得一个更贴近客户实际需求的产品，同时还消除了大量的浪费和因需求遗漏造成的返工</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>对人尊重</p>
+<ul>
+<li>“积极投身其中，并思考着的人，提供了最可持续发展的竞争优势。”<ul>
+<li>信任他们知道如何以最好方式来完成自己的工作</li>
+<li>让他们投身于解决当前过程中暴露出来的不足</li>
+<li>鼓励他们设法改善工作和周围的过程</li>
+<li>肯定他们取得的成绩并积极征询他们的意见</li>
+</ul>
+</li>
+<li>不要浪费最宝贵的资源<ul>
+<li>团队成员的智慧</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>整体优化</p>
+<ul>
+<li><p>在对一个本地的局部过程做优化时，几乎总是会以整个价值流为代价的</p>
+</li>
+<li><p>瓶颈和机会成本</p>
+<ul>
+<li>一般情况下，当尝试优化过程时，应该总是试图包含尽可能多的价值流。</li>
+<li>软件开发过程价值流分析</li>
+</ul>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210508010810665.png" alt="image-20210508010810665"></p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="2-软件开发的七大浪费以及消除方法"><a href="#2-软件开发的七大浪费以及消除方法" class="headerlink" title="2. 软件开发的七大浪费以及消除方法"></a>2. 软件开发的七大浪费以及消除方法</h3><ol>
+<li>缺陷<ul>
+<li>聚焦于预防缺陷</li>
+<li>发现一个缺陷时的反应<ul>
+<li>找到缺陷的根源</li>
+<li>确保缺陷不会再次发生</li>
+<li>自动化测试</li>
+<li>创建新的测试来监测这个缺陷</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>过度生产（未被用户使用的特性）<ul>
+<li>每行代码都是要钱的</li>
+</ul>
+</li>
+<li>运输（知识的传递）<ul>
+<li>尽可能避免传递</li>
+</ul>
+</li>
+<li>等待（远离客户而导致无法及时反馈决策）<ul>
+<li>最有成效的安排<ul>
+<li>设置包含所有团队成员的“集成式产品团队”（Integrated Product Teams,IPTs)。</li>
+<li>其中包括客户（或客户代表）在内。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>库存（半成品）<ul>
+<li>精益方法<ul>
+<li>使用单件流（single-piece flow)使某项功能特征尽快地流到部署阶段。</li>
+<li>不让半成品工作在队列中堆积起来。</li>
+</ul>
+</li>
+<li>完成<ul>
+<li>一项功能特征只有在可进行部署、做了完整的文档记录、经过测试和没有错误时，才可以说是已经完成了。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>移动（在任务间频繁切换）<ul>
+<li>使用单件流<ul>
+<li>在某项功能特征或任务上持续工作直至完成。</li>
+<li>没有任务切换的浪费。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>过度作业（不必要的流程环节和动作）<ul>
+<li>不必要的流程包括<ul>
+<li>没有达成任何产出的过程</li>
+<li>编写没有任何人会读的文档</li>
+<li>可以自动化但却以手工进行的任务</li>
+<li>原本可以很简单但现在却弄得很复杂的过程</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="3-精益创业环"><a href="#3-精益创业环" class="headerlink" title="3. 精益创业环"></a>3. 精益创业环</h3><p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210508010937427.png" alt="image-20210508010937427"></p>
+<h3 id="4-精益与看板产品开发框架"><a href="#4-精益与看板产品开发框架" class="headerlink" title="4. 精益与看板产品开发框架"></a>4. 精益与看板产品开发框架</h3><p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210508011032587.png" alt="image-20210508011032587"></p>
+<h3 id="5-精益创业过程"><a href="#5-精益创业过程" class="headerlink" title="5. 精益创业过程"></a>5. 精益创业过程</h3><p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210508011113076.png" alt="image-20210508011113076"></p>
+<h2 id="五、精益与敏捷的区别"><a href="#五、精益与敏捷的区别" class="headerlink" title="五、精益与敏捷的区别"></a>五、精益与敏捷的区别</h2><ul>
+<li>基本观点与哲学上不同<ul>
+<li>敏捷：尽快交付可用的产品，并与客户密切协作、及时获得客户反馈</li>
+<li>精益：开发最小的可用产品，并基于看板梳理价值流，消除价值流中的浪费</li>
+</ul>
+</li>
+<li>角度不同<ul>
+<li>敏捷的关注重点稍窄些<ul>
+<li>主要关心的是围绕软件开发的具体开发实践和项目管理</li>
+<li>一般不太关心在其中进行软件开发的商业上下文环境</li>
+</ul>
+</li>
+<li>精益采用比较宽泛的视角，偏好一体看待软件开发和它的整个业务环境</li>
+</ul>
+</li>
+</ul>
+<h2 id="六、微服务项目管理"><a href="#六、微服务项目管理" class="headerlink" title="六、微服务项目管理"></a>六、微服务项目管理</h2><ul>
+<li>微服务理念：松藕合，可并行开发、部署、运行的小产品</li>
+<li>6条微服务原则：<ol>
+<li><strong>只能通过服务接口（Service Interface,i.e.,API）对外发布其数据和功能。</strong></li>
+<li>各组件团队间<strong>互相沟通也必须通过这些接口。</strong></li>
+<li>各组件间不允许其他任何形式的进程通信：</li>
+<li>不关心使用什么样的技术，HTTP,CORBA,PubSub,自定义的协议-无所谓。</li>
+<li><strong>所有的服务接口设计从一开始必须外部化。</strong></li>
+<li><strong>任何人不这样做，将被解雇。</strong></li>
+</ol>
+</li>
+</ul>
+<h2 id="七、华为项目管理实践"><a href="#七、华为项目管理实践" class="headerlink" title="七、华为项目管理实践"></a>七、华为项目管理实践</h2><ul>
+<li>华为：从重型IPD转向“敏捷+精益+微服务+DevOps”轻量级敏捷开发模式</li>
+<li>华为敏捷是一种端到端敏捷<ul>
+<li>华为敏捷项目管理，融合了敏捷、精益、Devops理念，不只是开发阶段的敏捷，而是从市场，到开发、运维、运营的端到端敏捷。</li>
+</ul>
+</li>
+<li>端到端敏捷实施依赖于全自动化的DevOps持续交付流水线</li>
+<li>区别点：<ol>
+<li>传统敏捷模式强调持续构建CI(持续构建、测试）</li>
+<li>融合了DevOps的新型敏捷模式强调<strong>持续交付CD</strong> (包含持续构建、测试、以及<strong>持续部署、发布、反馈</strong> ）。加速了产品推向真实用户，并及时获得海量反馈决策数据源，比仅仅依靠PD或者少数粉丝用户反馈的决策准确率大为提升。</li>
+</ol>
+</li>
+<li>敏捷四阶段循环：<strong>准备、计划、开发、回顾。</strong></li>
+</ul>
+<h1 id="Chapter-5-系统分析建模"><a href="#Chapter-5-系统分析建模" class="headerlink" title="Chapter 5. 系统分析建模"></a>Chapter 5. 系统分析建模</h1><h2 id="一、系统业务流程建模"><a href="#一、系统业务流程建模" class="headerlink" title="一、系统业务流程建模"></a>一、系统业务流程建模</h2><ul>
+<li>业务流（transaction flow,也称事务流）,企业过程落实到操作层面的具体详细的活动和步骤。关注管理程序、手续、步骤，如学生入学注册流程、产品出库流程。</li>
+<li>业务流程图示应有以下基本表达能力：<ul>
+<li>业务流程包含多个业务功能（活动）</li>
+<li>业务功能可能由不同部门负责</li>
+<li>活动有次序</li>
+<li>活动执行过程含有控制逻辑（如分支、并发、同步汇合等）</li>
+</ul>
+</li>
+<li>只要使用满足上述要求的建模工具来描述业务流程，本课程都认为是业务流程图。</li>
+<li>业务流程建模的意义<ul>
+<li>帮助我们了解某项业务的具体处理过程</li>
+<li>发现和处理系统调查工作中的错误和疏漏</li>
+<li>便于分析原系统流程中的问题，优化或重组业务处理流程</li>
+<li>使用图示方法表示企业具体业务处理过程，易于理解和交流</li>
+</ul>
+</li>
+<li>业务流程图<ul>
+<li>业务流程图（Transaction Flow Diagram,TFD),就是用一些规定的符号（Symbol)及连线（Arrow Line)来表示某个具体业务处理过程（Process)的图表。</li>
+<li>是一种表明系统内各单位、人员之间业务关系、作业顺序和管理信息流动的图表。</li>
+<li>业务流程图的绘制基本上按照业务的实际处理步骤和过程绘制。换句话说，就是“文本”用图形方式来反映实际业务处理过程的“流水账”。</li>
+<li><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210508202958661.png" alt="image-20210508202958661"></li>
+</ul>
+</li>
+<li>业务流程图常用符号<ul>
+<li><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210508203109627.png" alt="image-20210508203109627"></li>
+</ul>
+</li>
+<li>业务流程分析<ul>
+<li>对业务流程进行分析的目的是发现现行系统中存在的问题和不合理的地方，优化业务处理过程，以便在新系统建设中予以克服或改进。</li>
+<li>分析的时候，不仅要找出原业务流程不合理的地方，还要充分考虑信息系统的建设为业务流程的优化带来的可能性，产生更为合理的业务流程。</li>
+</ul>
+</li>
+</ul>
+<h2 id="二、系统数据流程建模（数据流程图）"><a href="#二、系统数据流程建模（数据流程图）" class="headerlink" title="二、系统数据流程建模（数据流程图）"></a>二、系统数据流程建模（数据流程图）</h2><h3 id="1-数据流程图的基本符号"><a href="#1-数据流程图的基本符号" class="headerlink" title="1. 数据流程图的基本符号"></a>1. 数据流程图的基本符号</h3><h4 id="（1）外部实体（S）"><a href="#（1）外部实体（S）" class="headerlink" title="（1）外部实体（S）"></a>（1）外部实体（S）</h4><p>本系统之外的人、物、单位</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210508204932015.png" alt="image-20210508204932015"></p>
+<h4 id="（2）数据流（DF）"><a href="#（2）数据流（DF）" class="headerlink" title="（2）数据流（DF）"></a>（2）数据流（DF）</h4><p>组件间传递的信息和方向</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210508205021432.png" alt="image-20210508205021432"></p>
+<h4 id="（3）处理逻辑（P）"><a href="#（3）处理逻辑（P）" class="headerlink" title="（3）处理逻辑（P）"></a>（3）处理逻辑（P）</h4><p>对信息进行处理的逻辑功能</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210508205119187.png" alt="image-20210508205119187"></p>
+<h4 id="（4）数据存储（DB）"><a href="#（4）数据存储（DB）" class="headerlink" title="（4）数据存储（DB）"></a>（4）数据存储（DB）</h4><p>逻辑意义上的数据存储</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210508205713335.png" alt="image-20210508205713335"></p>
+<h3 id="2-数据流程图的绘制"><a href="#2-数据流程图的绘制" class="headerlink" title="2. 数据流程图的绘制"></a>2. 数据流程图的绘制</h3><h4 id="（1）数据流程图绘制的原则"><a href="#（1）数据流程图绘制的原则" class="headerlink" title="（1）数据流程图绘制的原则"></a>（1）数据流程图绘制的原则</h4><ul>
+<li>明确系统界限，确定外部项</li>
+<li>自顶向下逐层扩展</li>
+<li>牢记数据流程图的职能</li>
+<li>逐步求精，不断与用户交流</li>
+<li>合理布局</li>
+<li>先考虑稳定态，后考虑瞬间态</li>
+<li>审核</li>
+</ul>
+<h4 id="（2）绘制数据流程图的基本步骤"><a href="#（2）绘制数据流程图的基本步骤" class="headerlink" title="（2）绘制数据流程图的基本步骤"></a>（2）绘制数据流程图的基本步骤</h4><ul>
+<li>识别系统的输入和输出，画出顶层图</li>
+<li>画系统内部的数据流、加工与文件，画出一级细化图</li>
+<li>加工的进一步分解，画出二级细化图</li>
+</ul>
+<h3 id="3-错误示例"><a href="#3-错误示例" class="headerlink" title="3. 错误示例"></a>3. 错误示例</h3><p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210508210234668.png" alt="image-20210508210234668"></p>
+<h3 id="4-例题"><a href="#4-例题" class="headerlink" title="4. 例题"></a>4. 例题</h3><h4 id="（1）处理借书过程"><a href="#（1）处理借书过程" class="headerlink" title="（1）处理借书过程"></a>（1）处理借书过程</h4><p>前台接待员接受读者交的索书单，首先查看读者记录进行读者鉴别，并存储借阅记录文件。然后由图书管理员查询图书文件，进行存书查询，如果图书未借出，交书库管理员向书库发出库单，并由书库管理员修改借阅记录文件和图书文件；如果图书已借出，向读者发图书有人借阅通知。</p>
+<p>画出处理过程的数据流程图。</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509212711389.png" alt="image-20210509212711389"></p>
+<h4 id="（2）计算教师讲课费的过程"><a href="#（2）计算教师讲课费的过程" class="headerlink" title="（2）计算教师讲课费的过程"></a>（2）计算教师讲课费的过程</h4><p>各教研室交来课时统计表，先录入到讲课费存储文档，然后根据讲课费标准文件计算讲课费，再依据税率文件产生讲课费报表，并将税后讲课费计算结果返回讲课费存储文档，将报表送财务处，将讲课费明细表返回教研室。</p>
+<p>画出处理讲课费计算的数据流程图。</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509212850392.png" alt="image-20210509212850392"></p>
+<h4 id="（3）某银行储蓄所存（取）款过程"><a href="#（3）某银行储蓄所存（取）款过程" class="headerlink" title="（3）某银行储蓄所存（取）款过程"></a>（3）某银行储蓄所存（取）款过程</h4><p>储户将填好的存（取）单及存折送交分类处理处。分类处理处按三种不同情况分别处理。如果存折不符或存（取）单不合格，则将存折及存（取）单直接退还储户重新填写；如果是存款，则将存折及存款单送交存款处处理。存款处理处取出底账登记后，将存折退还给储户；如果是取款，则将存折及取款单送交取款处理处，该服务台取出底账及现金，记账后将存折与现金退给储户。从而完成存（取）款处理过程。</p>
+<p>试按此画出数据流程图。</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509213018462.png" alt="image-20210509213018462"></p>
+<h4 id="（4）订单处理的处理过程"><a href="#（4）订单处理的处理过程" class="headerlink" title="（4）订单处理的处理过程"></a>（4）订单处理的处理过程</h4><p>过程：验收订单。顾客发来订单后进行验收处理，将填写不清的订单和无法供应的订单退回顾客，将合格的订单送到下一“处理”。确定发货量。查库存台账，根据库存情况将订单分为两类，分别送至下一“处理”。开发货单、修改库存、记应收账和将订单存档。填写缺货订单。对未满足的订货填写缺货订单（即等有货后发货的发货单）。对照缺货订单。接到采购部门到货通知后应对照缺货订单。如可发货，则执行开发货单和修改库存处理。</p>
+<p>试按此画出数据流程图。</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509213213183.png" alt="image-20210509213213183"></p>
+<h4 id="（5）各种商品的销售库存情况"><a href="#（5）各种商品的销售库存情况" class="headerlink" title="（5）各种商品的销售库存情况"></a>（5）各种商品的销售库存情况</h4><p>某商店为及时了解各种商品的销售库存情况，拟建立一个销售库存统计系统。采购商品入库时，仓库管理员及时输入入库量及入库金额；售货员售货时，即输入售货数和销售收入。系统能使经理了解每种商品的日销售额，每周、每月的累计销售额和库存情况。</p>
+<p>请画此系统的顶层数据流程图（必须给图上所有成分命名）。</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509213336957.png" alt="image-20210509213336957"></p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509213405022.png" alt="image-20210509213405022"></p>
+<h4 id="（6）科研项目费用支付"><a href="#（6）科研项目费用支付" class="headerlink" title="（6）科研项目费用支付"></a>（6）科研项目费用支付</h4><p>过程是：接收项目负责人的费用收据，通过项目存档文件对收据进行审核，审核通过后参照项目账目文件进行费用计算，计算后将付款通知交财务处，将领款通知交项目负责人。</p>
+<p>画出处理过程的数据流程图。</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509213449543.png" alt="image-20210509213449543"></p>
+<h4 id="（7）运动会成绩处理"><a href="#（7）运动会成绩处理" class="headerlink" title="（7）运动会成绩处理"></a>（7）运动会成绩处理</h4><p>过程是：接受项目裁判送来的比赛成绩单，使用项目文件和运动员文件，将成绩录入到比赛成绩文件。成绩查询时根据运动员文件和比赛成绩文件产生项目比赛成绩，送大会秘书处。</p>
+<p>绘制运动会成绩处理的数据流程图。</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509213533259.png" alt="image-20210509213533259"></p>
+<h4 id="（8）学生成绩管理的处理过程"><a href="#（8）学生成绩管理的处理过程" class="headerlink" title="（8）学生成绩管理的处理过程"></a>（8）学生成绩管理的处理过程</h4><p>教务处接收教师交来班级学生成绩单，对照教学计划和学生名册进行核对。核对正确后登录学生成绩表。从学生成绩表对成绩进行鉴定，确定补考和留级学生单，将补考和留级学生名单交给学生所在院系办公室，将留级学生名单报学生处。</p>
+<p>画出处理的数据流程图。</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509083107920.png" alt="image-20210509083107920"></p>
+<h4 id="（9）教学管理的主要工作"><a href="#（9）教学管理的主要工作" class="headerlink" title="（9）教学管理的主要工作"></a>（9）教学管理的主要工作</h4><p>过程是：系办输入班级和教学时间，查看教学计划表，确定本学期教学任务。根据本学期教学任务，查看教师表制作开课任务书和班级教学计划表。查询时，教师输入教师姓名和时间，查询本人的教学任务，学生输入班级和时间，查询班级教学计划。</p>
+<p>画出教学管理的数据流程图。</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509213616096.png" alt="image-20210509213616096"></p>
+<h4 id="（10）教师申报科研成果"><a href="#（10）教师申报科研成果" class="headerlink" title="（10）教师申报科研成果"></a>（10）教师申报科研成果</h4><p>过程如下：接收教师交来科研材料和申报表，首先根据科研管理条例进行审核。对审查合格的材料，再根据科研管理条例和科研档案进行分类，分类完成后将科研成果存储到科研档案，并报科研处备案。</p>
+<p>画出处理的数据流程图。</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509213656471.png" alt="image-20210509213656471"></p>
+<h2 id="三、系统用例建模-（用例图）"><a href="#三、系统用例建模-（用例图）" class="headerlink" title="三、系统用例建模 （用例图）"></a>三、系统用例建模 （用例图）</h2><h3 id="1-基于用理的需求分析"><a href="#1-基于用理的需求分析" class="headerlink" title="1. 基于用理的需求分析"></a>1. 基于用理的需求分析</h3><ul>
+<li>用例分析是站在最终用户的角度看待系统及其特性，模型简单直接，一经提出便受到软件开发人员的青眯。</li>
+<li>用例总是和面向对象方法放在一起讨论，并且在面向对象标准建模语言UML中用也具有中心地位。但严格意义上讲，用例并不是一个面向对象方法论的产物，不含面向对象思想，只是因为用例概念最初是和面向对象方法一同提出并得到广泛接受而已。</li>
+</ul>
+<h3 id="2-需求分析的步骤"><a href="#2-需求分析的步骤" class="headerlink" title="2. 需求分析的步骤"></a>2. 需求分析的步骤</h3><ol>
+<li>从系统涉众获取候选需求</li>
+<li>结合系统业务背景理解候选需求</li>
+<li>捕获信息系统功能性需求（用例模型）</li>
+<li>捕获与功能需求相关的非功能性需求或其他技术性要求</li>
+</ol>
+<h3 id="3-用例分析的步骤"><a href="#3-用例分析的步骤" class="headerlink" title="3. 用例分析的步骤"></a>3. 用例分析的步骤</h3><ol>
+<li>分析并确定可以理解的用例<ul>
+<li>识别参与者</li>
+<li>识别用例</li>
+<li>模型表示</li>
+</ul>
+</li>
+<li>详细、完整地描述用例<ul>
+<li>书写用例规格说明</li>
+</ul>
+</li>
+<li>重构用例模型<ul>
+<li>识别用例间的关系</li>
+<li>对用例进行分组</li>
+</ul>
+</li>
+</ol>
+<h3 id="4-识别参与者（Actor）"><a href="#4-识别参与者（Actor）" class="headerlink" title="4. 识别参与者（Actor）"></a>4. 识别参与者（Actor）</h3><ul>
+<li>参与者是系统之外与系统进行交互的任何事物。<ol>
+<li>使用系统的个人<ul>
+<li>谁负责提供、使用或删除信息？</li>
+<li>谁将使用某项功能？</li>
+</ul>
+</li>
+<li>系统所连接的外部硬件。<ul>
+<li>例如，控制建筑物中温度的通风系统不断地从传感器获取温度信息，传感器就是一个参与者。</li>
+</ul>
+</li>
+<li>与该系统进行通信的其他信息系统。<ul>
+<li>例如为自动柜员机系统建模时，中央银行系统就是它的一个参与者。银行卡系统是销售系统中的一个参与者</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>区别参与者和DFD的外部实体<ul>
+<li>只有在执行系统功能时与信息系统进行实时交互的人员才能被当作参与者</li>
+<li>外部实体是指数据的来源和去向，提供数据的人员不一定会执行系统功能<ul>
+<li>新生入学手工填写个人信息，然后由教务人员统一将数据登记到学籍系统中，教务人员是参与者。</li>
+<li>如果学生直接通过Web方式提交个人信息，则认为学生是参与者。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>区别主要参与者和次要参与者<ul>
+<li>主要参与者（primary actor）是从系统中直接获得可度量价值的用户，功能最直接最主要的用户。</li>
+<li>次要参与者（secondary actor）的需求驱动了用例所表示的行为或功能，在用例中起辅助支持作用。</li>
+<li>用例分析的重点是要找到主要参与者。<ul>
+<li>例如，在图书馆的借/还书用例中，首先要考虑谁直接使用这一功能，谁频繁地和系统进行交互？图书管理人员是直接操作者，他们的需求和变化对于用例的影响最大。因此，图书管理员是主要参与者。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-参与者表示"><a href="#5-参与者表示" class="headerlink" title="5. 参与者表示"></a>5. 参与者表示</h3><p>在UML中，参与者用小人符号：</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210508214256262.png" alt="image-20210508214256262"></p>
+<h3 id="6-识别用例（Use-Case）"><a href="#6-识别用例（Use-Case）" class="headerlink" title="6. 识别用例（Use Case）"></a>6. 识别用例（Use Case）</h3><ul>
+<li><p>用例用来描述功能性需求。</p>
+</li>
+<li><p>一个用例就是系统的一项软件功能，对应于一个事件。</p>
+</li>
+<li><p>每个用例至少和一个参与者相关，用例名称要准确体现参与者希望系统提供的一项具体功能。</p>
+</li>
+<li><p>UML图形表示：</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210508215208019.png" alt="image-20210508215208019"></p>
+<h3 id="7-图书馆系统的用例（示例）"><a href="#7-图书馆系统的用例（示例）" class="headerlink" title="7. 图书馆系统的用例（示例）"></a>7. 图书馆系统的用例（示例）</h3></li>
+</ul>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210508215430602.png" alt="image-20210508215430602"></p>
+<h3 id="8-建立用例的关系"><a href="#8-建立用例的关系" class="headerlink" title="8. 建立用例的关系"></a>8. 建立用例的关系</h3><ul>
+<li><strong>包含关系</strong>：经过封装后可以在各种不同的基本用例中复用的行为称为包含用例。</li>
+<li><strong>扩展关系</strong>：表达某些可选或只在特定条件下才执行的系统行为的用例，它们是对基本用例的扩展。称为扩展用例。</li>
+<li><strong>泛化关系</strong>：如果两个或更多用例在行为、结构和目的方面存在共性，可以使用泛化关系。父用例描述这些共有部分，子用例继承父用例并特殊化。</li>
+</ul>
+<h4 id="（1）包含关系"><a href="#（1）包含关系" class="headerlink" title="（1）包含关系"></a>（1）包含关系</h4><ul>
+<li>基本用例可以控制包含用例，并依赖于（使用）包含用例所得到的结果。<ul>
+<li>包含用例是基本用例存在的必要条件</li>
+</ul>
+</li>
+<li>一个基本用例可以有多个包含用例，一个包含用例可以包含在若干基本用例中。包含关系可以嵌套，但超过三层的嵌套是难于理解的。</li>
+</ul>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210508221100033.png" alt="image-20210508221100033"></p>
+<h4 id="（2）扩展关系"><a href="#（2）扩展关系" class="headerlink" title="（2）扩展关系"></a>（2）扩展关系</h4><ul>
+<li>扩展用例是可选的，它是否执行取决于在执行基本用例时所发生的事件（存在扩展点）。</li>
+<li>扩展用例的缺失不影响对基本用例的理解。</li>
+</ul>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509001529707.png" alt="image-20210509001529707"></p>
+<h3 id="9-酒店预订用例图（包括用例关系）"><a href="#9-酒店预订用例图（包括用例关系）" class="headerlink" title="9. 酒店预订用例图（包括用例关系）"></a>9. 酒店预订用例图（包括用例关系）</h3><p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509001901359.png" alt="image-20210509001901359"></p>
+<h3 id="10-关于用例的粒度"><a href="#10-关于用例的粒度" class="headerlink" title="10. 关于用例的粒度"></a>10. 关于用例的粒度</h3><ul>
+<li>通常用例图粒度较大</li>
+<li>通过分解和细化，可以使粒度更小</li>
+<li><strong>每个用例将有一个较为独立的用户界面，是较适合的检验标准</strong></li>
+</ul>
+<p>分析事件流描述：</p>
+<ul>
+<li>寻找多个用例的共同点（相同事件流）,如果共同点能抽取出来，使用一个界面，可以识别为包含用例。</li>
+<li>寻找用例的扩展点，如果扩展事件流有独立界面，可以识别为扩展用例。</li>
+<li><strong>切忌“画蛇添足”！</strong></li>
+</ul>
+<h1 id="Chapter-6-数据库设计"><a href="#Chapter-6-数据库设计" class="headerlink" title="Chapter 6. 数据库设计"></a>Chapter 6. 数据库设计</h1><h2 id="一、数据库设计概述"><a href="#一、数据库设计概述" class="headerlink" title="一、数据库设计概述"></a>一、数据库设计概述</h2><ul>
+<li>数据库设计是建立数据库及其应用系统的技术，是信息系统开发和建设中的核心技术。具体说，数据库设计是指对于一个给定的应用环境，构造最优的数据库模式，建立数据库及其应用系统，使之能够有效地存储数据，满足各种用户的应用需求（信息要求和处理要求）。</li>
+<li>数据库合理的结构和组织是信息系统分析、设计时需要考虑的一个重要方面。</li>
+</ul>
+<h2 id="二、数据库设计内容与步骤"><a href="#二、数据库设计内容与步骤" class="headerlink" title="二、数据库设计内容与步骤"></a>二、数据库设计内容与步骤</h2><h3 id="1-数据库的结构特性设计"><a href="#1-数据库的结构特性设计" class="headerlink" title="1. 数据库的结构特性设计"></a>1. 数据库的结构特性设计</h3><ul>
+<li>结构特性设计称逻辑结构特征或静态结构设计。</li>
+</ul>
+<p>过程是：</p>
+<ol>
+<li>先将现实世界中的事物、事物间的联系用E-R图表示；</li>
+<li>再将各个分E-R图汇总，得出数据库的概念结构模型；</li>
+<li>最后将概念结构模型转化为数据库的逻辑结构模型表示。</li>
+</ol>
+<h3 id="2-数据库的行为特性设计"><a href="#2-数据库的行为特性设计" class="headerlink" title="2. 数据库的行为特性设计"></a>2. 数据库的行为特性设计</h3><ul>
+<li>数据库的行为特性设计是指确定数据库用户的行为和动作，并根据其行为特性设计出数据库的子模式。</li>
+</ul>
+<p>设计步骤是：</p>
+<ul>
+<li>首先要将现实世界中的数据及应用情况用数据流程图和数据字典表示，并详细描述其中的数据操作要求，进而得出系统的功能模块结构和数据库的子模式。</li>
+</ul>
+<h3 id="3-数据库的物理模式设计"><a href="#3-数据库的物理模式设计" class="headerlink" title="3. 数据库的物理模式设计"></a>3. 数据库的物理模式设计</h3><p>设计要求是：</p>
+<ul>
+<li>根据数据库结构的动态特性（即数据库应用处理要求）, 在选定的DBMS环境下，把数据库的逻辑结构模型加以物理实现，从而得出数据库的存储模式和存取方法。</li>
+</ul>
+<h3 id="4-数据库设计应注意的问题"><a href="#4-数据库设计应注意的问题" class="headerlink" title="4. 数据库设计应注意的问题"></a>4. 数据库设计应注意的问题</h3><p>数据库系统的设计是一项涉及多学科的综合技术，也是一项庞大的工程。设计过程中应注意：</p>
+<ul>
+<li>应考虑计算机硬件、软件及实际情况<ol>
+<li>系统硬件条件：数据库的规模、存储方式、分布结构、数据通行等</li>
+<li>DBMS和编程语言系统的特点</li>
+<li>用户的技术水平和管理水平</li>
+</ol>
+</li>
+<li>数据库的结构特性设计和行为特性设计紧密结合<ul>
+<li>数据库设计过程是一种自上而下的、逐步逼近设计目的的过程。</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-数据库设计的6个阶段"><a href="#5-数据库设计的6个阶段" class="headerlink" title="5. 数据库设计的6个阶段"></a>5. 数据库设计的6个阶段</h3><ol>
+<li>需求设计</li>
+<li>概念结构设计</li>
+<li>逻辑结构设计</li>
+<li>物理结构设计</li>
+<li>数据库的实施</li>
+<li>数据库的运行与维护</li>
+</ol>
+<h2 id="三、数据库需求分析"><a href="#三、数据库需求分析" class="headerlink" title="三、数据库需求分析"></a>三、数据库需求分析</h2><ul>
+<li>数据字典是各类数据描述的集合，是进行详细的数据收集和数据分析后所获得的主要成果。数据字典包括5个方面：</li>
+</ul>
+<ol>
+<li><p>数据项</p>
+<ul>
+<li><p>数据项是不可再分的数据单位。它的描述为：</p>
+<ul>
+<li>数据项=[数据项名，数据项含义说明，别名，类型，长度，取值范围，与其他数据项的逻辑关系]。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>数据结构</p>
+<ul>
+<li><p>数据结构的描述为：</p>
+<ul>
+<li>数据结构=[数据结构名，含义说明，组成，[数据项或数据结构]]。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>数据流</p>
+<ul>
+<li><p>数据流是数据结构在系统内传输的路径。数据流的描述通常为：</p>
+<ul>
+<li>数据流=[数据流名，说明，流出过程，流入过程，组成：[数据结构],平均流量，高峰期流量]。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>数据存储</p>
+</li>
+</ol>
+<ul>
+<li><p>数据存储是数据及其结构停留或保存的地方，也是数据流的来源和去向之一。数据存储可以是手工文档、手工凭单或计算机文档。数据存储的描述通常为：</p>
+<ul>
+<li>数据存储=[数据存储名，说明，编号，输入的数据流，输出的数据流], 组成：[[数据结构], 数据量，存取频度，存取方式]。</li>
+</ul>
+</li>
+</ul>
+<ol start="5">
+<li>处理过程</li>
+</ol>
+<ul>
+<li><p>处理过程的具体处理逻辑一般用判定表或判定树来描述。数据字典中只需要描述处理过程的说明性信息，通常包括以下内容：</p>
+<ul>
+<li>处理过程=[处理过程名，说明，输入：[数据流],输出：[数据流],处理：[简要说明]]。</li>
+</ul>
+</li>
+</ul>
+<h2 id="四、数据库概念结构设计"><a href="#四、数据库概念结构设计" class="headerlink" title="四、数据库概念结构设计"></a>四、数据库概念结构设计</h2><p>概念结构设计是将系统需求分析得到的用户需求抽象为信息结构的过程。概念结构的结果就是数据库的概念模型。</p>
+<ul>
+<li>概念结构的特点及设计方法</li>
+<li>数据抽象与局部视图设计</li>
+<li>视图的集成</li>
+</ul>
+<p>设计概念结构的E-R模型，可采用四种方法：</p>
+<ul>
+<li><strong>自顶向下</strong>。先定义全局概念结构E-R模型的框架，再逐步细化。</li>
+<li><strong>自底向上</strong>。先定义各局部应用的概念结构E-R模型，然后将它们集成，得到全局概念结构E-R模型。</li>
+<li><strong>逐步扩张</strong>。先定义最重要的核心概念E-R模型，然后向外扩充，以滚雪球的方式逐步生成其他概念结构E-R模型。</li>
+<li><strong>混合策略</strong>。该方法采用自顶向下和自底向上相结合的方法，先自顶向下定义全局框架，再以它为骨架集成自底向上方法中设计的各个局部概念结构。</li>
+</ul>
+<p>其中最常用的方法是自底向上。即自顶向下地进行需求分析，再自底向上地设计概念结构。</p>
+<p>自底向上的设计方法可分为两步，如图所示：</p>
+<ol>
+<li><p>进行数据抽象，设计局部E-R模型，即设计用户视图。</p>
+</li>
+<li><p>集成各局部E-R模型，形成全局E-R模型，即视图的集成。</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509090116825.png" alt="image-20210509090116825"></p>
+</li>
+</ol>
+<p>数据抽象与局部E-R模型设计</p>
+<ul>
+<li>概念结构是对现实世界的一种抽象。</li>
+<li>所谓抽象是对实际的人、物、事和概念进行人为处理，它抽取人们关心的共同特性，忽略非本质的细节，并把这些特性用各种概念精确地加以描述，这些概念组成了某种模型。</li>
+<li>概念结构设计首先要根据需求分析得到的结果（数据流图、数据字典等）对现实世界进行抽象，设计各个局部E-R模型。</li>
+</ul>
+<h3 id="1-E-R方法（E-R图）"><a href="#1-E-R方法（E-R图）" class="headerlink" title="1. E-R方法（E-R图）"></a>1. E-R方法（E-R图）</h3><ul>
+<li><p>E-R方法是“实体-联系方法”（Entity-Relationship Approach)的简称。它是描述现实世界概念结构模型的有效方法。用E-R方法建立的概念结构模型称为E-R模型，或称为E-R图。</p>
+</li>
+<li><p>E-R图基本成分包含实体型、属性和联系。</p>
+<ol>
+<li>实体型：用矩形框表示，框内标注实体名称。</li>
+<li>属性：用柄圆形框表示，框内标注属性名称。</li>
+<li>联系：指实体之间的联系，有一对一（1:1),一对多（1:n)或多对多（m:n)三种联系类型。</li>
+</ol>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509090807207.png" alt="image-20210509090807207"></p>
+<p>例如系主任领导系，学生属于某一系，学生选修课程，工人生产产品，这里“领导”、“属于”、“选修”、“生产”表示实体间的联系，可以作为联系名称。联系用菱形框表示，框内标注联系名称。</p>
+</li>
+<li><p>现实世界的复杂性导致实体联系的复杂性。表现在E-R图上可以归结为以下几种基本形式：</p>
+<ul>
+<li>两个实体之间的联系。</li>
+<li>两个以上实体间的联系。</li>
+<li>同一实体集内部各实体之间的联系。</li>
+</ul>
+</li>
+<li><p>需要注意的是，因为联系本身也是一种实体型，所以联系也可以有属性。如果一个联系具有属性，则这些联系也要用无向边与该联系连接起来，例如：</p>
+<ul>
+<li>学生选修的课程有相应的成绩。这里的“成绩”既不是学生的属性，也不是课程的属性，只能是学生选修课程的联系的属性。</li>
+<li>供应商供应的零配件中“供应数量”是“供应”联系的属性。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509091201477.png" alt="image-20210509091201477"></p>
+<h3 id="2-数据抽象及数据抽象的方法"><a href="#2-数据抽象及数据抽象的方法" class="headerlink" title="2. 数据抽象及数据抽象的方法"></a>2. 数据抽象及数据抽象的方法</h3><ul>
+<li>在系统需求分析阶段，得到了多层数据流图、数据字典和系统分析报告。</li>
+<li>建立局部E-R模型，就是根据系统的具体情况，在多层的数据流图中选择一个适当层次的数据流图，作为设计分E-R图的出发点，让这组图中每一部分对应一个局部应用。在前面选好的某一层次的数据流图中，每个局部应用都对应了一组数据流图，局部应用所涉及的数据存储在数据字典中。</li>
+<li>目的：就是要将这些数据从数据字典中抽取出来，参照数据流图，确定每个局部应用包含哪些实体，这些实体又包含哪些属性，以及实体之间的联系及其类型。<ul>
+<li>设计局部E-R模型的关键就是正确划分实体和属性。实体和属性之间在形式上并无可以明显区分的界限，通常是按照现实世界中事物的自然划分来定义实体和属性，将现实世界中的事物进行数据抽象，得到实体和属性。</li>
+<li>数据抽象的方法：分类、聚集和概括。</li>
+</ul>
+</li>
+</ul>
+<h4 id="（1）分类"><a href="#（1）分类" class="headerlink" title="（1）分类"></a>（1）分类</h4><ul>
+<li><p>分类定义某一类概念作为现实世界中一组对象的类型，将一组具有某些共同特性和行为的对象抽象为一个实体。对象和实体之间是“is member of”的关系。</p>
+</li>
+<li><p>例如，在教学管理中，“赵斌”是一名学生，表示“赵斌”是学生中的一员，她具有学生们共同的特性和行为。</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509091805313.png" alt="image-20210509091805313"></p>
+</li>
+</ul>
+<h4 id="（2）聚集"><a href="#（2）聚集" class="headerlink" title="（2）聚集"></a>（2）聚集</h4><ul>
+<li><p>聚集定义某一类型的组成成份，将对象类型的组成成份抽象为实体的属性。组成成份与对象类型之间是“is part of”的关系。</p>
+</li>
+<li><p>例如，学号、姓名、性别、年龄、系别等可以抽象为学生实体的属性，其中学号是标识学生实体的主键。</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509092012769.png" alt="image-20210509092012769"></p>
+</li>
+</ul>
+<h4 id="（3）概括"><a href="#（3）概括" class="headerlink" title="（3）概括"></a>（3）概括</h4><ul>
+<li><p>概括定义类之间的一种子集关系，它抽象了类型之间的所属语义。</p>
+</li>
+<li><p>例如，职工是个实体，技术人员、干部也是实体。但技术人员、干部是职工的子集。</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509092104264.png" alt="image-20210509092104264"></p>
+</li>
+</ul>
+<h3 id="3-局部E-R模型设计（分E-R图设计）"><a href="#3-局部E-R模型设计（分E-R图设计）" class="headerlink" title="3. 局部E-R模型设计（分E-R图设计）"></a>3. 局部E-R模型设计（分E-R图设计）</h3><ul>
+<li><p>数据抽象后得到了实体和属性，实际上实体和属性是相对而言的，往往要根据实际情况进行必要的调整。在调整中要遵循两条基本准则：</p>
+<ol>
+<li>实体具有描述信息，而属性没有。即属性必须是不可分的数据项，不能再由另一些属性组成。</li>
+<li>属性不能与其他实体具有联系，联系只能发生在实体之间。</li>
+</ol>
+</li>
+<li><p>下面举例说明局部E-R模型设计。</p>
+<p>在简单的教务管理系统中，有如下语义约束。</p>
+<ol>
+<li>一个学生可选修多门课程，一门课程可为多个学生选修，因此学生和课程是多对多的联系；</li>
+<li>一个教师可讲授多门课程，一门课程可为多个教师讲授，因此教师和课程也是多对多的联系；</li>
+<li>一个系可有多个教师，一个教师只能属于一个系，因此系和教师是一对多的联系，同样系和学生也是一对多的联系。- </li>
+</ol>
+</li>
+<li><p>根据上述约定，可以得到如图所示的学生选课局部E一R图和教师任课局部E一R图。形成局部E-R模型后，应该返回去征求用户意见，以求改进和完善，使之如实地反映现实世界。</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509092727973.png" alt="image-20210509092727973"></p>
+</li>
+</ul>
+<h3 id="4-视图的集成（全局E-R模型设计）"><a href="#4-视图的集成（全局E-R模型设计）" class="headerlink" title="4. 视图的集成（全局E-R模型设计）"></a>4. 视图的集成（全局E-R模型设计）</h3><p>局部E-R模型设计完成之后，下一步就是集成各局部E-R模型，形成全局E-R模型，即视图的集成。</p>
+<p>视图集成的方法有两种：</p>
+<ol>
+<li>多元集成法，一次性将多个局部E-R图合并为一个全局E-R图。</li>
+<li>二元集成法，首先集成两个重要的局部视图，以后用累加的方法逐步将一个新的视图集成进来。</li>
+</ol>
+<p>在实际应用中，可以根据系统复杂性选择这两种方案。一般采用逐步集成的方法。</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509093015234.png" alt="image-20210509093015234"></p>
+<p>视图集成均分成两个步骤：</p>
+<ol>
+<li>合并，消除各局部E-R图之间的冲突，生成初步E-R图。</li>
+<li>修改和重构（优化）,消除不必要的实体冗余和联系冗余，生成基本E-R图。</li>
+</ol>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509093241885.png" alt="image-20210509093241885"></p>
+<h4 id="（1）合并局部E-R图，生成初步E-R图"><a href="#（1）合并局部E-R图，生成初步E-R图" class="headerlink" title="（1）合并局部E-R图，生成初步E-R图"></a>（1）合并局部E-R图，生成初步E-R图</h4><p>E-R图中的冲突有三种：属性冲突、命名冲突和结构冲突</p>
+<h5 id="1）属性冲突"><a href="#1）属性冲突" class="headerlink" title="1）属性冲突"></a>1）属性冲突</h5><ul>
+<li>属性冲突又分为属性值域冲突和属性的取值单位冲突。<ul>
+<li>属性值域冲突，即属性值的类型、取值范围或取值集合不同。比如学号，有些部门将其定义为数值型，而有些部门将其定义为字符型。又如年龄，有的可能用出生年月表示，有的则用整数表示。</li>
+<li>属性的取值单位冲突。比如零件的重量，有的以公斤为单位，有的以斤为单位，有的则以克为单位。</li>
+</ul>
+</li>
+<li>属性冲突属于用户业务上的约定，必须与用户协商后解决。</li>
+</ul>
+<h5 id="2）命名冲突"><a href="#2）命名冲突" class="headerlink" title="2）命名冲突"></a>2）命名冲突</h5><ul>
+<li>命名不一致可能发生在实体名、属性名或联系名之间，其中属性的命名冲突更为常见。</li>
+<li>一般表现为同名异义或异名同义（实体、属性、联系名）。<ul>
+<li>同名异义，即同一名字的对象在不同的部门中具有不同的意义。<ul>
+<li>比如，“单位”在某些部门表示为人员所在的部门，而在某些部门可能表示物品的重量、长度等属性。</li>
+</ul>
+</li>
+<li>异名同义，即同一意义的对象在不同的部门中具有不同的名称。<ul>
+<li>比如，对于“房间”这个名称，可以是“寝室”，“学生宿舍”。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>命名冲突的解决方法同属性冲突，需要与各部门协商、讨论后加以解决。</li>
+</ul>
+<h5 id="3）结构冲突"><a href="#3）结构冲突" class="headerlink" title="3）结构冲突"></a>3）结构冲突</h5><ul>
+<li>同一对象在不同应用中有不同的抽象，可能为实体，也可能为属性。例如，教师的职称在某一局部应用中被当作实体，而在另一局部应用中被当作属性。这类冲突在解决时，就是使同一对象在不同应用中具有相同的抽象，或把实体转换为属性，或把属性转换为实体。</li>
+<li>同一实体在不同应用中属性组成不同，可能是属性个数或属性次序不同。解决办法是，合并后实体的属性组成为各局部E-R图中的同名实体属性的并集，然后再适当调整属性的次序。</li>
+<li>同一联系在不同应用中呈现不同的类型。比如E1与E2在某一应用中可能是一对一联系，而在另一应用中可能是一对多或多对多联系，也可能是在E1、E2、E3三者之间有联系。（例子：一人做两个系主任）</li>
+</ul>
+<p>这种情况应该根据应用的语义对实体联系的类型进行综合或调整。</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509124719077.png" alt="image-20210509124719077"></p>
+<ul>
+<li><p><strong>教务管理系统的初步E-R图</strong></p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509125144993.png" alt="image-20210509125144993"></p>
+</li>
+</ul>
+<h4 id="（2）消除不必要的冗余，生成基本E-R图"><a href="#（2）消除不必要的冗余，生成基本E-R图" class="headerlink" title="（2）消除不必要的冗余，生成基本E-R图"></a>（2）消除不必要的冗余，生成基本E-R图</h4><ul>
+<li><p>所谓冗余，在这里指冗余的数据和实体之间冗余的联系。冗余的数据是指可由基本的数据导出的数据，冗余的联系是由其他的联系导出的联系。在上面消除冲突合并后得到的初步E-R图中，可能存在冗余的数据或冗余的联系。冗余的存在容易破坏数据库的完整性，给数据库的维护增加困难，应该消除。我们把消除了冗余的初步E-R图称为基本E-R图。</p>
+</li>
+<li><p><strong>通常采用分析的方法消除冗余。数据字典是分析冗余数据的依据，还可以通过数据流图分析出冗余的联系。</strong></p>
+<ul>
+<li>如图所示的初步E-R图中，“课程”实体中的属性“教师号”可由“讲授”这个教师与课程之间的联系导出，而学生的平均成绩可由“选修”联系中的属性“成绩”中计算出来，所以“课程”实体中的“教师号”与“学生”实体中的“平均成绩”均属于冗余数据。</li>
+<li>另外，“系”和“课程”之间的联系“开课”，可以由“系”和“教师”之间的“属于”联系与“教师”和“课程”之间的“讲授”联系推导出来，所以“开课”属于冗余联系。</li>
+</ul>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509125914206.png" alt="image-20210509125914206"></p>
+</li>
+<li><p>最终得到的基本E-R模型是企业的概念模型，它代表了用户的数据要求，是沟通“要求”和“设计”的桥梁。它决定数据库的总体逻辑结构，是成功建立数据库的关键。如果设计不好，就不能充分发挥数据库的功能，无法满足用户的处理要求。</p>
+</li>
+<li><p>因此，用户和数据库人员必须对这一模型反复讨论，在用户确认这一模型已正确无误的反映了他们的要求后，才能进入下一阶段的设计工作。</p>
+</li>
+</ul>
+<h3 id="5-绘制E-R图步骤"><a href="#5-绘制E-R图步骤" class="headerlink" title="5. 绘制E-R图步骤"></a>5. 绘制E-R图步骤</h3><ol>
+<li>收集信息</li>
+<li>标识对象（实体-Entity）</li>
+<li>标识每个实体的属性（Attribute）</li>
+<li>标识对象之间的关系（Relationship）</li>
+<li>绘制E-R（Entity-Relationship）实体关系图</li>
+</ol>
+<h2 id="五、数据库逻辑结构设计"><a href="#五、数据库逻辑结构设计" class="headerlink" title="五、数据库逻辑结构设计"></a>五、数据库逻辑结构设计</h2><ul>
+<li>数据库逻辑结构设计的任务：是将概念结构转换成特定DBMS所支持的数据模型的过程；</li>
+<li>概念结构是各种数据模型的共同基础。为了能够用某一DBMS实现用户需求，还必须将概念结构进一步转化为相应的数据模型，这正是数据库逻辑结构设计所要完成的任务。</li>
+</ul>
+<p>一般的逻辑结构设计分为以下三个步骤：</p>
+<ol>
+<li>将概念结构转化为一般的关系、网状、层次模型。</li>
+<li>将转化来的关系、网状、层次模型向特定DBMS支持下的数据模型转换。</li>
+<li>对数据模型进行优化。</li>
+</ol>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509130601041.png" alt="image-20210509130601041"></p>
+<h3 id="1-转换原则"><a href="#1-转换原则" class="headerlink" title="1. 转换原则"></a>1. 转换原则</h3><ul>
+<li>概念设计中得到的E-R图是由实体、属性和联系组成的，将E-R图转换为关系模型实际上就是将实体、属性和联系转换成关系模式。在转换中要遵循以下原则：<ol>
+<li>实体集的转换：一个实体转换为一个关系模式，实体的属性就是关系的属性，实体的键就是关系的键。</li>
+<li>实体集间联系的转换规则：一个联系转换为一个关系模式，与该联系相连的各实体的键以及联系的属性均转换为该关系的属性。该关系的键有三种情况：<ol>
+<li>如果联系为1:1,则每个实体的键都是关系的候选键；</li>
+<li>如果联系为1:n,则n端实体的键是关系的键；</li>
+<li>如果联系为n:m,则各实体键的组合是关系的键。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="2-具体做法"><a href="#2-具体做法" class="headerlink" title="2. 具体做法"></a>2. 具体做法</h3><h4 id="（1）实体集的转换"><a href="#（1）实体集的转换" class="headerlink" title="（1）实体集的转换"></a>（1）实体集的转换</h4><ul>
+<li><p>首先分析各实体的属性，从中确定其主键，然后分别用关系模式表示。</p>
+<p>例如，以前面分析图的E-R模型为例，四个实体分别转换成四个关系模式：</p>
+<ul>
+<li><p>学生（<u>学号</u>，姓名，性别，年龄）</p>
+</li>
+<li><p>课程（<u>课程号</u>，课程名）</p>
+</li>
+<li><p>教师（<u>教师号</u>，姓名，性别，职称）</p>
+</li>
+<li><p>系（<u>系名</u>，电话）</p>
+</li>
+</ul>
+</li>
+<li><p>其中，有下划线者表示是主键。</p>
+</li>
+</ul>
+<h4 id="（2）把每一个实体集间联系的转换"><a href="#（2）把每一个实体集间联系的转换" class="headerlink" title="（2）把每一个实体集间联系的转换"></a>（2）把每一个实体集间联系的转换</h4><h5 id="1）1-1联系的转换方法"><a href="#1）1-1联系的转换方法" class="headerlink" title="1）1:1联系的转换方法"></a>1）1:1联系的转换方法</h5><ul>
+<li><p>将1:1联系转换为一个独立的关系：与该联系相连的各实体的码以及联系本身的属性均转换为关系的属性，且每个实体的码均是该关系的候选码。</p>
+</li>
+<li><p>将1:1联系与某一端实体集所对应的关系合并，则需要在被合并关系中增加属性，其新增的属性为联系本身的属性和与联系相关的另一个实体集的码。</p>
+<ul>
+<li><p>例1：将E-R图转换为关系模型</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509142926329.png" alt="image-20210509142926329"></p>
+<ul>
+<li><p>方案1:联系形成的关系独立存在：</p>
+<p>职工（职工号，姓名，年龄）;</p>
+<p>产品（产品号，产品名，价格）;</p>
+<p>负责（职工号，产品号）.</p>
+</li>
+<li><p>方案2:“负责”与“职工”两关系合并：</p>
+<p>职工（职工号，姓名，年龄，产品号）;</p>
+<p>产品（产品号，产品名，价格）;</p>
+</li>
+<li><p>方案3:“负责”与“产品”两关系合并：</p>
+<p>职工（职工号，姓名，年龄）;</p>
+<p>产品（产品号，产品名，价格，职工号）。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="2）1-n联系的转换方法"><a href="#2）1-n联系的转换方法" class="headerlink" title="2）1:n联系的转换方法"></a>2）1:n联系的转换方法</h5><ul>
+<li><p>一种方法是将联系转换为一个独立的关系，其关系的属性由与该联系相连的各实体集的码以及联系本身的属性组成，而该关系的码为n端实体集的码；</p>
+</li>
+<li><p>一种方法是在n端实体集中增加新属性，新属性由联系对应的1端实体集的码和联系自身的属性构成，新增属性后原关系的码不变。</p>
+<ul>
+<li><p>例2：将E-R图转换为关系模型</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509143651995.png" alt="image-20210509143651995"></p>
+<ul>
+<li><p>方案1:联系形成的关系独立存在。</p>
+<p>仓库（仓库号，地点，面积）;</p>
+<p>产品（产品号，产品名，价格）;</p>
+<p>仓储（仓库号，产品号，数量）.</p>
+</li>
+<li><p>方案2:联系形成的关系与n端对象合并。</p>
+<p>仓库（仓库号，地点，面积）;</p>
+<p>产品（产品号，产品名，价格，仓库号，数量）</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="3）m-n联系的转换方法"><a href="#3）m-n联系的转换方法" class="headerlink" title="3）m:n联系的转换方法"></a>3）m:n联系的转换方法</h5><ul>
+<li><p>在向关系模型转换时，一个m:n联系转换为一个关系。转换方法为：与该联系相连的各实体集的码以及联系本身的属性均转换为关系的属性，新关系的码为两个相连实体码的组合（该码为多属性构成的组合码）。</p>
+<ul>
+<li><p>例3：将E-R图转换为关系模型</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509143846461.png" alt="image-20210509143846461"></p>
+<ul>
+<li><p>该例题转换的关系模型为：</p>
+<p>学生（学号，姓名，年龄，性别）;</p>
+<p>课程（课程号，课程名，学时数）;</p>
+<p>选修（学号，课程号，成绩）</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="4）特殊情况的处理"><a href="#4）特殊情况的处理" class="headerlink" title="4）特殊情况的处理"></a>4）特殊情况的处理</h5><ul>
+<li><p>同实体联系的转换，除实体的主键及联系本身的属性外，需要自定义一个键名。三个或三个以上实体间的一个多元联系在转换为一个关系模式时，与该多元联系相连的各实体的主键及联系本身的属性均转换成为关系的属性，转换后所得到的关系的主键为各实体键的组合。</p>
+<ul>
+<li><p>例4：将E-R图转换为关系模型</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509144032824.png" alt="image-20210509144032824"></p>
+<ul>
+<li><p>解决方案：</p>
+<p>供应商（供应商号，供应商名，地址）;</p>
+<p>零件（零件号，零件名，单价）;</p>
+<p>产品（产品号，产品名，型号）</p>
+<p>供应（供应商号，零件号，产品号，数量）。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-范式"><a href="#3-范式" class="headerlink" title="3. 范式"></a>3. 范式</h3><h4 id="（1）第一范式1NF"><a href="#（1）第一范式1NF" class="headerlink" title="（1）第一范式1NF"></a>（1）第一范式1NF</h4><ul>
+<li>第一范式的目标是确保每列的原子性</li>
+<li>如果每列都是不可再分的最小数据单元（也称为最小的原子单元）,则满足第一范式（1NF)</li>
+</ul>
+<h4 id="（2）第二范式2NF"><a href="#（2）第二范式2NF" class="headerlink" title="（2）第二范式2NF"></a>（2）第二范式2NF</h4><ul>
+<li>如果一个关系满足1NF,并且除了主键以外的其他列，都依赖与该主键，则满足第二范式（2NF)</li>
+<li><strong>第二范式要求每个表只描述一件事情</strong></li>
+</ul>
+<h4 id="（3）第三范式3NF"><a href="#（3）第三范式3NF" class="headerlink" title="（3）第三范式3NF"></a>（3）第三范式3NF</h4><ul>
+<li>如果一个关系满足2NF,并且除了主键以外的其它列都不传递依赖于主键列，则满足第三范式（3NF)</li>
+</ul>
+<h2 id="六、数据库物理结构设计"><a href="#六、数据库物理结构设计" class="headerlink" title="六、数据库物理结构设计"></a>六、数据库物理结构设计</h2><p>物理设计的任务是为上一阶段得到的数据库逻辑模式，即数据库的逻辑结构选择合适的应用环境的物理结构，既确定有效地实现逻辑结构模式的数据库存储模式，确定在物理设备上所采用的存储结构和存取方法，然后对该存储模式进行性能评价、修改设计，经过多次反复，最后得到一个性能较好的存储模式。</p>
+<ul>
+<li><p>数据库物理设计概念</p>
+<p>数据库最终要存储在物理设备上。对于给定的逻辑数据模型，选取一个最适合应用环境的物理结构的过程，称为数据库物理设计。</p>
+</li>
+<li><p>数据库的物理设计可分为两步：</p>
+<ol>
+<li>确定数据的物理结构，在关系数据库中主要指存取方法和存储结构；</li>
+<li>评价物理结构，评价的重点是时间和空间效率。</li>
+</ol>
+</li>
+</ul>
+<p>事务（TRANSACTION)是作为单个逻辑工作单元执行的一系列操作</p>
+<ul>
+<li><p>多个操作作为一个整体向系统提交，要么都执行、要么都不执行</p>
+</li>
+<li><p>事务是一个不可分割的工作逻辑单元</p>
+</li>
+<li><p>事务必须具备以下四个属性，简称ACID 属性</p>
+<ul>
+<li><p>原子性（Atomicity)</p>
+<p>事务是一个完整的操作，事务的各步操作是不可分的（原子的）,要么都执行，要么都不执行</p>
+</li>
+<li><p>一致性（Consistency)</p>
+<p>当事务完成时，数据必须处于一致状态</p>
+</li>
+<li><p>隔离性（Isolation)</p>
+<p>并发事务之间彼此隔离、独立，它不应以任何方式依赖于或影响其他事务</p>
+</li>
+<li><p>持久性（Durability)</p>
+<p>事务完成后，它对数据库的修改被永久保持</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="Chapter-7-系统总体设计"><a href="#Chapter-7-系统总体设计" class="headerlink" title="Chapter 7. 系统总体设计"></a>Chapter 7. 系统总体设计</h1><h2 id="一、系统总体设计概述"><a href="#一、系统总体设计概述" class="headerlink" title="一、系统总体设计概述"></a>一、系统总体设计概述</h2><ul>
+<li>架构包含系统的一组基本结构（structure),每种结构都有各种类型的部件（component）及其关系构成，架构描述了这些部件的组合、相互调用参照、通信以及其他动态交互。</li>
+</ul>
+<h3 id="1-架构和结构的关系"><a href="#1-架构和结构的关系" class="headerlink" title="1. 架构和结构的关系"></a>1. 架构和结构的关系</h3><ul>
+<li>架构是抽象无形的，体现高层全局的决策，就像文章的中心思想和提纲。</li>
+<li>结构是具体有形的，体现决策的贯彻，如同文章的每个段落及细节描述。</li>
+<li>架构包含了结构的初步描述和决策。</li>
+<li>相同架构的系统，具体结构允许有差异。</li>
+</ul>
+<h3 id="2-软件架构"><a href="#2-软件架构" class="headerlink" title="2. 软件架构"></a>2. 软件架构</h3><ul>
+<li>软件架构（software architecture)的定义没有统一的版本，一般认为：一个应用程序或计算系统的软件架构是一个或一组结构，它包含组成系统的软件元素、这些元素对外可见的性质以及它们之间的关系。对外可见的性质指软件元素能够提供的服务、性能特征、错误处理、共享资源的用法等。<ul>
+<li>软件的一个结构元素可能是一个子系统、构件、进程、库、数据库、计算结点、遗留系统等等。</li>
+</ul>
+</li>
+<li>软件架构是最高层次的系统分解，它不会囊括所有的结构和行为的定义，它只关注那些被认为是重要的元素。<ul>
+<li>架构难以更改，一旦修改，意味着整个系统重建，而结构修改只影响局部。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-软件架构模式"><a href="#3-软件架构模式" class="headerlink" title="3. 软件架构模式"></a>3. 软件架构模式</h3><ul>
+<li>大部分的架构来源于有相似关注点的系统的总结和抽象，这些相似性被描述成某种特殊模式的架构风格，也就是架构模式（architectural pattern)。</li>
+<li>一种架构模式就是一个经验秘籍，架构师在设计不同系统时可以重复使用这些先进经验。</li>
+</ul>
+<h2 id="二、三层架构设计"><a href="#二、三层架构设计" class="headerlink" title="二、三层架构设计"></a>二、三层架构设计</h2><ul>
+<li><p>基于组件的软件开发，组件根据横向位置划分为多层（N-Layer):</p>
+<ul>
+<li>下层组件负责对上层组件提供服务</li>
+<li>上层组件可以使用下层组件定义的服务，但下层组件对上层组件一无所知。</li>
+<li>层与层之间通常是不透明的，每一层都具有独立的职责</li>
+<li>不同层的软件构件可以分布在多台机器上，也可以部署在同一台机器上，形成物理上的多层（N-Tier)</li>
+</ul>
+</li>
+<li><p>三层架构示意图</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509165624277.png" alt="image-20210509165624277"></p>
+</li>
+<li><p>三层之间数据传递方向</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509165714095.png" alt="image-20210509165714095"></p>
+</li>
+</ul>
+<h2 id="三、MVC架构设计"><a href="#三、MVC架构设计" class="headerlink" title="三、MVC架构设计"></a>三、MVC架构设计</h2><p>MVC模式是一种软件开发模式。</p>
+<ul>
+<li>M是Model,表示模型，主要完成系统的逻辑处理。<ul>
+<li>代表数据，使用对象及其属性实现。</li>
+</ul>
+</li>
+<li>V是View,表示视图，主要完成与用户的交互。<ul>
+<li>是模型的外在表现形式，视图可以直接访问模型；查询数据信息，当模型中数据发生变化时，它会通知视图刷新界面，显示更新后的数据。</li>
+</ul>
+</li>
+<li>DC是Controller,表示控制器，主要建立模型与视图之间的关联。<ul>
+<li>是模型与视图的联系纽带，客户的请求由控制器处理，它根据客户的请求调用模型的方法，完成数据更新，然后调用视图的方法将响应结果展示给客户。相应的，模型的更新与修改将通过控制器通知视图，保持视图与模型的一致性</li>
+</ul>
+</li>
+</ul>
+<h2 id="四、SOA架构设计"><a href="#四、SOA架构设计" class="headerlink" title="四、SOA架构设计"></a>四、SOA架构设计</h2><ul>
+<li>可从企业外部访问</li>
+<li>松藕合、粗粒度</li>
+<li>面向业务</li>
+<li>内部实现可以基于对象，但是作为一个整体，它是面向业务的，而不是面向对X象的。</li>
+<li>服务分析与设计的步骤<ul>
+<li>识别服务</li>
+<li>描述服务</li>
+<li>服务实现</li>
+</ul>
+</li>
+</ul>
+<h2 id="五、微服务架构设计"><a href="#五、微服务架构设计" class="headerlink" title="五、微服务架构设计"></a>五、微服务架构设计</h2><h3 id="（1）单体架构"><a href="#（1）单体架构" class="headerlink" title="（1）单体架构"></a>（1）单体架构</h3><p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509171441946.png" alt="image-20210509171441946"></p>
+<ul>
+<li>单体架构的特点和好处<ul>
+<li>单一代码库、IDE友好、看着简单</li>
+<li>容易部署</li>
+<li>开发模型简单，一份代码库进行编码、构建和部署</li>
+<li>技术栈单一</li>
+</ul>
+</li>
+<li>单体架构的问题<ul>
+<li>庞大的代码库，关系错综复杂</li>
+<li>交付周期长</li>
+<li>扩展能力与弹性受限</li>
+<li>新技术与工具框架使用会受限</li>
+<li>维护成本高</li>
+</ul>
+</li>
+</ul>
+<h3 id="（2）服务化架构"><a href="#（2）服务化架构" class="headerlink" title="（2）服务化架构"></a>（2）服务化架构</h3><p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509171622919.png" alt="image-20210509171622919"></p>
+<ul>
+<li><p>服务化架构的特点和好处</p>
+<ul>
+<li>对业务进行分层，通常分为表现层（前端）、公共服务、业务逻辑服务、数据访问层等</li>
+<li>对业务进行解耗，通过Pub-Sub或RPC进行服务间调用关系解藕</li>
+<li>服务独立性，多数服务可以进行独立打包发布</li>
+<li>每个服务的技术栈单一</li>
+<li>部署简单，具备可伸缩性</li>
+</ul>
+</li>
+<li><p>服务化架构的问题</p>
+<ul>
+<li>对于部分服务而言，代码库依然很庞大</li>
+<li>打包、发布、部署流程不足够好</li>
+<li>维护团队间沟通受阻，技术经验有效传递不够</li>
+<li>服务增多对开发人员不够友好</li>
+</ul>
+</li>
+</ul>
+<h3 id="（3）微服务架构"><a href="#（3）微服务架构" class="headerlink" title="（3）微服务架构"></a>（3）微服务架构</h3><ul>
+<li>服务注册→服务发现→服务调用</li>
+<li>MVC→SOA→微服务</li>
+</ul>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509171808463.png" alt="image-20210509171808463"></p>
+<ul>
+<li><p>微服务的特征</p>
+<ul>
+<li><strong>每个微服务都是业务完整的</strong><ul>
+<li>接口及界面呈现、业务逻辑、数据管理</li>
+</ul>
+</li>
+<li><strong>每个微服务仅仅对一个业务负责</strong><ul>
+<li>产品服务、评价服务、支付服务、订单服务</li>
+</ul>
+</li>
+<li><strong>每个微服务接口明确定义</strong><ul>
+<li>接口消费只关注接口，对微服务不具备依赖</li>
+</ul>
+</li>
+<li><strong>独立部署、升级和伸缩</strong></li>
+</ul>
+</li>
+<li><p>微服务的独立性与自主性</p>
+<ul>
+<li><strong>微服务间的独立性是关键</strong><ul>
+<li>代码库独立</li>
+<li>技术栈独立</li>
+<li>可伸缩性、可扩展性独立</li>
+<li>还有业务功能等</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>独立的代码库</p>
+<ul>
+<li>每个微服务具备自己的代码仓库<ul>
+<li>由对应团队开发者维护</li>
+<li>编译、打包、发布及部署都很快</li>
+<li>服务启动迅速</li>
+<li>在各个服务的代码库间没有交叉依赖</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>技术栈对立</p>
+<ul>
+<li>每个微服务都有自己独立的技术栈来实现<ul>
+<li>根据业务实现需求来选中最合适的技术栈</li>
+<li>团队可以尝试新的技术、工具或者框架</li>
+<li>所选的技术栈一般来说都很轻量级</li>
+<li>不需要同一标准化技术栈的选择。无需针对技术选型而纠关注业务实现</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>独立的可伸缩性</p>
+<ul>
+<li>每个微服务都可以独立的伸缩<ul>
+<li>更加直观定位性能瓶颈</li>
+<li>数据库分片可以根据需求来</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>业务功能独立</p>
+<ul>
+<li>每个微服务可以在不影响其他微服务的情况下进行功能扩展<ul>
+<li>例如更新新版本界面或者某个微服务中的某项功能时，无需更新整个系统</li>
+<li>可以进行整个业务功能的重写，并替换之</li>
+</ul>
+</li>
+<li><strong>要保证接口明确定义且稳定</strong></li>
+</ul>
+</li>
+<li><p>微服务优点</p>
+<ul>
+<li>每个服务足够内聚，足够小，代码容易理解、开发效率提高</li>
+<li>服务之间可以独立部署，微服务架构让持续部署成为可能，</li>
+<li>每个服务可以各自进行X扩展和Z扩展，而且，每个服务可以根据自己的需要部署到合适的硬件服务器上；</li>
+<li>容易扩大开发团队，可以针对每个服务（service）组件开发团队；</li>
+<li>提高容错性（fault isolation），一个服务的内存泄露并不会让整个系统瘫疾；</li>
+<li>系统不会被长期限制在某个技术栈上。</li>
+</ul>
+</li>
+<li><p>微服务不足</p>
+<ul>
+<li>“微服务”强调了服务大小</li>
+<li>业务逻辑。</li>
+<li>分区数据库</li>
+<li>测试</li>
+</ul>
+</li>
+<li><p>微服务架构工作流程</p>
+<ul>
+<li><strong>设计阶段</strong><ul>
+<li>将产品功能拆分为若干服务</li>
+<li>为每个服务设计API接口</li>
+</ul>
+</li>
+<li><strong>开发阶段</strong><ul>
+<li>实现API接口（包括单元测试）</li>
+<li>开发UI原型（页面）</li>
+</ul>
+</li>
+<li><strong>测试阶段</strong><ul>
+<li>前后端集成</li>
+<li>验证产品功能</li>
+</ul>
+</li>
+<li><strong>部署阶段</strong><ul>
+<li>发布测试环境</li>
+<li>发布生产环境</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="Chapter-8-系统持续集成设计"><a href="#Chapter-8-系统持续集成设计" class="headerlink" title="Chapter 8. 系统持续集成设计"></a>Chapter 8. 系统持续集成设计</h1><h2 id="一、系统配置管理"><a href="#一、系统配置管理" class="headerlink" title="一、系统配置管理"></a>一、系统配置管理</h2><h3 id="1-版本控制系统简介"><a href="#1-版本控制系统简介" class="headerlink" title="1. 版本控制系统简介"></a>1. 版本控制系统简介</h3><ul>
+<li>版本控制系统<ul>
+<li>定义：<ul>
+<li>从狭义上来说，它是软件项目开发过程中用于储存我们所写的代码所有修订版本的软件</li>
+<li>事实上我们可以将任何对项目有帮助的文档交付版本控制系统进行管理</li>
+</ul>
+</li>
+<li>目的：<ul>
+<li>实现开发团队并行开发、提高开发效率</li>
+<li>对软件开发进程中文件或目录的发展过程提供有效的追踪手段，保证在需要时可回到旧版本，避免文件丢失、修改的丢失和相互覆盖</li>
+</ul>
+</li>
+<li>好处：减轻开发人员的负担，节省时间，同时降低人为错误<ul>
+<li>空间<ul>
+<li>保证集中统一管理，解决一致性和冗余问题</li>
+</ul>
+</li>
+<li>时间<ul>
+<li>解决冗余、事务性处理并发性问题</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>常见代码版本控制系统<ul>
+<li>集中式<ul>
+<li>CVS</li>
+<li>VSS</li>
+<li>SVN</li>
+<li>ClearCase</li>
+</ul>
+</li>
+<li>分布式<ul>
+<li>Mercurial</li>
+<li>Bazaar</li>
+<li>Bitkeeper</li>
+<li>Git</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-Git简介"><a href="#2-Git简介" class="headerlink" title="2. Git简介"></a>2. Git简介</h3><p>Git的设计理念包括以下几点：</p>
+<ul>
+<li>速度快</li>
+<li>设计简单</li>
+<li>强力支持非线性开发，允许上千分支并行开发</li>
+<li>完全的分布式</li>
+<li>有能力高效管理类似Linux内核一样的超大规模项目（速度和数据量）</li>
+</ul>
+<h3 id="3-Git基本概念"><a href="#3-Git基本概念" class="headerlink" title="3. Git基本概念"></a>3. Git基本概念</h3><ul>
+<li>工作拷贝（工作目录）:用于存放产品开发数据本地工作目录。</li>
+<li>索引（Index):用于存放待提交数据的缓存区。</li>
+<li>本地库：远端库的一个完整的拷贝，包括所有文件的修改记录，分支等。</li>
+<li>远端库：本地库clone来源。</li>
+<li>中心库：远端库的一种，公司级存放某个项目所有产品数据的仓库。</li>
+<li>快照（snapshot):版本库某个时间点所有文件集合。</li>
+<li>全球版本号（commitID):Git库的版本号是通过SHA-1算法根据库中的所有内容计算出一个40位的哈希值，这个哈希值是全球唯一的，基本只要前六位就可以唯一标识了。</li>
+</ul>
+<p>文件状态介绍：</p>
+<ul>
+<li>Untracked files:未被跟踪的文件，一般指新添加的文件</li>
+<li>Change not staged for commit:已修改的文件，包括modified和deleted状态</li>
+<li>Change to be commit: 已缓冲的文件，即已add的文件，包括modified、deleted和new file状态</li>
+<li>Noting to commit:已提交的文件，即已commit的文件</li>
+</ul>
+<h3 id="4-简单的常用Git命令"><a href="#4-简单的常用Git命令" class="headerlink" title="4. 简单的常用Git命令"></a>4. 简单的常用Git命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">git init                                                  # 初始化本地git仓库（创建新仓库） </span><br><span class="line">git config --global user.name &quot;xxx&quot;                       # 配置用户名 </span><br><span class="line">git config --global user.email &quot;xxx@xxx.com&quot;              # 配置邮件 </span><br><span class="line">git clone git@github.com:xxx.git           				  # clone远程仓库 </span><br><span class="line">git status                                                # 查看当前版本状态（是否修改） </span><br><span class="line">git add xyz                                               # 添加xyz文件至index </span><br><span class="line">git add .                                                 # 增加当前子目录下所有更改过的文件至index </span><br><span class="line">git commit -m &#39;xxx&#39;                                       # 提交 </span><br><span class="line">git commit --amend -m &#39;xxx&#39;                               # 合并上一次提交（用于反复修改） </span><br><span class="line">git commit -am &#39;xxx&#39;                                      # 将add和commit合为一步 </span><br><span class="line">git rm xxx                                                # 删除index中的文件 </span><br><span class="line">git branch                                                # 显示本地分支 </span><br><span class="line">git branch --contains 50089                               # 显示包含提交50089的分支 </span><br><span class="line">git branch -a                                             # 显示所有分支 </span><br><span class="line">git branch -r                                             # 显示所有原创分支 </span><br><span class="line">git branch --merged                                       # 显示所有已合并到当前分支的分支 </span><br><span class="line">git branch --no-merged                                    # 显示所有未合并到当前分支的分支 </span><br><span class="line">git push origin master                                    # 将当前分支push到远程master分支 </span><br><span class="line">git pull origin master                                    # 获取远程分支master并merge到当前分支 </span><br></pre></td></tr></table></figure>
+<h2 id="二、系统代码检查"><a href="#二、系统代码检查" class="headerlink" title="二、系统代码检查"></a>二、系统代码检查</h2><p>代码交付过程中常见问题与风险</p>
+<table>
+<thead>
+<tr>
+<th align="center">潜在问题</th>
+<th>风险</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">重复代码过多</td>
+<td>造成开发人力的浪费以及后期维护成本增加</td>
+</tr>
+<tr>
+<td align="center">编码风格糟糕</td>
+<td>代码凌乱、不可读，难于维护与开发修改</td>
+</tr>
+<tr>
+<td align="center">圈复杂度过高</td>
+<td>造成代码可维护性、可继承性降低，问题定位难度加大</td>
+</tr>
+<tr>
+<td align="center">编码安全风险</td>
+<td>使用具有安全风险的函数，导致系统的安全性层级降低，加大系统的安全风险</td>
+</tr>
+</tbody></table>
+<p>产生代码重复可能有以下几个原因：</p>
+<ul>
+<li>因为某段代码能用就复制粘贴过来，多数情况下代码会有少许不同，如变量名称改变或代码增删。</li>
+<li>因为要实现与已有功能类似的功能，开发者独立写出与别处相似的代码，研究表明独立撰写的代码在语法上不一定相似。</li>
+<li>抄袭，即不经允许复制代码，且未列出版权归属。</li>
+<li>代码自动生成，这时可能需要重复代码以提高性能或方便开发。</li>
+</ul>
+<h2 id="三、系统编译构建"><a href="#三、系统编译构建" class="headerlink" title="三、系统编译构建"></a>三、系统编译构建</h2><ul>
+<li>软件编译构建是指把软件源码编译成目标文件，并将目标文件和必要的文档制作成软件包的过程。以Maven工程构建为例，包含：从代码仓库拉取源码、从软件仓库拉取依赖包、编译成目标文件、软件打包、上传软件包等步骤。</li>
+</ul>
+<h2 id="四、系统测试管理"><a href="#四、系统测试管理" class="headerlink" title="四、系统测试管理"></a>四、系统测试管理</h2><h3 id="1-软件测试的目的"><a href="#1-软件测试的目的" class="headerlink" title="1. 软件测试的目的"></a>1. 软件测试的目的</h3><p>不同组织会有不同的测试目的</p>
+<ul>
+<li>确保软件产品符合用户需求</li>
+<li>发现软件产品中的质量缺陷和风险</li>
+<li>保证软件产品的高质量</li>
+<li>帮助经理做发布/不发布决策</li>
+<li>给出有一定可信度的质量评价</li>
+<li>找出安全可靠的产品使用方法</li>
+<li>最小化技术支持投入</li>
+<li>合规</li>
+<li>最小化诉讼风险</li>
+</ul>
+<h3 id="2-软件测试的对象"><a href="#2-软件测试的对象" class="headerlink" title="2. 软件测试的对象"></a>2. 软件测试的对象</h3><ul>
+<li>软件源程序</li>
+<li>需求规格说明</li>
+<li>概要设计说明</li>
+<li>详细设计规格说明</li>
+</ul>
+<h3 id="3-软件测试过程"><a href="#3-软件测试过程" class="headerlink" title="3. 软件测试过程"></a>3. 软件测试过程</h3><p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509202631083.png" alt="image-20210509202631083"></p>
+<h3 id="4-软件测试V模型"><a href="#4-软件测试V模型" class="headerlink" title="4. 软件测试V模型"></a>4. 软件测试V模型</h3><p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509202833580.png" alt="image-20210509202833580"></p>
+<h3 id="5-软件测试的原则"><a href="#5-软件测试的原则" class="headerlink" title="5. 软件测试的原则"></a>5. 软件测试的原则</h3><ul>
+<li>尽早地、不断地进行软件测试，测试和开发过程相结合</li>
+<li>所有的测试应追溯到用户需求</li>
+<li>权衡测试投入和产出比</li>
+<li>测试规模从小到大覆盖，从单元测试到系统测试</li>
+<li>明确测试输入预制条件和对应的预期输出结果</li>
+<li>一般避免测试自己编写的程序</li>
+<li>测试设计时充分考虑异常的输入情况</li>
+<li>二八原则：分析、设计、实现阶段的复审和测试能发现80%缺陷，系统测试找出其余缺陷中的80%。80%问题在20%程序模块。</li>
+<li>既应该测试软件该做什么，也应该测试软件不该做什么</li>
+</ul>
+<h3 id="6-软件测试方法和类型"><a href="#6-软件测试方法和类型" class="headerlink" title="6. 软件测试方法和类型"></a>6. 软件测试方法和类型</h3><p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509203200343.png" alt="image-20210509203200343"></p>
+<h1 id="Chapter-9-软件工程伦理"><a href="#Chapter-9-软件工程伦理" class="headerlink" title="Chapter 9. 软件工程伦理"></a>Chapter 9. 软件工程伦理</h1><h2 id="一-工程伦理概述"><a href="#一-工程伦理概述" class="headerlink" title="一. 工程伦理概述"></a>一. 工程伦理概述</h2><h3 id="（1）伦理困境与伦理选择"><a href="#（1）伦理困境与伦理选择" class="headerlink" title="（1）伦理困境与伦理选择"></a>（1）伦理困境与伦理选择</h3><p>通过道德慎思为自己的伦理行为划分优先顺序，审慎的思考和处理几对重要的伦理关系，更好的在工程实践中履行伦理责任。</p>
+<ol>
+<li>自主与责任的关系</li>
+<li>效率和公正的关系</li>
+<li>个人与集体的关系</li>
+<li>环境与社会的关系</li>
+</ol>
+<p>将工程行业的伦理规范与个人美德结合一一通过自我反思而达到对伦理规范的新认识，并以现实的行动实践这种认识。</p>
+<h3 id="（2）应对工程伦理问题的基本思路"><a href="#（2）应对工程伦理问题的基本思路" class="headerlink" title="（2）应对工程伦理问题的基本思路"></a>（2）应对工程伦理问题的基本思路</h3><p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509204236343.png" alt="image-20210509204236343"></p>
+<p>面对具体工程伦理问题时，可通过以下五个程序性步骤应对和解决：</p>
+<ol>
+<li>培养工程实践主体的伦理意识。</li>
+<li>利用伦理原则、底线原则与相关具体情境相结合。</li>
+<li>遇到难以抉择的伦理问题时，需多方听取意见。</li>
+<li>根据工程实践中遇到的伦理问题及时修正相关伦理准则和规范。</li>
+<li>逐步建立遵守工程伦理准则的相关保障制度。</li>
+</ol>
+<h2 id="二、人工智能伦理"><a href="#二、人工智能伦理" class="headerlink" title="二、人工智能伦理"></a>二、人工智能伦理</h2><ul>
+<li><p>人工智能对科技伦理思想的冲击</p>
+<ul>
+<li>对人本主义的冲击</li>
+<li>对传统生殖伦理的冲击</li>
+<li>对效率原则的冲击</li>
+<li>对安全原则的冲击</li>
+<li>对个体情感道德的冲击</li>
+</ul>
+</li>
+<li><p>人工智能发展对策</p>
+<ul>
+<li>人工智能不管处于什么样的阶段，都必须坚持“不会伤害人、有利于人的生存与发展”的这一基本原则。在人工智能的初级阶段，我们必须选材要环保，不会对环境产生破坏和污染；其次，开发研究必须是公开透明的，要将其成功地置于人道主义原则监督之下；最后，必须要让人工智能开发者对其产品承担相应的责任。</li>
+</ul>
+</li>
+</ul>
+<h2 id="三、大数据伦理"><a href="#三、大数据伦理" class="headerlink" title="三、大数据伦理"></a>三、大数据伦理</h2><ul>
+<li>大数据伦理责任特点<ul>
+<li>数据伦理责任是具有普遍意义的伦理责任在大数据时代的具体化，因此，它具有<strong>伦理责任的一般特征</strong>；同时，由于数据管理和网络社会自身的自由性、开放和虚拟性等特点，数据伦理责任又有自己的特殊性，表现为：<strong>自律性、广泛性和实践性</strong></li>
+</ul>
+</li>
+<li>大数据创新科技人员伦理责任意识<ul>
+<li>正确识别各类责任主体的利益关注点，理解他们的价值追求及行为动机，是大数据创新科技人员必须具备的伦理责任意识</li>
+</ul>
+</li>
+<li>大数据创新科技人员伦理责任<ul>
+<li>尊重个人自由；强化技术保护；严格操作规程；加强行业自律；承担社会责任</li>
+</ul>
+</li>
+<li>大数据创新科技人员行为规范</li>
+</ul>
+<h1 id="Chapter-10-类图"><a href="#Chapter-10-类图" class="headerlink" title="Chapter 10. 类图"></a>Chapter 10. 类图</h1><h2 id="一、关联名称"><a href="#一、关联名称" class="headerlink" title="一、关联名称"></a>一、关联名称</h2><ul>
+<li><p>多数关联是二元的（即只存在于两个类的实例之间），在图中表示为连接两个类符号的实线路径。</p>
+</li>
+<li><p>使用关联名称，应该反映该关系的目的，并且应该是一个动词词组。</p>
+<ul>
+<li>读者和图书的关联是“借阅”</li>
+<li>教师对象和课程对象的关联名称就是“讲授”</li>
+<li>医生和处方单的关系是“开”。</li>
+</ul>
+</li>
+<li><p>关联名称应放置在关联路径上或其附近。</p>
+</li>
+</ul>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509205137253.png" alt="image-20210509205137253"></p>
+<h2 id="二、关联角色（Role）"><a href="#二、关联角色（Role）" class="headerlink" title="二、关联角色（Role）"></a>二、关联角色（Role）</h2><ul>
+<li>关联所联系的每一端叫做一个角色</li>
+<li>角色名称应该是一个名词，能够表达被关联对象在关联中所充当的角色，角色名称紧邻关联线的末端。</li>
+</ul>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509205230251.png" alt="image-20210509205230251"></p>
+<h2 id="三、关联的多重性（Multiplicity）"><a href="#三、关联的多重性（Multiplicity）" class="headerlink" title="三、关联的多重性（Multiplicity）"></a>三、关联的多重性（Multiplicity）</h2><ul>
+<li><p>定义了一个类A的实例在一段特定的时间内能够和多少个类B的实例发生关联。</p>
+</li>
+<li><p>类似于ER中的关联基数（一对一/一对多/多对多）</p>
+</li>
+</ul>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509205409552.png" alt="image-20210509205409552"></p>
+<h2 id="四、关联的导向性-Navigability"><a href="#四、关联的导向性-Navigability" class="headerlink" title="四、关联的导向性(Navigability)"></a>四、关联的导向性(Navigability)</h2><ul>
+<li><p>角色的导向性特征表示可以通过关联从源类导向到目标类上。也就是说给定关联一端的对象就能够容易并直接地得到另一端的对象。</p>
+</li>
+<li><p>识别关联的导向可以推迟，与设计实现有关。通常是源对象存储了对目标对象的一些引用</p>
+</li>
+</ul>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509205514965.png" alt="image-20210509205514965"></p>
+<h2 id="五、整体-部分关联"><a href="#五、整体-部分关联" class="headerlink" title="五、整体-部分关联"></a>五、整体-部分关联</h2><ul>
+<li><p>如果对象a是对象b的一个组成部分，则称b为a的整体对象，a为b的部分对象，二者对应的关联形式称为整体-部分关联（Whole-Part）。这种结构可以用a “is a part of” b进行验证。</p>
+</li>
+<li><p>整体-部分关联是关联中使用较频繁的一种模式，用于对模型元素之间的组装关系进行建模。整体-部分关系在现实生活中可以表现为以下几种形式：</p>
+<ul>
+<li>客观上或逻辑上的整体事物和它的组成部分（机器和零件、人体和器官、书和章节、图和元素）</li>
+<li>组织机构和它的下级组织及部分（公司和子公司、医院和科室）</li>
+<li>团体（组织）和成员（科室和医生、班级和学生）</li>
+<li>空间上的容器事物和其包容物（车间和机器/工人、教室和设备）</li>
+</ul>
+</li>
+<li><p>整体-部分关系建模的这种关联也称为聚集（aggregation），在UML类图中使用连接线和菱形表达，菱形一端的对象是整体对象。</p>
+</li>
+<li><p>整体-部分关联有两种类型：</p>
+</li>
+</ul>
+<h3 id="1-组合聚集-composition-aggregation"><a href="#1-组合聚集-composition-aggregation" class="headerlink" title="1. 组合聚集(composition aggregation )"></a>1. 组合聚集(composition aggregation )</h3><ul>
+<li>组合聚集具有很强的归属关系，在特定时刻部分只能是一个组合对象的成员。</li>
+<li>整体端的重数不会超过 1（即它无法被多个整体对象共享）,关系建立后一般不可变更。</li>
+<li>关联路径的末端有一个实心菱形，用来表示组合关系。</li>
+</ul>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509205828918.png" alt="image-20210509205828918"></p>
+<h3 id="2-共享聚集-shared-aggregation"><a href="#2-共享聚集-shared-aggregation" class="headerlink" title="2. 共享聚集(shared aggregation)"></a>2. 共享聚集(shared aggregation)</h3><ul>
+<li>描述整体-部分的关系，部分可能同时属于多个整体对象。</li>
+<li>关联路径的末端有一个空心菱形，用来表示聚集关系。</li>
+</ul>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509205954962.png" alt="image-20210509205954962"></p>
+<h3 id="3-识别关联的原则"><a href="#3-识别关联的原则" class="headerlink" title="3. 识别关联的原则"></a>3. 识别关联的原则</h3><ul>
+<li><p>找出问题域中的对象远远比找出关联更为重要</p>
+</li>
+<li><p>注意力集中在那些需要将对象之间的关系信息记忆一段持续时间的关联</p>
+</li>
+<li><p>太多无效关联会使概念模型变得混乱</p>
+</li>
+<li><p>要避免关联之间的信息冗余以及减少派生关联</p>
+</li>
+<li><p>关联使用关联名称、角色、多重性和导向性来说明</p>
+</li>
+</ul>
+<h2 id="六、识别泛化关系"><a href="#六、识别泛化关系" class="headerlink" title="六、识别泛化关系"></a>六、识别泛化关系</h2><ul>
+<li>泛化（Generalization）是在多个概念之间识别共性，定义超类（一般概念）和子类（特定概念）关系的活动。<ul>
+<li>如在图书馆系统中，发现图书馆目前还收藏了其它资源，比如影碟（VCD/DVD）、音乐CD、电子书等品种。它们和图书一样可以被任何读者借出，每个对象都有条码和状态。但它们也有自己的特性，比如属性项、借阅期限、逾期惩罚不同，必须区别对待。</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-一般-特殊结构-Generalization-Specialization"><a href="#1-一般-特殊结构-Generalization-Specialization" class="headerlink" title="1. 一般-特殊结构(Generalization-Specialization)"></a>1. 一般-特殊结构(Generalization-Specialization)</h3><ul>
+<li>如果类A具有类B的全部属性和行为，而且具有自己特有的某些属性或服务，则A叫做B的特殊类，B叫做A的一般类。这种关系也称为一般-特殊关系、泛化-特化关系、继承关系。</li>
+<li>特点：<ul>
+<li>可以简化模型，有效地反映问题空间的分类层次。 </li>
+<li>必须确认子类一定是父类的一个特殊类型，即可以用“is-a-kind-of”进行验证 </li>
+<li>注意控制泛化的粒度，额外的泛化增加复杂性</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-什么时候需要划分一般-特殊结构"><a href="#2-什么时候需要划分一般-特殊结构" class="headerlink" title="2. 什么时候需要划分一般-特殊结构"></a>2. 什么时候需要划分一般-特殊结构</h3><ul>
+<li>类的属性或行为不适合该类的全部对象<ul>
+<li>如果定义“学生”类有“导师”属性，有“教学实践”行为的话，则该类的对象对于本科生不适合，只适合于研究生对象，采用一般-特殊结构重新分类，建立“学生”和“研究生”之间的一般-特殊结构，研究生可以继承所有学生的特性。</li>
+</ul>
+</li>
+<li>属性和行为相似的类<ul>
+<li>这些类的共性抽象出来作为超类，各自特性仍旧保留而作为超类的子类。</li>
+<li>将不要将一个对象的状态变化设计为多个子类，除非对象的<strong>多数行为</strong>是由状态来决定</li>
+</ul>
+</li>
+</ul>
+<h2 id="七、抽象类"><a href="#七、抽象类" class="headerlink" title="七、抽象类"></a>七、抽象类</h2><ul>
+<li>如果一般类A的每个实例还必须是它的一个特殊类的成员，那么类A就被称为一个抽象类。<ul>
+<li>比如“学生”、“研究生”中，“学生”不是一个抽象类</li>
+<li>比如“支付”、“现金支付”、“信用卡支付”中，“支付”就是一个抽象类</li>
+</ul>
+</li>
+<li>但面向对象的设计原则强调设计抽象类，比如学生，设计一个抽象学生类，然后派生出本科生和研究生</li>
+<li>抽象类意味着不能创建该类的实例</li>
+</ul>
+<h2 id="八、多继承"><a href="#八、多继承" class="headerlink" title="八、多继承"></a>八、多继承</h2><ul>
+<li><p>继承有单继承和多继承。</p>
+</li>
+<li><p>多继承是指一个子类继承了两个父类的属性和行为。</p>
+</li>
+<li><p>例如MyTool继承铅笔和橡皮两种事物的特性：</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509210743974.png" alt="image-20210509210743974"></p>
+</li>
+<li><p>多继承的替换方法</p>
+<ul>
+<li><p>如果某个类从若干个类中进行继承，就必须检查祖先中操作和属性的命名冲突（重名处理）。</p>
+</li>
+<li><p>一般不建议使用多继承，解决方法是采用单继承、接口（左图）或组装结构（右图）来描述：</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509210853231.png" alt="image-20210509210853231"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="九、接口"><a href="#九、接口" class="headerlink" title="九、接口"></a>九、接口</h2><ul>
+<li><p>当多种不同类型的对象具有相似行为时，可以将他们的行为进行抽象，定义为接口。</p>
+</li>
+<li><p>接口只是某种行为的契约，接口不含有契约的具体实现机制，实现由类来完成。</p>
+</li>
+<li><p>例如：</p>
+<ul>
+<li>业务系统中有些单据能撤销，有些不能，可以将撤销操作封装到一个接口中，所有支持撤销的单据类去实现该接口</li>
+</ul>
+</li>
+<li><p>接口与实现举例</p>
+<ul>
+<li><p>数据可以采用文件方式读写，也可以采用数据库读写；</p>
+</li>
+<li><p>IAccessible是一个接口，定义了读写两个方法；</p>
+</li>
+<li><p>File类和DB类都提供读写操作，实现IAccessible接口的读写方法。</p>
+</li>
+<li><p>底层机制与抽象类相似。</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509211028899.png" alt="image-20210509211028899"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="十、类图的画法"><a href="#十、类图的画法" class="headerlink" title="十、类图的画法"></a>十、类图的画法</h2><p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509211111361.png" alt="image-20210509211111361"></p>
+<ul>
+<li><p>图书馆管理系统的类图</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509211235645.png" alt="image-20210509211235645"></p>
+</li>
+<li><p>空调维修系统的类图</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509211247963.png" alt="image-20210509211247963"></p>
+</li>
+</ul>
+<h1 id="Chapter-11-模块图-功能思维导图"><a href="#Chapter-11-模块图-功能思维导图" class="headerlink" title="Chapter 11. 模块图/功能思维导图"></a>Chapter 11. 模块图/功能思维导图</h1><ul>
+<li><p>结构化设计采用结构图(structured chart)描述系统的模块结构及模块间的联系。</p>
+</li>
+<li><p>结构图中的主要成分有：</p>
+<ul>
+<li>模块:<ul>
+<li>用长方形表示。</li>
+</ul>
+</li>
+<li>调用:<ul>
+<li>从一个模块指向另一模块的箭头表示前一个模块调用后一个模块。箭尾的菱形表示有条件地调用，弧形箭头表示循环调用。</li>
+</ul>
+</li>
+<li>数据:<ul>
+<li>用带圆圈的小箭头表示从一个模块传递给另一模块的数据。</li>
+</ul>
+</li>
+<li>控制:<ul>
+<li>信息带涂黑圆圈的小箭头表示一个模块传送给另一模块的控制信息。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>结构图的层数称为深度。</p>
+</li>
+<li><p>一个层次上的模块总数称为宽度。</p>
+</li>
+<li><p>深度和宽度反映了系统的大小和复杂程度。</p>
+<p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509211845608.png" alt="image-20210509211845608"></p>
+</li>
+<li><p>结构化设计的基本思想</p>
+<ul>
+<li>就是把系统设计成由相对独立、功能单一的模块组成的层次结构。</li>
+</ul>
+</li>
+<li><p>为了衡量模块的相对独立性，提出了</p>
+<ul>
+<li>模块间的耦合(coupling)</li>
+<li>模块的内聚(cohesion)</li>
+</ul>
+</li>
+<li><p>这两个概念从不同侧面反映了模块的独立性。</p>
+<ul>
+<li>耦合反映模块之间连接的紧密程度。</li>
+<li>内聚指一个模块内各元素彼此结合的紧密程度。</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据流图导出模块图"><a href="#数据流图导出模块图" class="headerlink" title="数据流图导出模块图"></a>数据流图导出模块图</h2><ul>
+<li>信息系统的数据流图一般有两种典型结构：<ul>
+<li>变换型结构和事务型结构。</li>
+<li>对这两种结构，可以分别通过变换分析和事务分析方法导出标准的结构图。</li>
+<li>采用这些方法时，都是先设计结构图的顶端模块，然后自顶向下逐步细化，最后得到满足数据流要求的系统结构。</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-划分输入、加工、输出"><a href="#1-划分输入、加工、输出" class="headerlink" title="1. 划分输入、加工、输出"></a>1. 划分输入、加工、输出</h3><p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509212239709.png" alt="image-20210509212239709"></p>
+<h3 id="2-构造第1、2层模块"><a href="#2-构造第1、2层模块" class="headerlink" title="2. 构造第1、2层模块"></a>2. 构造第1、2层模块</h3><p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509212305735.png" alt="image-20210509212305735"></p>
+<h3 id="3-继续分解"><a href="#3-继续分解" class="headerlink" title="3. 继续分解"></a>3. 继续分解</h3><p><img src="https://cdn.megalomania.icu/xtfxsj_images/image-20210509212341592.png" alt="image-20210509212341592"></p>
+
+    </div>
+
+    
+    
+    
+
+    <div>
+       
+        <div>
+     
+        <div style="text-align:center;color:#bfbfbf;font-size:16px;"> 
+            <span>-------- 本文结束 </span>
+                <i class="fa fa-balance-scale" aria-hidden="true"></i> 
+            <span> 感谢阅读 --------</span> 
+        </div> 
+    
+</div> 
+      
+    </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%A4%8D%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 复习</a>
+              <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> 软件工程</a>
+          </div>
+
+      <div>
+        
+          
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/sys-ana-ds/">系统分析设计—提纲</a></p>
+  <p><span>文章作者:</span>Shaw Wei</p>
+  <p><span>发布时间:</span>2021年06月11日 - 13:06</p>
+  <p><span>最后更新:</span>2021年06月11日 - 14:06</p>
+  <p><span>原始链接:</span><a href="/sys-ana-ds/" title="系统分析设计—提纲">https://megalomania.icu/sys-ana-ds/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://megalomania.icu/sys-ana-ds/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+	  $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
+        
+      </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/embedded_sys_review/" rel="prev" title="嵌入式系统与组成原理—提纲">
+      <i class="fa fa-chevron-left"></i> 嵌入式系统与组成原理—提纲
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-1-%E6%A6%82%E8%BF%B0"><span class="nav-text">Chapter 1. 概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%89%B9%E5%BE%81"><span class="nav-text">一、系统的概念与特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95"><span class="nav-text">二、系统分析与设计方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%BD%AF%E4%BB%B6%E5%8D%B1%E6%9C%BA"><span class="nav-text">1. 软件危机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1"><span class="nav-text">2. 系统分析与设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="nav-text">3. 系统分析的步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E8%BD%AF%E4%BB%B6%E7%A0%94%E5%8F%91%E8%B6%8B%E5%8A%BF"><span class="nav-text">三、软件研发趋势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B"><span class="nav-text">1. 软件工程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E4%B8%AD%E7%9A%84%E6%A0%B9%E6%9C%AC%E5%92%8C%E6%AC%A1%E8%A6%81%E9%97%AE%E9%A2%98"><span class="nav-text">2. 软件工程中的根本和次要问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%A0%94%E5%8F%91%E8%B6%8B%E5%8A%BF"><span class="nav-text">3. 研发趋势</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81DevOps%E7%A0%94%E5%8F%91%E6%A8%A1%E5%BC%8F"><span class="nav-text">四、DevOps研发模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%85%B4%E8%B5%B7%E7%9A%84%E9%A9%B1%E5%8A%A8%E5%9B%A0%E7%B4%A0"><span class="nav-text">1. 兴起的驱动因素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%9A%E4%B9%89DevOps"><span class="nav-text">2. 定义DevOps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-DevOps%E7%9A%84%E4%BA%94%E4%B8%AA%E8%A6%81%E7%B4%A0"><span class="nav-text">3. DevOps的五个要素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-DevOps%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E8%BF%87%E7%A8%8B"><span class="nav-text">4. DevOps生命周期过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-DevOps%E4%B8%8E%E6%95%8F%E6%8D%B7"><span class="nav-text">5. DevOps与敏捷</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-2-%E7%B3%BB%E7%BB%9F%E8%A7%84%E5%88%92"><span class="nav-text">Chapter 2. 系统规划</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%B3%BB%E7%BB%9F%E8%A7%84%E5%88%92%E6%A6%82%E8%BF%B0"><span class="nav-text">一、系统规划概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%8F%91%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-text">1. 系统开发生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%B3%BB%E7%BB%9F%E8%A7%84%E5%88%92%E5%AE%9A%E4%B9%89"><span class="nav-text">2. 系统规划定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%B3%BB%E7%BB%9F%E8%A7%84%E5%88%92%E7%9A%84%E5%BF%85%E8%A6%81%E6%80%A7"><span class="nav-text">3. 系统规划的必要性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%B3%BB%E7%BB%9F%E8%A7%84%E5%88%92%E6%A6%82%E8%BF%B0"><span class="nav-text">4. 系统规划概述</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%B3%BB%E7%BB%9F%E8%A7%84%E5%88%92%E6%AD%A5%E9%AA%A4"><span class="nav-text">二、系统规划步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%B3%BB%E7%BB%9F%E6%80%BB%E4%BD%93%E8%A7%84%E5%88%92%E7%9A%84%E5%8E%9F%E5%88%99"><span class="nav-text">1. 系统总体规划的原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%B3%BB%E7%BB%9F%E8%A7%84%E5%88%92%E7%9A%84%E4%B8%BB%E8%A6%81%E9%98%B6%E6%AE%B5"><span class="nav-text">2. 系统规划的主要阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%80%BB%E4%BD%93%E8%A7%84%E5%88%92%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="nav-text">3. 总体规划的步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%B3%BB%E7%BB%9F%E8%A7%84%E5%88%92%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%96%B9%E6%B3%95"><span class="nav-text">三、系统规划模型与方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%AF%BA%E5%85%B0%E6%A8%A1%E5%9E%8B%EF%BC%88Nolan%EF%BC%89"><span class="nav-text">1. 诺兰模型（Nolan）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%BA%94%E7%94%A8%E5%8F%91%E5%B1%95%E7%9A%846%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="nav-text">（1）计算机应用发展的6个阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%8F%91%E5%B1%95%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E5%A2%9E%E9%95%BF%E8%A6%81%E7%B4%A0"><span class="nav-text">（2）计算机系统发展过程中的增长要素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E8%AF%BA%E5%85%B0%E9%98%B6%E6%AE%B5%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-text">（3）诺兰阶段模型的应用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%83%BD%E5%8A%9B%E6%88%90%E7%86%9F%E5%BA%A6%E6%A8%A1%E5%9E%8B%EF%BC%88CMM%EF%BC%89"><span class="nav-text">2. 能力成熟度模型（CMM）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89CMM%E7%9A%84%E4%BD%9C%E7%94%A8%E5%92%8C%E7%9B%AE%E7%9A%84"><span class="nav-text">（1）CMM的作用和目的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89CMM%E7%9A%84%E7%94%A8%E9%80%94"><span class="nav-text">（2）CMM的用途</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89CMM%E7%9A%84%E4%B8%BB%E8%A6%81%E7%89%B9%E7%82%B9"><span class="nav-text">（3）CMM的主要特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%884%EF%BC%89%E5%BC%95%E8%BF%9BCMM%E7%9A%84%E4%B8%BB%E8%A6%81%E6%84%8F%E4%B9%89"><span class="nav-text">（4）引进CMM的主要意义</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%85%B3%E9%94%AE%E6%88%90%E5%8A%9F%E5%9B%A0%E7%B4%A0%E6%B3%95"><span class="nav-text">3. 关键成功因素法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%85%B3%E9%94%AE%E6%88%90%E5%8A%9F%E5%9B%A0%E7%B4%A0%E6%B3%95%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="nav-text">（1）关键成功因素法的步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%A4%B4%E8%84%91%E9%A3%8E%E6%9A%B4"><span class="nav-text">（2）头脑风暴</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E5%A4%B4%E8%84%91%E9%A3%8E%E6%9A%B4%E5%90%8E"><span class="nav-text">（3）头脑风暴后</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E9%B1%BC%E9%AA%A8%E5%9B%BE"><span class="nav-text">四、鱼骨图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%B1%BC%E9%AA%A8%E5%9B%BE%E7%9A%84%E4%B8%89%E7%A7%8D%E7%B1%BB%E5%9E%8B"><span class="nav-text">1. 鱼骨图的三种类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%B1%BC%E9%AA%A8%E5%9B%BE%E7%BB%93%E6%9E%84"><span class="nav-text">2. 鱼骨图结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%B1%BC%E9%AA%A8%E5%9B%BE%E7%9A%84%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4"><span class="nav-text">3. 鱼骨图的使用步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E9%B1%BC%E9%AA%A8%E5%9B%BE%E5%AE%9E%E4%BE%8B"><span class="nav-text">4. 鱼骨图实例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E4%BE%8B1"><span class="nav-text">（1）例1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E4%BE%8B2"><span class="nav-text">（2）例2</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-3-%E7%B3%BB%E7%BB%9F%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="nav-text">Chapter 3. 系统需求分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%B3%BB%E7%BB%9F%E9%9C%80%E6%B1%82%E6%A6%82%E8%BF%B0"><span class="nav-text">一、系统需求概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E8%8E%B7%E5%8F%96%E9%9C%80%E6%B1%82"><span class="nav-text">二、获取需求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%94%A8%E6%88%B7%E7%A0%94%E7%A9%B6"><span class="nav-text">1. 用户研究</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%B8%82%E5%9C%BA%E5%88%86%E6%9E%90"><span class="nav-text">2. 市场分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%BB%B7%E5%80%BC%E6%9B%B2%E7%BA%BF%E8%AF%84%E4%BB%B7%E6%B3%95"><span class="nav-text">3. 价值曲线评价法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%AB%9E%E5%93%81%E5%88%86%E6%9E%90"><span class="nav-text">4. 竞品分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90"><span class="nav-text">5. 数据分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E7%94%A8%E6%88%B7%E5%8F%8D%E9%A6%88"><span class="nav-text">6. 用户反馈</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%94%A8%E6%88%B7%E7%94%BB%E5%83%8F"><span class="nav-text">三、用户画像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%88%86%E6%9E%90%E6%95%B4%E5%90%88"><span class="nav-text">四、分析整合</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-4-%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86"><span class="nav-text">Chapter 4. 系统项目管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E6%A6%82%E5%BF%B5"><span class="nav-text">一、项目管理概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E9%A1%B9%E7%9B%AE%E8%BF%9B%E5%BA%A6%E8%AE%A1%E5%88%92%E7%AE%A1%E7%90%86"><span class="nav-text">二、项目进度计划管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%A1%B9%E7%9B%AE%E8%BF%9B%E5%BA%A6%E7%AE%A1%E7%90%86%E7%9A%84%E7%9B%B8%E5%85%B3%E6%9C%AF%E8%AF%AD"><span class="nav-text">1. 项目进度管理的相关术语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E8%BF%9B%E5%BA%A6%E7%AE%A1%E7%90%86%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-text">2. 软件项目进度管理的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E8%BF%9B%E5%BA%A6%E7%AE%A1%E7%90%86%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-text">3. 软件项目进度管理的内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E9%A1%B9%E7%9B%AE%E8%BF%9B%E5%BA%A6%E6%8F%8F%E8%BF%B0%E5%B7%A5%E5%85%B7"><span class="nav-text">4. 项目进度描述工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%B0%8F%E7%BB%93"><span class="nav-text">5. 小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%95%8F%E6%8D%B7%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86"><span class="nav-text">三、敏捷项目管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%8F%E6%8D%B7%E5%AE%A3%E8%A8%80"><span class="nav-text">1. 敏捷宣言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%95%8F%E6%8D%B7%E5%BC%80%E5%8F%91%E5%8E%9F%E5%88%99"><span class="nav-text">2. 敏捷开发原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%95%8F%E6%8D%B7%E7%90%86%E5%BF%B5"><span class="nav-text">3. 深入理解敏捷理念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%95%8F%E6%8D%B7%E5%9B%A2%E9%98%9F%E7%BB%84%E6%88%90"><span class="nav-text">4. 敏捷团队组成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E7%B2%BE%E7%9B%8A%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86"><span class="nav-text">四、精益项目管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%B2%BE%E7%9B%8A%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E4%B8%83%E9%A1%B9%E5%8E%9F%E5%88%99"><span class="nav-text">1. 精益软件开发七项原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%83%E5%A4%A7%E6%B5%AA%E8%B4%B9%E4%BB%A5%E5%8F%8A%E6%B6%88%E9%99%A4%E6%96%B9%E6%B3%95"><span class="nav-text">2. 软件开发的七大浪费以及消除方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%B2%BE%E7%9B%8A%E5%88%9B%E4%B8%9A%E7%8E%AF"><span class="nav-text">3. 精益创业环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%B2%BE%E7%9B%8A%E4%B8%8E%E7%9C%8B%E6%9D%BF%E4%BA%A7%E5%93%81%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6"><span class="nav-text">4. 精益与看板产品开发框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E7%B2%BE%E7%9B%8A%E5%88%9B%E4%B8%9A%E8%BF%87%E7%A8%8B"><span class="nav-text">5. 精益创业过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E7%B2%BE%E7%9B%8A%E4%B8%8E%E6%95%8F%E6%8D%B7%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">五、精益与敏捷的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86"><span class="nav-text">六、微服务项目管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E5%8D%8E%E4%B8%BA%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E5%AE%9E%E8%B7%B5"><span class="nav-text">七、华为项目管理实践</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-5-%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90%E5%BB%BA%E6%A8%A1"><span class="nav-text">Chapter 5. 系统分析建模</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%B3%BB%E7%BB%9F%E4%B8%9A%E5%8A%A1%E6%B5%81%E7%A8%8B%E5%BB%BA%E6%A8%A1"><span class="nav-text">一、系统业务流程建模</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%B3%BB%E7%BB%9F%E6%95%B0%E6%8D%AE%E6%B5%81%E7%A8%8B%E5%BB%BA%E6%A8%A1%EF%BC%88%E6%95%B0%E6%8D%AE%E6%B5%81%E7%A8%8B%E5%9B%BE%EF%BC%89"><span class="nav-text">二、系统数据流程建模（数据流程图）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E6%B5%81%E7%A8%8B%E5%9B%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%AC%A6%E5%8F%B7"><span class="nav-text">1. 数据流程图的基本符号</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%A4%96%E9%83%A8%E5%AE%9E%E4%BD%93%EF%BC%88S%EF%BC%89"><span class="nav-text">（1）外部实体（S）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E6%95%B0%E6%8D%AE%E6%B5%81%EF%BC%88DF%EF%BC%89"><span class="nav-text">（2）数据流（DF）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E5%A4%84%E7%90%86%E9%80%BB%E8%BE%91%EF%BC%88P%EF%BC%89"><span class="nav-text">（3）处理逻辑（P）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%884%EF%BC%89%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%88DB%EF%BC%89"><span class="nav-text">（4）数据存储（DB）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%95%B0%E6%8D%AE%E6%B5%81%E7%A8%8B%E5%9B%BE%E7%9A%84%E7%BB%98%E5%88%B6"><span class="nav-text">2. 数据流程图的绘制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E6%95%B0%E6%8D%AE%E6%B5%81%E7%A8%8B%E5%9B%BE%E7%BB%98%E5%88%B6%E7%9A%84%E5%8E%9F%E5%88%99"><span class="nav-text">（1）数据流程图绘制的原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E7%BB%98%E5%88%B6%E6%95%B0%E6%8D%AE%E6%B5%81%E7%A8%8B%E5%9B%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%AD%A5%E9%AA%A4"><span class="nav-text">（2）绘制数据流程图的基本步骤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%94%99%E8%AF%AF%E7%A4%BA%E4%BE%8B"><span class="nav-text">3. 错误示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E4%BE%8B%E9%A2%98"><span class="nav-text">4. 例题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%A4%84%E7%90%86%E5%80%9F%E4%B9%A6%E8%BF%87%E7%A8%8B"><span class="nav-text">（1）处理借书过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E8%AE%A1%E7%AE%97%E6%95%99%E5%B8%88%E8%AE%B2%E8%AF%BE%E8%B4%B9%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="nav-text">（2）计算教师讲课费的过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E6%9F%90%E9%93%B6%E8%A1%8C%E5%82%A8%E8%93%84%E6%89%80%E5%AD%98%EF%BC%88%E5%8F%96%EF%BC%89%E6%AC%BE%E8%BF%87%E7%A8%8B"><span class="nav-text">（3）某银行储蓄所存（取）款过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%884%EF%BC%89%E8%AE%A2%E5%8D%95%E5%A4%84%E7%90%86%E7%9A%84%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B"><span class="nav-text">（4）订单处理的处理过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%885%EF%BC%89%E5%90%84%E7%A7%8D%E5%95%86%E5%93%81%E7%9A%84%E9%94%80%E5%94%AE%E5%BA%93%E5%AD%98%E6%83%85%E5%86%B5"><span class="nav-text">（5）各种商品的销售库存情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%886%EF%BC%89%E7%A7%91%E7%A0%94%E9%A1%B9%E7%9B%AE%E8%B4%B9%E7%94%A8%E6%94%AF%E4%BB%98"><span class="nav-text">（6）科研项目费用支付</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%887%EF%BC%89%E8%BF%90%E5%8A%A8%E4%BC%9A%E6%88%90%E7%BB%A9%E5%A4%84%E7%90%86"><span class="nav-text">（7）运动会成绩处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%888%EF%BC%89%E5%AD%A6%E7%94%9F%E6%88%90%E7%BB%A9%E7%AE%A1%E7%90%86%E7%9A%84%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B"><span class="nav-text">（8）学生成绩管理的处理过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%889%EF%BC%89%E6%95%99%E5%AD%A6%E7%AE%A1%E7%90%86%E7%9A%84%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C"><span class="nav-text">（9）教学管理的主要工作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%8810%EF%BC%89%E6%95%99%E5%B8%88%E7%94%B3%E6%8A%A5%E7%A7%91%E7%A0%94%E6%88%90%E6%9E%9C"><span class="nav-text">（10）教师申报科研成果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%B3%BB%E7%BB%9F%E7%94%A8%E4%BE%8B%E5%BB%BA%E6%A8%A1-%EF%BC%88%E7%94%A8%E4%BE%8B%E5%9B%BE%EF%BC%89"><span class="nav-text">三、系统用例建模 （用例图）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%9F%BA%E4%BA%8E%E7%94%A8%E7%90%86%E7%9A%84%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="nav-text">1. 基于用理的需求分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="nav-text">2. 需求分析的步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%94%A8%E4%BE%8B%E5%88%86%E6%9E%90%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="nav-text">3. 用例分析的步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E8%AF%86%E5%88%AB%E5%8F%82%E4%B8%8E%E8%80%85%EF%BC%88Actor%EF%BC%89"><span class="nav-text">4. 识别参与者（Actor）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%8F%82%E4%B8%8E%E8%80%85%E8%A1%A8%E7%A4%BA"><span class="nav-text">5. 参与者表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E8%AF%86%E5%88%AB%E7%94%A8%E4%BE%8B%EF%BC%88Use-Case%EF%BC%89"><span class="nav-text">6. 识别用例（Use Case）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E5%9B%BE%E4%B9%A6%E9%A6%86%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%94%A8%E4%BE%8B%EF%BC%88%E7%A4%BA%E4%BE%8B%EF%BC%89"><span class="nav-text">7. 图书馆系统的用例（示例）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E5%BB%BA%E7%AB%8B%E7%94%A8%E4%BE%8B%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-text">8. 建立用例的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%8C%85%E5%90%AB%E5%85%B3%E7%B3%BB"><span class="nav-text">（1）包含关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E6%89%A9%E5%B1%95%E5%85%B3%E7%B3%BB"><span class="nav-text">（2）扩展关系</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-%E9%85%92%E5%BA%97%E9%A2%84%E8%AE%A2%E7%94%A8%E4%BE%8B%E5%9B%BE%EF%BC%88%E5%8C%85%E6%8B%AC%E7%94%A8%E4%BE%8B%E5%85%B3%E7%B3%BB%EF%BC%89"><span class="nav-text">9. 酒店预订用例图（包括用例关系）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-%E5%85%B3%E4%BA%8E%E7%94%A8%E4%BE%8B%E7%9A%84%E7%B2%92%E5%BA%A6"><span class="nav-text">10. 关于用例的粒度</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-6-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1"><span class="nav-text">Chapter 6. 数据库设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E6%A6%82%E8%BF%B0"><span class="nav-text">一、数据库设计概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E5%86%85%E5%AE%B9%E4%B8%8E%E6%AD%A5%E9%AA%A4"><span class="nav-text">二、数据库设计内容与步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%BB%93%E6%9E%84%E7%89%B9%E6%80%A7%E8%AE%BE%E8%AE%A1"><span class="nav-text">1. 数据库的结构特性设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E8%A1%8C%E4%B8%BA%E7%89%B9%E6%80%A7%E8%AE%BE%E8%AE%A1"><span class="nav-text">2. 数据库的行为特性设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%89%A9%E7%90%86%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1"><span class="nav-text">3. 数据库的物理模式设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E5%BA%94%E6%B3%A8%E6%84%8F%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-text">4. 数据库设计应注意的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E7%9A%846%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="nav-text">5. 数据库设计的6个阶段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="nav-text">三、数据库需求分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A6%82%E5%BF%B5%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="nav-text">四、数据库概念结构设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-E-R%E6%96%B9%E6%B3%95%EF%BC%88E-R%E5%9B%BE%EF%BC%89"><span class="nav-text">1. E-R方法（E-R图）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%95%B0%E6%8D%AE%E6%8A%BD%E8%B1%A1%E5%8F%8A%E6%95%B0%E6%8D%AE%E6%8A%BD%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-text">2. 数据抽象及数据抽象的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%88%86%E7%B1%BB"><span class="nav-text">（1）分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E8%81%9A%E9%9B%86"><span class="nav-text">（2）聚集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E6%A6%82%E6%8B%AC"><span class="nav-text">（3）概括</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%B1%80%E9%83%A8E-R%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1%EF%BC%88%E5%88%86E-R%E5%9B%BE%E8%AE%BE%E8%AE%A1%EF%BC%89"><span class="nav-text">3. 局部E-R模型设计（分E-R图设计）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E8%A7%86%E5%9B%BE%E7%9A%84%E9%9B%86%E6%88%90%EF%BC%88%E5%85%A8%E5%B1%80E-R%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1%EF%BC%89"><span class="nav-text">4. 视图的集成（全局E-R模型设计）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%90%88%E5%B9%B6%E5%B1%80%E9%83%A8E-R%E5%9B%BE%EF%BC%8C%E7%94%9F%E6%88%90%E5%88%9D%E6%AD%A5E-R%E5%9B%BE"><span class="nav-text">（1）合并局部E-R图，生成初步E-R图</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1%EF%BC%89%E5%B1%9E%E6%80%A7%E5%86%B2%E7%AA%81"><span class="nav-text">1）属性冲突</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2%EF%BC%89%E5%91%BD%E5%90%8D%E5%86%B2%E7%AA%81"><span class="nav-text">2）命名冲突</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3%EF%BC%89%E7%BB%93%E6%9E%84%E5%86%B2%E7%AA%81"><span class="nav-text">3）结构冲突</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E6%B6%88%E9%99%A4%E4%B8%8D%E5%BF%85%E8%A6%81%E7%9A%84%E5%86%97%E4%BD%99%EF%BC%8C%E7%94%9F%E6%88%90%E5%9F%BA%E6%9C%ACE-R%E5%9B%BE"><span class="nav-text">（2）消除不必要的冗余，生成基本E-R图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E7%BB%98%E5%88%B6E-R%E5%9B%BE%E6%AD%A5%E9%AA%A4"><span class="nav-text">5. 绘制E-R图步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E9%80%BB%E8%BE%91%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="nav-text">五、数据库逻辑结构设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%BD%AC%E6%8D%A2%E5%8E%9F%E5%88%99"><span class="nav-text">1. 转换原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%85%B7%E4%BD%93%E5%81%9A%E6%B3%95"><span class="nav-text">2. 具体做法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%AE%9E%E4%BD%93%E9%9B%86%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="nav-text">（1）实体集的转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E6%8A%8A%E6%AF%8F%E4%B8%80%E4%B8%AA%E5%AE%9E%E4%BD%93%E9%9B%86%E9%97%B4%E8%81%94%E7%B3%BB%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="nav-text">（2）把每一个实体集间联系的转换</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1%EF%BC%891-1%E8%81%94%E7%B3%BB%E7%9A%84%E8%BD%AC%E6%8D%A2%E6%96%B9%E6%B3%95"><span class="nav-text">1）1:1联系的转换方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2%EF%BC%891-n%E8%81%94%E7%B3%BB%E7%9A%84%E8%BD%AC%E6%8D%A2%E6%96%B9%E6%B3%95"><span class="nav-text">2）1:n联系的转换方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3%EF%BC%89m-n%E8%81%94%E7%B3%BB%E7%9A%84%E8%BD%AC%E6%8D%A2%E6%96%B9%E6%B3%95"><span class="nav-text">3）m:n联系的转换方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4%EF%BC%89%E7%89%B9%E6%AE%8A%E6%83%85%E5%86%B5%E7%9A%84%E5%A4%84%E7%90%86"><span class="nav-text">4）特殊情况的处理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%8C%83%E5%BC%8F"><span class="nav-text">3. 范式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E7%AC%AC%E4%B8%80%E8%8C%83%E5%BC%8F1NF"><span class="nav-text">（1）第一范式1NF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E7%AC%AC%E4%BA%8C%E8%8C%83%E5%BC%8F2NF"><span class="nav-text">（2）第二范式2NF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E7%AC%AC%E4%B8%89%E8%8C%83%E5%BC%8F3NF"><span class="nav-text">（3）第三范式3NF</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E7%89%A9%E7%90%86%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="nav-text">六、数据库物理结构设计</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-7-%E7%B3%BB%E7%BB%9F%E6%80%BB%E4%BD%93%E8%AE%BE%E8%AE%A1"><span class="nav-text">Chapter 7. 系统总体设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%B3%BB%E7%BB%9F%E6%80%BB%E4%BD%93%E8%AE%BE%E8%AE%A1%E6%A6%82%E8%BF%B0"><span class="nav-text">一、系统总体设计概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%9E%B6%E6%9E%84%E5%92%8C%E7%BB%93%E6%9E%84%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-text">1. 架构和结构的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84"><span class="nav-text">2. 软件架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F"><span class="nav-text">3. 软件架构模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%B8%89%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="nav-text">二、三层架构设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81MVC%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="nav-text">三、MVC架构设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81SOA%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="nav-text">四、SOA架构设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="nav-text">五、微服务架构设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84"><span class="nav-text">（1）单体架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E6%9C%8D%E5%8A%A1%E5%8C%96%E6%9E%B6%E6%9E%84"><span class="nav-text">（2）服务化架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84"><span class="nav-text">（3）微服务架构</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-8-%E7%B3%BB%E7%BB%9F%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E8%AE%BE%E8%AE%A1"><span class="nav-text">Chapter 8. 系统持续集成设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86"><span class="nav-text">一、系统配置管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B"><span class="nav-text">1. 版本控制系统简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Git%E7%AE%80%E4%BB%8B"><span class="nav-text">2. Git简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Git%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">3. Git基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%AE%80%E5%8D%95%E7%9A%84%E5%B8%B8%E7%94%A8Git%E5%91%BD%E4%BB%A4"><span class="nav-text">4. 简单的常用Git命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%B3%BB%E7%BB%9F%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5"><span class="nav-text">二、系统代码检查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91%E6%9E%84%E5%BB%BA"><span class="nav-text">三、系统编译构建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E7%B3%BB%E7%BB%9F%E6%B5%8B%E8%AF%95%E7%AE%A1%E7%90%86"><span class="nav-text">四、系统测试管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E7%9A%84%E7%9B%AE%E7%9A%84"><span class="nav-text">1. 软件测试的目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="nav-text">2. 软件测试的对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%BF%87%E7%A8%8B"><span class="nav-text">3. 软件测试过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95V%E6%A8%A1%E5%9E%8B"><span class="nav-text">4. 软件测试V模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E7%9A%84%E5%8E%9F%E5%88%99"><span class="nav-text">5. 软件测试的原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95%E5%92%8C%E7%B1%BB%E5%9E%8B"><span class="nav-text">6. 软件测试方法和类型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-9-%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E4%BC%A6%E7%90%86"><span class="nav-text">Chapter 9. 软件工程伦理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80-%E5%B7%A5%E7%A8%8B%E4%BC%A6%E7%90%86%E6%A6%82%E8%BF%B0"><span class="nav-text">一. 工程伦理概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E4%BC%A6%E7%90%86%E5%9B%B0%E5%A2%83%E4%B8%8E%E4%BC%A6%E7%90%86%E9%80%89%E6%8B%A9"><span class="nav-text">（1）伦理困境与伦理选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%BA%94%E5%AF%B9%E5%B7%A5%E7%A8%8B%E4%BC%A6%E7%90%86%E9%97%AE%E9%A2%98%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%9D%E8%B7%AF"><span class="nav-text">（2）应对工程伦理问题的基本思路</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E4%BC%A6%E7%90%86"><span class="nav-text">二、人工智能伦理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%A4%A7%E6%95%B0%E6%8D%AE%E4%BC%A6%E7%90%86"><span class="nav-text">三、大数据伦理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-10-%E7%B1%BB%E5%9B%BE"><span class="nav-text">Chapter 10. 类图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%85%B3%E8%81%94%E5%90%8D%E7%A7%B0"><span class="nav-text">一、关联名称</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%85%B3%E8%81%94%E8%A7%92%E8%89%B2%EF%BC%88Role%EF%BC%89"><span class="nav-text">二、关联角色（Role）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%85%B3%E8%81%94%E7%9A%84%E5%A4%9A%E9%87%8D%E6%80%A7%EF%BC%88Multiplicity%EF%BC%89"><span class="nav-text">三、关联的多重性（Multiplicity）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%85%B3%E8%81%94%E7%9A%84%E5%AF%BC%E5%90%91%E6%80%A7-Navigability"><span class="nav-text">四、关联的导向性(Navigability)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%95%B4%E4%BD%93-%E9%83%A8%E5%88%86%E5%85%B3%E8%81%94"><span class="nav-text">五、整体-部分关联</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%BB%84%E5%90%88%E8%81%9A%E9%9B%86-composition-aggregation"><span class="nav-text">1. 组合聚集(composition aggregation )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%85%B1%E4%BA%AB%E8%81%9A%E9%9B%86-shared-aggregation"><span class="nav-text">2. 共享聚集(shared aggregation)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%AF%86%E5%88%AB%E5%85%B3%E8%81%94%E7%9A%84%E5%8E%9F%E5%88%99"><span class="nav-text">3. 识别关联的原则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E8%AF%86%E5%88%AB%E6%B3%9B%E5%8C%96%E5%85%B3%E7%B3%BB"><span class="nav-text">六、识别泛化关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%B8%80%E8%88%AC-%E7%89%B9%E6%AE%8A%E7%BB%93%E6%9E%84-Generalization-Specialization"><span class="nav-text">1. 一般-特殊结构(Generalization-Specialization)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E9%9C%80%E8%A6%81%E5%88%92%E5%88%86%E4%B8%80%E8%88%AC-%E7%89%B9%E6%AE%8A%E7%BB%93%E6%9E%84"><span class="nav-text">2. 什么时候需要划分一般-特殊结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E6%8A%BD%E8%B1%A1%E7%B1%BB"><span class="nav-text">七、抽象类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E5%A4%9A%E7%BB%A7%E6%89%BF"><span class="nav-text">八、多继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%9D%E3%80%81%E6%8E%A5%E5%8F%A3"><span class="nav-text">九、接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E3%80%81%E7%B1%BB%E5%9B%BE%E7%9A%84%E7%94%BB%E6%B3%95"><span class="nav-text">十、类图的画法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-11-%E6%A8%A1%E5%9D%97%E5%9B%BE-%E5%8A%9F%E8%83%BD%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE"><span class="nav-text">Chapter 11. 模块图&#x2F;功能思维导图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%B5%81%E5%9B%BE%E5%AF%BC%E5%87%BA%E6%A8%A1%E5%9D%97%E5%9B%BE"><span class="nav-text">数据流图导出模块图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%88%92%E5%88%86%E8%BE%93%E5%85%A5%E3%80%81%E5%8A%A0%E5%B7%A5%E3%80%81%E8%BE%93%E5%87%BA"><span class="nav-text">1. 划分输入、加工、输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%9E%84%E9%80%A0%E7%AC%AC1%E3%80%812%E5%B1%82%E6%A8%A1%E5%9D%97"><span class="nav-text">2. 构造第1、2层模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%BB%A7%E7%BB%AD%E5%88%86%E8%A7%A3"><span class="nav-text">3. 继续分解</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Shaw Wei"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Shaw Wei</p>
+  <div class="site-description" itemprop="description">Just do it.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Shaw-W" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Shaw-W" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:shaw.wei@qq.com" title="E-Mail → mailto:shaw.wei@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/weixin_44544583" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_44544583" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">粤ICP备20050867号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-balance-scale"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shaw Wei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+<span id="sitetime"></span>
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* 
+		Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+		year - 作为date对象的年份，为4位年份值
+		month - 0-11之间的整数，做为date对象的月份
+		day - 1-31之间的整数，做为date对象的天数
+		hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+		minutes - 0-59之间的整数，做为date对象的分钟数
+		seconds - 0-59之间的整数，做为date对象的秒数
+		microseconds - 0-999之间的整数，做为date对象的毫秒数
+        */
+		var t1 = Date.UTC(2020,06,01,04,00,00); //北京时间2018-2-13 00:00:00
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML="| 已运行 "+diffYears+"年"+diffDays+"天"+diffHours+"小时"+diffMinutes+"分钟"+diffSeconds+"秒";
+	}
+	siteTime();
+</script>
+
+<div>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+</div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              Counter('post', '/classes/Counter', { title, url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"r97PRG7qR4NHLbPKyHG6SI78-gzGzoHsz","app_key":"soFAbA0hxFx9sMHAnF3ExDYu","server_url":null,"security":false};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  <script>
+  (function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
