@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"megalomania.icu","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="学校小学期Java课程的练习题，留个档便于以后需要时候有例子可以回忆，写的烂的地方请多多包含">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Java】Java学习笔记（2）Java面向对象基础作业函数题">
+<meta property="og:url" content="https://megalomania.icu/java_study_note_2/index.html">
+<meta property="og:site_name" content="Megalomania">
+<meta property="og:description" content="学校小学期Java课程的练习题，留个档便于以后需要时候有例子可以回忆，写的烂的地方请多多包含">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-18T07:30:04.000Z">
+<meta property="article:modified_time" content="2022-08-27T06:38:58.223Z">
+<meta property="article:author" content="Shaw Wei">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="练习">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://megalomania.icu/java_study_note_2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>【Java】Java学习笔记（2）Java面向对象基础作业函数题 | Megalomania</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <a target="_blank" rel="noopener" href="https://github.com/Shaw-W" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Megalomania</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">C.E.P.J.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+    
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://megalomania.icu/java_study_note_2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Shaw Wei">
+      <meta itemprop="description" content="Just do it.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Megalomania">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【Java】Java学习笔记（2）Java面向对象基础作业函数题
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-18 15:30:04" itemprop="dateCreated datePublished" datetime="2020-07-18T15:30:04+08:00">2020-07-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-08-27 14:38:58" itemprop="dateModified" datetime="2022-08-27T14:38:58+08:00">2022-08-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/java_study_note_2/" class="post-meta-item leancloud_visitors" data-flag-title="【Java】Java学习笔记（2）Java面向对象基础作业函数题" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>19k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>17 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p><strong>学校小学期Java课程的练习题，留个档便于以后需要时候有例子可以回忆，写的烂的地方请多多包含</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="1、求两个数值之和"><a href="#1、求两个数值之和" class="headerlink" title="1、求两个数值之和"></a>1、求两个数值之和</h3><ul>
+<li>描述：定义一个计算器类，从键盘输入两个整数，每个整数按回车确认，调用计算器类中的add()方法计算两个整数之和，并输出结果。</li>
+<li>代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Computer</span></span>&#123;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	TODO：求两个数的和</span></span><br><span class="line"><span class="comment">    功能描述：设计方法，计算两个数之和，并返回结果</span></span><br><span class="line"><span class="comment">	参数说明：x，y需要计算的数</span></span><br><span class="line"><span class="comment">	返回值说明：将求和结果返回</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> re;</span><br><span class="line">		re=x+y;</span><br><span class="line">		<span class="keyword">return</span> re;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Example4_6</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">        Scanner reader = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        Computer com = <span class="keyword">new</span> Computer();</span><br><span class="line">        System.out.println(<span class="string">&quot;输入两个整数：&quot;</span>);</span><br><span class="line">        <span class="keyword">int</span> m = reader.nextInt();</span><br><span class="line">        <span class="keyword">int</span> n = reader.nextInt();</span><br><span class="line">        <span class="keyword">int</span> result;</span><br><span class="line">	    <span class="comment">//<span class="doctag">TODO:</span>调用Computer中的add方法，传入参数，将结果返回给result</span></span><br><span class="line">        result=com.add(m,n);</span><br><span class="line">        System.out.println(<span class="string">&quot;两数之和：&quot;</span>+result); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="2、模拟收音机电池使用情况"><a href="#2、模拟收音机电池使用情况" class="headerlink" title="2、模拟收音机电池使用情况"></a>2、模拟收音机电池使用情况</h3><ul>
+<li>描述：定义一个电池类和收音机类，电池类有电量这个成员，收音机类有耗电这个方法，当播放收音机就会耗电，现在模拟收音机电池使用情况，有一个满格的电池，让收音机使用，使用10个小时就会用完电池，输入一个整数，要使用几个小时，输出电池使用后的电量。</li>
+<li>代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Example4_7</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">		Scanner reader = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		System.out.println(<span class="string">&quot;输入使用几个小时：&quot;</span>);</span><br><span class="line">		<span class="keyword">int</span> h = reader.nextInt();</span><br><span class="line">      	Battery nanfu = <span class="keyword">new</span> Battery(<span class="number">100</span>);</span><br><span class="line">      	System.out.println(<span class="string">&quot;南孚电池的储电量是:&quot;</span>+nanfu.electricityAmount);</span><br><span class="line">      	Radio radio = <span class="keyword">new</span> Radio();</span><br><span class="line">      	System.out.println(<span class="string">&quot;收音机开始使用南孚电池&quot;</span>);</span><br><span class="line">      	radio.openRadio(nanfu,h);</span><br><span class="line">      	System.out.println(<span class="string">&quot;目前南孚电池的储电量是:&quot;</span>+nanfu.electricityAmount);</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Battery</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> electricityAmount;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	<span class="doctag">TODO:</span>初始化构造方法</span></span><br><span class="line"><span class="comment">    功能描述：把传入的参数赋值给变量electricityAmount</span></span><br><span class="line"><span class="comment">	参数说明：amount为传入参数数值，int类型</span></span><br><span class="line"><span class="comment">	返回值说明：无</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">    Battery(<span class="keyword">int</span> amount)&#123;</span><br><span class="line">      	electricityAmount=amount;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Radio</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">openRadio</span><span class="params">(Battery battery,<span class="keyword">int</span> h)</span></span>&#123;</span><br><span class="line">    	<span class="keyword">if</span>(h&gt;=<span class="number">0</span> &amp;&amp; h&lt;=<span class="number">10</span>)&#123;</span><br><span class="line">    		battery.electricityAmount = battery.electricityAmount-(h*<span class="number">10</span>);<span class="comment">//<span class="doctag">TODO:</span> 求电量=总电量-（h*10）</span></span><br><span class="line">    	&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="comment">//<span class="doctag">TODO:</span>输出字符串  时间输入格式有误</span></span><br><span class="line">            System.out.println(<span class="string">&quot;时间输入格式有误&quot;</span>);</span><br><span class="line">    	&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="3、求圆锥的体积"><a href="#3、求圆锥的体积" class="headerlink" title="3、求圆锥的体积"></a>3、求圆锥的体积</h3><ul>
+<li>描述：定义一个圆类和圆锥类，圆锥的底是一个圆，所以圆锥类有一个成员是圆类声明的对象，圆锥通过调用方法将某个圆的引用传递给圆锥的圆类型的成员变量，设置圆锥的底的半径和高，求出圆锥的体积。</li>
+<li>代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test_1</span> </span>&#123;</span><br><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">	   	Scanner reader = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">       	Circle circle = <span class="keyword">new</span> Circle();            <span class="comment">//【代码1】    </span></span><br><span class="line">       	System.out.println(<span class="string">&quot;输入圆锥底的半径：&quot;</span>);</span><br><span class="line">       	circle.setRadius(reader.nextDouble());                    <span class="comment">//【代码2】</span></span><br><span class="line">       	Circular circular = <span class="keyword">new</span> Circular();      <span class="comment">//【代码3】</span></span><br><span class="line">       	System.out.println(<span class="string">&quot;输入圆锥的高：&quot;</span>);</span><br><span class="line">       	circular.setHeight(reader.nextDouble());             </span><br><span class="line">       	circular.setBottom(circle);              <span class="comment">//【代码4】</span></span><br><span class="line">       	System.out.println(<span class="string">&quot;圆锥的体积:&quot;</span>+circular.getVolme());</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Circle</span> </span>&#123;</span><br><span class="line">	<span class="keyword">double</span> radius,area;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">setRadius</span><span class="params">(<span class="keyword">double</span> r)</span> </span>&#123;</span><br><span class="line">		radius=r;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">getRadius</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> radius;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	<span class="doctag">TODO:</span>计算圆的面积</span></span><br><span class="line"><span class="comment">    功能描述：根据数学公式，编写计算圆面积的代码，半径为radius</span></span><br><span class="line"><span class="comment">	参数说明：无</span></span><br><span class="line"><span class="comment">	返回值说明：圆的面积   </span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">getArea</span><span class="params">()</span></span>&#123;</span><br><span class="line">      	area=<span class="number">3.14</span>*radius*radius;</span><br><span class="line">      	<span class="keyword">return</span> area;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Circular</span> </span>&#123;</span><br><span class="line">	Circle bottom;</span><br><span class="line">    <span class="keyword">double</span> height;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setBottom</span><span class="params">(Circle c)</span> </span>&#123;</span><br><span class="line">       	bottom = c;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setHeight</span><span class="params">(<span class="keyword">double</span> h)</span> </span>&#123;</span><br><span class="line">       	height = h;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">getVolme</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(bottom == <span class="keyword">null</span>)</span><br><span class="line">           	<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">	    <span class="comment">//<span class="doctag">TODO:</span> 求圆锥的体积，将计算结果返回</span></span><br><span class="line">            <span class="keyword">return</span> bottom.getArea()*height/<span class="number">3.0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	<span class="doctag">TODO:</span>获取圆的半径</span></span><br><span class="line"><span class="comment">    功能描述：获取Circle对象的半径（radius）数值</span></span><br><span class="line"><span class="comment">	参数说明：无</span></span><br><span class="line"><span class="comment">	返回值说明：Circle对象的半径</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">getBottomRadius</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> bottom.getRadius();</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">    <span class="doctag">TODO:</span>设置圆的半径</span></span><br><span class="line"><span class="comment">    功能描述：把传入的参数作为圆的半径，赋值给radius字段</span></span><br><span class="line"><span class="comment">	参数说明：r为半径</span></span><br><span class="line"><span class="comment">	返回值说明：无</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBottomRadius</span><span class="params">(<span class="keyword">double</span> r)</span></span>&#123;</span><br><span class="line">      bottom.setRadius(r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="4、模拟手机和SIM卡的组合关系"><a href="#4、模拟手机和SIM卡的组合关系" class="headerlink" title="4、模拟手机和SIM卡的组合关系"></a>4、模拟手机和SIM卡的组合关系</h3><ul>
+<li>描述：定义一个手机类和SIM卡类，一个手机可以安装任何SIM卡，手机类中有SIM卡的成员变量，并可以调用方法更改其中的SIM卡，现在创建一个手机，给手机安装了一个SIM卡，要换一个其他SIM卡，输出原来和更换后的卡号。</li>
+<li>代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Example4_9</span> </span>&#123;</span><br><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">	   	Scanner reader = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">	   	System.out.println(<span class="string">&quot;输入手机卡号：&quot;</span>);</span><br><span class="line">       	SIM simOne = <span class="keyword">new</span> SIM(reader.nextLong());</span><br><span class="line">       	MobileTelephone mobile = <span class="keyword">new</span> MobileTelephone();</span><br><span class="line">       	mobile.setSIM(simOne);</span><br><span class="line">       	System.out.println(<span class="string">&quot;原来的手机号码:&quot;</span>+mobile.lookNumber());</span><br><span class="line">       	System.out.println(<span class="string">&quot;更换手机卡的号码为：&quot;</span>);</span><br><span class="line">       	SIM simTwo = <span class="keyword">new</span> SIM(reader.nextLong());</span><br><span class="line">       	mobile.setSIM(simTwo);</span><br><span class="line">       	System.out.println(<span class="string">&quot;更换后的手机号码:&quot;</span>+mobile.lookNumber());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"><span class="doctag">TODO:</span>编写手机卡类 </span></span><br><span class="line"><span class="comment">有long型的变量number</span></span><br><span class="line"><span class="comment">有有参构造方法</span></span><br><span class="line"><span class="comment">还有一个getNumber()获取number</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SIM</span> </span>&#123;</span><br><span class="line">	<span class="keyword">long</span> number;</span><br><span class="line">	SIM(<span class="keyword">long</span> tmp)&#123;</span><br><span class="line">		number=tmp;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setNumber</span><span class="params">(<span class="keyword">long</span> tmp)</span></span>&#123;</span><br><span class="line">        number=tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">long</span> <span class="title">getNumber</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> number;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"><span class="doctag">TODO:</span>编写手机类</span></span><br><span class="line"><span class="comment">有SIM类声明的变量sim</span></span><br><span class="line"><span class="comment">有setSIM()方法设置sim</span></span><br><span class="line"><span class="comment">有lookNumber()方法获取sim中的number</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MobileTelephone</span> </span>&#123;</span><br><span class="line">    SIM sim;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setSIM</span><span class="params">(SIM tmp)</span></span>&#123;</span><br><span class="line">        sim=tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">long</span> <span class="title">lookNumber</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> sim.getNumber();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="5、梯形共享一个下底的问题"><a href="#5、梯形共享一个下底的问题" class="headerlink" title="5、梯形共享一个下底的问题"></a>5、梯形共享一个下底的问题</h3><ul>
+<li>描述：定义一个Lader类，Lader类创建的梯形对象共享同一个下底，设置共享下底值，使用Lader类创建两个梯形，并输出两个梯形的下底。</li>
+<li>代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Example4_10</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">		Scanner reader = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		System.out.println(<span class="string">&quot;输入梯形的共享下底：&quot;</span>);</span><br><span class="line">		Lader1.bottom=reader.nextDouble();     <span class="comment">//Lader1的字节码被加载到内存,通过类名操作类变量</span></span><br><span class="line">		Lader1 laderOne=<span class="keyword">new</span> Lader1();</span><br><span class="line">		Lader1 laderTwo=<span class="keyword">new</span> Lader1();</span><br><span class="line">		System.out.println(<span class="string">&quot;laderOne的下底:&quot;</span>+laderOne.getBottom());</span><br><span class="line">		System.out.println(<span class="string">&quot;laderTwo的下底:&quot;</span>+laderTwo.getBottom());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lader1</span> </span>&#123;</span><br><span class="line">	<span class="keyword">double</span> above,height;       <span class="comment">//实例变量，上底和高</span></span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">double</span> bottom;     <span class="comment">//类变量，下底</span></span><br><span class="line">	<span class="comment">/*TODO：设置上底字段的值</span></span><br><span class="line"><span class="comment">    功能描述：把传入的参数作为上底的值，赋值给字段</span></span><br><span class="line"><span class="comment">	参数说明：a传入的上底值</span></span><br><span class="line"><span class="comment">    返回值说明：无</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">setAbove</span><span class="params">(<span class="keyword">double</span> a)</span> </span>&#123;</span><br><span class="line">		above=a;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*TODO：设置下底字段的值</span></span><br><span class="line"><span class="comment">   	功能描述：把传入的参数作为下底的值，赋值给字段</span></span><br><span class="line"><span class="comment">	参数说明：b传入的下底值</span></span><br><span class="line"><span class="comment">    返回值说明：无</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">setBottom</span><span class="params">(<span class="keyword">double</span> b)</span> </span>&#123;</span><br><span class="line">		bottom=b;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">/*TODO：获取上底</span></span><br><span class="line"><span class="comment">    功能描述：获取上底字段的值并返回</span></span><br><span class="line"><span class="comment">	参数说明：无</span></span><br><span class="line"><span class="comment">    返回值说明：上底的值</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="function"><span class="keyword">double</span> <span class="title">getAbove</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> above;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">/*TODO：获取下底</span></span><br><span class="line"><span class="comment">    功能描述：获取下底字段的值并返回</span></span><br><span class="line"><span class="comment">	参数说明：无</span></span><br><span class="line"><span class="comment">    返回值说明：下底的值</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="function"><span class="keyword">double</span> <span class="title">getBottom</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> bottom;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="6、二分法查询"><a href="#6、二分法查询" class="headerlink" title="6、二分法查询"></a>6、二分法查询</h3><ul>
+<li>描述：定义一个int型数组并初始化，将数组从小到大排序，然后使用二分法判断用户从键盘输入的整数是否和数组中某个元素的值相同，即是否在数组中，最后打印输出和哪个元素值相同，或者不与数组中任何元素值相同。</li>
+<li>代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Example4_11</span> </span>&#123;</span><br><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">      	Scanner scanner = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">      	<span class="keyword">int</span> [] a=&#123;<span class="number">12</span>,<span class="number">34</span>,<span class="number">9</span>,<span class="number">23</span>,<span class="number">45</span>,<span class="number">6</span>,<span class="number">45</span>,<span class="number">90</span>,<span class="number">123</span>,<span class="number">19</span>,<span class="number">34</span>&#125;;</span><br><span class="line">      	<span class="comment">//<span class="doctag">TODO:</span>调用Arrays的sort方法排序a数组</span></span><br><span class="line">      	Arrays.sort(a);</span><br><span class="line">      	System.out.println(Arrays.toString(a));</span><br><span class="line">      	System.out.println(<span class="string">&quot;输入整数，程序判断该整数是否在数组中:&quot;</span>);</span><br><span class="line">      	<span class="keyword">int</span> number = scanner.nextInt();</span><br><span class="line">      	<span class="comment">/*</span></span><br><span class="line"><span class="comment">      	<span class="doctag">TODO:</span>用Arrays.binarySearch(a,number)获得number数值在a数组中的序号</span></span><br><span class="line"><span class="comment">      	并把结果赋给int类型的index</span></span><br><span class="line"><span class="comment">      	*/</span></span><br><span class="line">      	<span class="keyword">int</span> index = Arrays.binarySearch(a,number); </span><br><span class="line">      	<span class="keyword">if</span>(index&gt;=<span class="number">0</span>)</span><br><span class="line">        	System.out.println(number+<span class="string">&quot;和数组中索引为&quot;</span>+index+<span class="string">&quot;的元素值相同&quot;</span>);</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">         	System.out.println(number+<span class="string">&quot;不与数组中任何元素值相同&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="7、类中方法重载的实现"><a href="#7、类中方法重载的实现" class="headerlink" title="7、类中方法重载的实现"></a>7、类中方法重载的实现</h3><ul>
+<li>描述：定义一个B类，有两个相同名称的方法hello,参数不同，一个方法是将两个整数相加，另一个是将两个小数相乘，根据提示从键盘输入四个数值，调用B类中的hello方法，并将结果打印。</li>
+<li>代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"><span class="doctag">TODO:</span>在类B中编写两个方法名为hello的方法</span></span><br><span class="line"><span class="comment">第一个方法：参数为两个整数a,b返回两个数的和</span></span><br><span class="line"><span class="comment">第二个方法：参数为double型的a,b返回两个数的积</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">hello</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a+b;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">hello</span><span class="params">(<span class="keyword">double</span> a, <span class="keyword">double</span> b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a*b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Example4_12</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">    	Scanner reader = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">    	System.out.println(<span class="string">&quot;请输入两个整数：&quot;</span>);</span><br><span class="line">    	<span class="keyword">int</span> b = reader.nextInt();</span><br><span class="line">    	<span class="keyword">int</span> a = reader.nextInt();</span><br><span class="line">    	System.out.println(<span class="string">&quot;输入两个小数：&quot;</span>);</span><br><span class="line">    	<span class="keyword">double</span> c = reader.nextDouble();</span><br><span class="line">    	<span class="keyword">double</span> d = reader.nextDouble();</span><br><span class="line">      	<span class="comment">//<span class="doctag">TODO:</span>创建B对象</span></span><br><span class="line">      	B tom=<span class="keyword">new</span> B();</span><br><span class="line">      	System.out.println(<span class="string">&quot;两个整数调用hello方法的结果：&quot;</span>);</span><br><span class="line">      	System.out.println(tom.hello(a,b));</span><br><span class="line">      	System.out.println(<span class="string">&quot;两个小数调用hello方法的结果：&quot;</span>);</span><br><span class="line">      	System.out.println(tom.hello(c,d));</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="8、求圆和梯形的面积"><a href="#8、求圆和梯形的面积" class="headerlink" title="8、求圆和梯形的面积"></a>8、求圆和梯形的面积</h3><ul>
+<li>描述：定义学生类、梯形类、圆类，在梯形类和圆类中都有一个计算面积的方法，学生类中有两个获得圆面积和梯形面积的computerArea方法，测试创建一个学生zhang，设置圆的半径和梯形的上底、下底、高，调用zhang的computerArea方法，得到圆和梯形的面积，并打印输出。</li>
+<li>代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Example4_13</span> </span>&#123;</span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">	  Scanner reader = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">	  System.out.println(<span class="string">&quot;请输入圆的半径：&quot;</span>);</span><br><span class="line">      Circle1 circle = <span class="keyword">new</span> Circle1();</span><br><span class="line">      circle.setRadius(reader.nextDouble());</span><br><span class="line">      System.out.println(<span class="string">&quot;请输入梯形的上底、下底、高：&quot;</span>);</span><br><span class="line">      Tixing lader = <span class="keyword">new</span> Tixing(reader.nextDouble(),reader.nextDouble(),reader.nextDouble());</span><br><span class="line">      Student zhang = <span class="keyword">new</span> Student();</span><br><span class="line">      System.out.println(<span class="string">&quot;zhang计算圆的面积：&quot;</span>);</span><br><span class="line">      <span class="keyword">double</span> result=zhang.computerArea(circle);</span><br><span class="line">      System.out.println(result);</span><br><span class="line">      System.out.println(<span class="string">&quot;zhang计算梯形的面积：&quot;</span>);</span><br><span class="line">      result=zhang.computerArea(lader);</span><br><span class="line">      System.out.println(result);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">Circle1</span> </span>&#123;</span><br><span class="line">    <span class="keyword">double</span> radius,area;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">    <span class="doctag">TODO:</span>设置半径</span></span><br><span class="line"><span class="comment">    功能描述：初始化半径radius</span></span><br><span class="line"><span class="comment">    参数说明：r传入的半径值</span></span><br><span class="line"><span class="comment">    返回值说明：无</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setRadius</span><span class="params">(<span class="keyword">double</span> r)</span> </span>&#123;</span><br><span class="line">        radius=r;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    <span class="doctag">TODO:</span>求圆的面积</span></span><br><span class="line"><span class="comment">    功能描述：根据求圆面积的公式，编写代码，求圆面积的值</span></span><br><span class="line"><span class="comment">    参数说明：无</span></span><br><span class="line"><span class="comment">    返回值说明：圆面积值</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">getArea</span><span class="params">()</span></span>&#123;</span><br><span class="line">        area=<span class="number">3.14</span>*radius*radius;</span><br><span class="line">        <span class="keyword">return</span> area;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">Tixing</span> </span>&#123;</span><br><span class="line">   <span class="keyword">double</span> above,bottom,height;</span><br><span class="line">   <span class="comment">/*</span></span><br><span class="line"><span class="comment">   <span class="doctag">TODO:</span>初始化变量</span></span><br><span class="line"><span class="comment">   功能描述：分别初始化above、bottom、height三个变量值为a、b、h</span></span><br><span class="line"><span class="comment">   参数说明：a，b，h分别对应梯形的上底、下底、高</span></span><br><span class="line"><span class="comment">   返回值说明：无</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">   Tixing(<span class="keyword">double</span> a,<span class="keyword">double</span> b,<span class="keyword">double</span> h) &#123;</span><br><span class="line">       above=a;</span><br><span class="line">       bottom=b;</span><br><span class="line">       height=h;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">/*</span></span><br><span class="line"><span class="comment">   <span class="doctag">TODO:</span>求梯形的面积</span></span><br><span class="line"><span class="comment">   功能描述：根据求梯形面积的公式，编写代码求出梯形面积值</span></span><br><span class="line"><span class="comment">   参数说明：无</span></span><br><span class="line"><span class="comment">   返回值说明：梯形面积值</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">   <span class="function"><span class="keyword">double</span> <span class="title">getArea</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="number">0.5</span>*(above+bottom)*height;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">double</span> <span class="title">computerArea</span><span class="params">(Circle1 c)</span> </span>&#123;</span><br><span class="line">      <span class="comment">//TODO：调用Circle1的getArea方法获取面积</span></span><br><span class="line">      <span class="keyword">double</span> area=c.getArea();</span><br><span class="line">      <span class="keyword">return</span> area;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">double</span> <span class="title">computerArea</span><span class="params">(Tixing t)</span> </span>&#123;</span><br><span class="line">      <span class="comment">//TODO：调用Tixing的getArea方法获取面积</span></span><br><span class="line">      <span class="keyword">double</span> area=t.getArea();</span><br><span class="line">      <span class="keyword">return</span> area;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="9、根据输入的名字初始化对象"><a href="#9、根据输入的名字初始化对象" class="headerlink" title="9、根据输入的名字初始化对象"></a>9、根据输入的名字初始化对象</h3><ul>
+<li>描述：定义People1类，包含int型成员变量 leg、hand，String类型变量name，以及有参构造函数，和初始化的方法。获取键盘输入的名字，作为构造函数的参数，初始化对象，并打印对象属性值。</li>
+<li>代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">People1</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> leg,hand;</span><br><span class="line">    String name;</span><br><span class="line">    People1(String s)&#123;</span><br><span class="line">        <span class="comment">//TODO：将参数s赋值给name</span></span><br><span class="line">        name=s;</span><br><span class="line">        <span class="keyword">this</span>.init();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">       leg=<span class="number">2</span>;</span><br><span class="line">       hand=<span class="number">2</span>;</span><br><span class="line">       System.out.println(name+<span class="string">&quot;有&quot;</span>+hand+<span class="string">&quot;只手&quot;</span>+leg+<span class="string">&quot;条腿&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">    	Scanner reader = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">    	System.out.println(<span class="string">&quot;请输入名字：&quot;</span>);</span><br><span class="line">        <span class="comment">//<span class="doctag">TODO:</span>创建People1时，构造方法中的传入参数为输入的值</span></span><br><span class="line">        People1 p=<span class="keyword">new</span> People1(reader.next());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="10、大小写转换"><a href="#10、大小写转换" class="headerlink" title="10、大小写转换"></a>10、大小写转换</h3><ul>
+<li>描述：从键盘输入含有大小写字母的字符串，按回车结束，然后将字符串中的小写字母转换成大写，大写字母转换成小写，并将转换后的字符串输出。</li>
+<li>代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Example4_20</span> </span>&#123; </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[ ])</span> </span>&#123; </span><br><span class="line">	   Scanner reader = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">	   System.out.println(<span class="string">&quot;请输入一串英文字母（回车确认）:&quot;</span>);</span><br><span class="line">      String str = reader.nextLine();</span><br><span class="line">      <span class="keyword">char</span> a[]=<span class="keyword">new</span> <span class="keyword">char</span>[str.length()];</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;str.length();i++) &#123; </span><br><span class="line">         <span class="keyword">if</span>(Character.isLowerCase(str.charAt(i)))    </span><br><span class="line">        	 <span class="comment">//<span class="doctag">TODO:</span> 将小写字母变成大写</span></span><br><span class="line">             a[i]=Character.toUpperCase(str.charAt(i));</span><br><span class="line">         <span class="keyword">else</span> <span class="keyword">if</span>(Character.isUpperCase(str.charAt(i)))</span><br><span class="line">             <span class="comment">//<span class="doctag">TODO:</span> 将大写字母变成小写</span></span><br><span class="line">             a[i]=Character.toLowerCase(str.charAt(i));</span><br><span class="line">         <span class="keyword">else</span></span><br><span class="line">        	 System.out.println(<span class="string">&quot;第&quot;</span>+(i+<span class="number">1</span>)+<span class="string">&quot;个字母&quot;</span>+str.charAt(i)+<span class="string">&quot;输入有误&quot;</span>);</span><br><span class="line">       &#125;</span><br><span class="line">      System.out.println(<span class="string">&quot;大小写转换后的字母：&quot;</span>);</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;a.length;i++)   </span><br><span class="line">         <span class="comment">/*</span></span><br><span class="line"><span class="comment">         <span class="doctag">TODO:</span>输出数组a中的内容</span></span><br><span class="line"><span class="comment">         输出提示：System.out.print(&quot; &quot;+输出内容);</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        System.out.print(<span class="string">&quot; &quot;</span>+a[i]);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="11、求矩形和梯形的面积"><a href="#11、求矩形和梯形的面积" class="headerlink" title="11、求矩形和梯形的面积"></a>11、求矩形和梯形的面积</h3><ul>
+<li>描述：定义一个矩形类和梯形类，分别求矩形面积和梯形的面积，并输出结果。</li>
+<li>代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Example4_5</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">       Scanner reader = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">       <span class="comment">/** <span class="doctag">TODO:</span>创建Rect类对象ractangle **/</span> </span><br><span class="line">       Rect ractangle=<span class="keyword">new</span> Rect();</span><br><span class="line">       System.out.println(<span class="string">&quot;输入矩形的宽：&quot;</span>);</span><br><span class="line">       ractangle.width = reader.nextDouble();</span><br><span class="line">       System.out.println(<span class="string">&quot;输入矩形的高：&quot;</span>);</span><br><span class="line">       ractangle.height = reader.nextDouble();</span><br><span class="line">       <span class="keyword">double</span> area=ractangle.getArea();</span><br><span class="line">       System.out.println(<span class="string">&quot;矩形的面积:&quot;</span>+area);</span><br><span class="line">       <span class="comment">/** <span class="doctag">TODO:</span>创建Lader类对象lader **/</span> </span><br><span class="line">       Lader lader=<span class="keyword">new</span> Lader();</span><br><span class="line">       System.out.println(<span class="string">&quot;输入梯形的上底：&quot;</span>);</span><br><span class="line">       lader.above= reader.nextDouble();</span><br><span class="line">       System.out.println(<span class="string">&quot;输入梯形的下底：&quot;</span>);</span><br><span class="line">       lader.bottom= reader.nextDouble();</span><br><span class="line">       System.out.println(<span class="string">&quot;输入梯形的高：&quot;</span>);</span><br><span class="line">       lader.height= reader.nextDouble();</span><br><span class="line">       area=lader.getArea();</span><br><span class="line">       System.out.println(<span class="string">&quot;梯形的面积:&quot;</span>+area);</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rect</span> </span>&#123;</span><br><span class="line">    <span class="keyword">double</span> width;  <span class="comment">//矩形的宽</span></span><br><span class="line">    <span class="keyword">double</span> height; <span class="comment">//矩形的高</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">getArea</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="comment">/** <span class="doctag">TODO:</span> 求矩形面积 **/</span></span><br><span class="line">       <span class="keyword">return</span> width*height;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lader</span> </span>&#123;</span><br><span class="line">    <span class="keyword">double</span> above;   <span class="comment">//梯形的上底</span></span><br><span class="line">    <span class="keyword">double</span> bottom;  <span class="comment">//梯形的下底</span></span><br><span class="line">    <span class="keyword">double</span> height;  <span class="comment">//梯形的高</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">getArea</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="comment">/**<span class="doctag">TODO:</span>  求梯形面积 **/</span></span><br><span class="line">       <span class="keyword">return</span> <span class="number">0.5</span>*(above+bottom)*height;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="12、分数运算"><a href="#12、分数运算" class="headerlink" title="12、分数运算"></a>12、分数运算</h3><ul>
+<li>描述：定义一个Rational类，编写方法对两个分数做加法减法乘法除法，返回结果为分数，从键盘输入两个数的分子和分母，对这两个数求加减乘除，并输出结果。</li>
+<li>代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Example4_23</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">      Scanner reader = <span class="keyword">new</span> Scanner(System.in); </span><br><span class="line">      Rational r1=<span class="keyword">new</span> Rational();</span><br><span class="line">      r1.setNumerator(reader.nextInt());</span><br><span class="line">      r1.setDenominator(reader.nextInt());</span><br><span class="line">      Rational r2=<span class="keyword">new</span> Rational();</span><br><span class="line">      r2.setNumerator(reader.nextInt());</span><br><span class="line">      r2.setDenominator(reader.nextInt());</span><br><span class="line">      Rational result=r1.add(r2); </span><br><span class="line">      <span class="keyword">int</span> a=result.getNumerator();</span><br><span class="line">      <span class="keyword">int</span> b=result.getDenominator();  </span><br><span class="line">      System.out.println(<span class="string">&quot;求和： &quot;</span>+a+<span class="string">&quot;/&quot;</span>+b);</span><br><span class="line">      result=r1.sub(r2);</span><br><span class="line">      a=result.getNumerator();</span><br><span class="line">      b=result.getDenominator();    </span><br><span class="line">      System.out.println(<span class="string">&quot;求差： &quot;</span>+a+<span class="string">&quot;/&quot;</span>+b);</span><br><span class="line">      result=r1.muti(r2); </span><br><span class="line">      a=result.getNumerator();</span><br><span class="line">      b=result.getDenominator();  </span><br><span class="line">      System.out.println(<span class="string">&quot;求积：&quot;</span>+a+<span class="string">&quot;/&quot;</span>+b);</span><br><span class="line">      result=r1.div(r2);</span><br><span class="line">      a=result.getNumerator();</span><br><span class="line">      b=result.getDenominator();   </span><br><span class="line">      System.out.println(<span class="string">&quot;求商： &quot;</span>+a+<span class="string">&quot;/&quot;</span>+b);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rational</span> </span>&#123;</span><br><span class="line">   <span class="keyword">int</span> numerator = <span class="number">1</span> ;   <span class="comment">//分子</span></span><br><span class="line">   <span class="keyword">int</span> denominator = <span class="number">1</span>; <span class="comment">//分母</span></span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">setNumerator</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;  <span class="comment">//设置分子</span></span><br><span class="line">      <span class="keyword">int</span> c=f(Math.abs(a),denominator);  <span class="comment">//计算最大公约数</span></span><br><span class="line">      numerator = a/c; </span><br><span class="line">      denominator = denominator/c;</span><br><span class="line">      <span class="keyword">if</span>(numerator&lt;<span class="number">0</span>&amp;&amp;denominator&lt;<span class="number">0</span>) &#123;</span><br><span class="line">          numerator = -numerator;</span><br><span class="line">          denominator = -denominator;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">setDenominator</span><span class="params">(<span class="keyword">int</span> b)</span> </span>&#123;  <span class="comment">//设置分母</span></span><br><span class="line">      <span class="keyword">int</span> c=f(numerator,Math.abs(b));  <span class="comment">//计算最大公约数</span></span><br><span class="line">      numerator = numerator/c;</span><br><span class="line">      denominator = b/c;</span><br><span class="line">      <span class="keyword">if</span>(numerator&lt;<span class="number">0</span>&amp;&amp;denominator&lt;<span class="number">0</span>) &#123;</span><br><span class="line">          numerator = -numerator;</span><br><span class="line">          denominator = -denominator;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">int</span> <span class="title">getNumerator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> numerator;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">int</span> <span class="title">getDenominator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     <span class="keyword">return</span> denominator;</span><br><span class="line">   &#125;  </span><br><span class="line">   <span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span> </span>&#123; <span class="comment">//求a和b的最大公约数</span></span><br><span class="line">      <span class="keyword">if</span>(a==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">if</span>(a&lt;b) &#123;</span><br><span class="line">         <span class="keyword">int</span> c=a;</span><br><span class="line">         a=b;</span><br><span class="line">         b=c; </span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">int</span> r=a%b;</span><br><span class="line">      <span class="keyword">while</span>(r!=<span class="number">0</span>) &#123;</span><br><span class="line">         a=b;</span><br><span class="line">         b=r;</span><br><span class="line">         r=a%b;</span><br><span class="line">      &#125; </span><br><span class="line">      <span class="keyword">return</span> b;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function">Rational <span class="title">add</span><span class="params">(Rational r)</span> </span>&#123;  <span class="comment">//加法运算</span></span><br><span class="line">      <span class="keyword">int</span> a=r.getNumerator();</span><br><span class="line">      <span class="keyword">int</span> b=r.getDenominator();</span><br><span class="line">      <span class="keyword">int</span> newNumerator=numerator*b+denominator*a; <span class="comment">//计算出新分子</span></span><br><span class="line">      <span class="keyword">int</span> newDenominator=denominator*b;           <span class="comment">//计算出新分母</span></span><br><span class="line">      Rational result=<span class="keyword">new</span> Rational(); </span><br><span class="line">      result.setNumerator(newNumerator);</span><br><span class="line">      result.setDenominator(newDenominator);</span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function">Rational <span class="title">sub</span><span class="params">(Rational r)</span> </span>&#123;  <span class="comment">//减法运算</span></span><br><span class="line">      <span class="keyword">int</span> a=r.getNumerator();</span><br><span class="line">      <span class="keyword">int</span> b=r.getDenominator();</span><br><span class="line">      <span class="keyword">int</span> newNumerator=numerator*b-denominator*a;</span><br><span class="line">      <span class="keyword">int</span> newDenominator=denominator*b;</span><br><span class="line">      Rational result=<span class="keyword">new</span> Rational(); </span><br><span class="line">      result.setNumerator(newNumerator);</span><br><span class="line">      result.setDenominator(newDenominator);</span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function">Rational <span class="title">muti</span><span class="params">(Rational r)</span> </span>&#123; <span class="comment">//乘法运算</span></span><br><span class="line">      <span class="keyword">int</span> a=r.getNumerator();</span><br><span class="line">      <span class="keyword">int</span> b=r.getDenominator();</span><br><span class="line">      <span class="keyword">int</span> newNumerator=numerator*a;</span><br><span class="line">      <span class="keyword">int</span> newDenominator=denominator*b;</span><br><span class="line">      Rational result=<span class="keyword">new</span> Rational(); </span><br><span class="line">      result.setNumerator(newNumerator);</span><br><span class="line">      result.setDenominator(newDenominator);</span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function">Rational <span class="title">div</span><span class="params">(Rational r)</span>  </span>&#123; <span class="comment">//除法运算</span></span><br><span class="line">      <span class="keyword">int</span> a=r.getNumerator();</span><br><span class="line">      <span class="keyword">int</span> b=r.getDenominator();</span><br><span class="line">      <span class="keyword">int</span> newNumerator=numerator*b;</span><br><span class="line">      <span class="keyword">int</span> newDenominator=denominator*a;</span><br><span class="line">      Rational result=<span class="keyword">new</span> Rational(); </span><br><span class="line">      result.setNumerator(newNumerator);</span><br><span class="line">      result.setDenominator(newDenominator);</span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="13、求前n项之和"><a href="#13、求前n项之和" class="headerlink" title="13、求前n项之和"></a>13、求前n项之和</h3><ul>
+<li>描述：从键盘输入一个为n的项数,按回车结束,计算2/1+3/2+4/3+…+(n+1)/n之和，结果用分数表示和小数，并输出。</li>
+<li>代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Example4_24</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">	   Scanner reader = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">      <span class="keyword">int</span> n=reader.nextInt(),k=<span class="number">1</span>,a=<span class="number">0</span>,b=<span class="number">0</span>;</span><br><span class="line">      System.out.println(<span class="string">&quot;前&quot;</span>+n+<span class="string">&quot;项求和：&quot;</span>);</span><br><span class="line">      Rational sum=<span class="keyword">new</span> Rational();</span><br><span class="line">      sum.setNumerator(<span class="number">0</span>);</span><br><span class="line">      Rational item=<span class="keyword">new</span> Rational();</span><br><span class="line">      item.setNumerator(<span class="number">2</span>);</span><br><span class="line">      item.setDenominator(<span class="number">1</span>);</span><br><span class="line">      sum=sum.add(item);</span><br><span class="line">      a=<span class="number">2</span>;</span><br><span class="line">      b=<span class="number">1</span>;</span><br><span class="line">      <span class="keyword">while</span>(k&lt;n) &#123;</span><br><span class="line">         <span class="comment">//求前n项和的分子和分母</span></span><br><span class="line">         <span class="comment">// TODO：</span></span><br><span class="line">         item.setNumerator(a+b);</span><br><span class="line">         item.setDenominator(a);</span><br><span class="line">         sum=sum.add(item);</span><br><span class="line">         <span class="keyword">int</span> temp=a;</span><br><span class="line">         a=a+b;</span><br><span class="line">         b=temp;</span><br><span class="line">         k++;</span><br><span class="line">      &#125; </span><br><span class="line">      a=sum.getNumerator();</span><br><span class="line">      b=sum.getDenominator();</span><br><span class="line">      System.out.println(<span class="string">&quot;用分数表示:&quot;</span>);</span><br><span class="line">      System.out.println(a+<span class="string">&quot;/&quot;</span>+b);</span><br><span class="line">      <span class="keyword">double</span> doubleResult=(a*<span class="number">1.0</span>)/b;</span><br><span class="line">      System.out.println(<span class="string">&quot;用小数表示:&quot;</span>);</span><br><span class="line">      System.out.print(doubleResult); </span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rational</span> </span>&#123;</span><br><span class="line">   <span class="keyword">int</span> numerator = <span class="number">1</span> ;   <span class="comment">//分子</span></span><br><span class="line">   <span class="keyword">int</span> denominator = <span class="number">1</span>; <span class="comment">//分母</span></span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">setNumerator</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;  <span class="comment">//设置分子</span></span><br><span class="line">      <span class="keyword">int</span> c=f(Math.abs(a),denominator);  <span class="comment">//计算最大公约数</span></span><br><span class="line">      numerator = a/c; </span><br><span class="line">      denominator = denominator/c;</span><br><span class="line">      <span class="keyword">if</span>(numerator&lt;<span class="number">0</span>&amp;&amp;denominator&lt;<span class="number">0</span>) &#123;</span><br><span class="line">          numerator = -numerator;</span><br><span class="line">          denominator = -denominator;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">setDenominator</span><span class="params">(<span class="keyword">int</span> b)</span> </span>&#123;  <span class="comment">//设置分母</span></span><br><span class="line">      <span class="keyword">int</span> c=f(numerator,Math.abs(b));  <span class="comment">//计算最大公约数</span></span><br><span class="line">      numerator = numerator/c;</span><br><span class="line">      denominator = b/c;</span><br><span class="line">      <span class="keyword">if</span>(numerator&lt;<span class="number">0</span>&amp;&amp;denominator&lt;<span class="number">0</span>) &#123;</span><br><span class="line">          numerator = -numerator;</span><br><span class="line">          denominator = -denominator;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">int</span> <span class="title">getNumerator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> numerator;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">int</span> <span class="title">getDenominator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     <span class="keyword">return</span> denominator;</span><br><span class="line">   &#125;  </span><br><span class="line">   <span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span> </span>&#123; <span class="comment">//求a和b的最大公约数</span></span><br><span class="line">      <span class="keyword">if</span>(a==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">if</span>(a&lt;b) &#123;</span><br><span class="line">         <span class="keyword">int</span> c=a;</span><br><span class="line">         a=b;</span><br><span class="line">         b=c; </span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">int</span> r=a%b;</span><br><span class="line">      <span class="keyword">while</span>(r!=<span class="number">0</span>) &#123;</span><br><span class="line">         a=b;</span><br><span class="line">         b=r;</span><br><span class="line">         r=a%b;</span><br><span class="line">      &#125; </span><br><span class="line">      <span class="keyword">return</span> b;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function">Rational <span class="title">add</span><span class="params">(Rational r)</span> </span>&#123;  <span class="comment">//加法运算</span></span><br><span class="line">      <span class="keyword">int</span> a=r.getNumerator();</span><br><span class="line">      <span class="keyword">int</span> b=r.getDenominator();</span><br><span class="line">      <span class="keyword">int</span> newNumerator=numerator*b+denominator*a; <span class="comment">//计算出新分子</span></span><br><span class="line">      <span class="keyword">int</span> newDenominator=denominator*b;           <span class="comment">//计算出新分母</span></span><br><span class="line">      Rational result=<span class="keyword">new</span> Rational(); </span><br><span class="line">      result.setNumerator(newNumerator);</span><br><span class="line">      result.setDenominator(newDenominator);</span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function">Rational <span class="title">sub</span><span class="params">(Rational r)</span> </span>&#123;  <span class="comment">//减法运算</span></span><br><span class="line">      <span class="keyword">int</span> a=r.getNumerator();</span><br><span class="line">      <span class="keyword">int</span> b=r.getDenominator();</span><br><span class="line">      <span class="keyword">int</span> newNumerator=numerator*b-denominator*a;</span><br><span class="line">      <span class="keyword">int</span> newDenominator=denominator*b;</span><br><span class="line">      Rational result=<span class="keyword">new</span> Rational(); </span><br><span class="line">      result.setNumerator(newNumerator);</span><br><span class="line">      result.setDenominator(newDenominator);</span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function">Rational <span class="title">muti</span><span class="params">(Rational r)</span> </span>&#123; <span class="comment">//乘法运算</span></span><br><span class="line">      <span class="keyword">int</span> a=r.getNumerator();</span><br><span class="line">      <span class="keyword">int</span> b=r.getDenominator();</span><br><span class="line">      <span class="keyword">int</span> newNumerator=numerator*a;</span><br><span class="line">      <span class="keyword">int</span> newDenominator=denominator*b;</span><br><span class="line">      Rational result=<span class="keyword">new</span> Rational(); </span><br><span class="line">      result.setNumerator(newNumerator);</span><br><span class="line">      result.setDenominator(newDenominator);</span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function">Rational <span class="title">div</span><span class="params">(Rational r)</span>  </span>&#123; <span class="comment">//除法运算</span></span><br><span class="line">      <span class="keyword">int</span> a=r.getNumerator();</span><br><span class="line">      <span class="keyword">int</span> b=r.getDenominator();</span><br><span class="line">      <span class="keyword">int</span> newNumerator=numerator*b;</span><br><span class="line">      <span class="keyword">int</span> newDenominator=denominator*a;</span><br><span class="line">      Rational result=<span class="keyword">new</span> Rational(); </span><br><span class="line">      result.setNumerator(newNumerator);</span><br><span class="line">      result.setDenominator(newDenominator);</span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="14、求分数评定的最后得分"><a href="#14、求分数评定的最后得分" class="headerlink" title="14、求分数评定的最后得分"></a>14、求分数评定的最后得分</h3><blockquote>
+<p>就是不能通过，很申必，我觉得代码没问题就贴上来了</p>
+</blockquote>
+<ul>
+<li>描述：用流水线完成分数评定,其中InputScore类的对象负责录入分数,InputScore类组合了DelScore类的对象；DelScore类的对象负责去掉一个最高分和一个最低分,DelScore类组合了ComputerAver类对象;ComputerAver类对象负责计算平均值;Line类组合了InputScore、DelScore和ComputerAver三个类的实例,从键盘输入评委数和每位评委的评分，根据规则计算出平均分,并输出。</li>
+<li>代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingGame</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">      Line line=<span class="keyword">new</span>  Line();</span><br><span class="line">      line.givePersonScore();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InputScore</span> </span>&#123;</span><br><span class="line">   DelScore del ;</span><br><span class="line">   InputScore(DelScore del) &#123;</span><br><span class="line">       <span class="comment">/** <span class="doctag">TODO:</span> 给类成员变量del赋值 **/</span></span><br><span class="line">	   <span class="keyword">this</span>.del=del;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">inputScore</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;请输入评委数&quot;</span>);</span><br><span class="line">      Scanner read=<span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">      <span class="keyword">int</span> count = read.nextInt();</span><br><span class="line">      System.out.println(<span class="string">&quot;请输入各个评委的分数&quot;</span>);</span><br><span class="line">      <span class="keyword">double</span> []a = <span class="keyword">new</span> <span class="keyword">double</span>[count];</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;count;i++) &#123;</span><br><span class="line">           a[i]=read.nextDouble();</span><br><span class="line">      &#125;</span><br><span class="line">      del.doDelete(a);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Line</span> </span>&#123;</span><br><span class="line">    InputScore one;</span><br><span class="line">    DelScore two;</span><br><span class="line">    ComputerAver three;  </span><br><span class="line">    Line()&#123;</span><br><span class="line">       <span class="comment">/** <span class="doctag">TODO:</span> 给类成员变量one，two，three赋值 **/</span></span><br><span class="line">    	three=<span class="keyword">new</span> ComputerAver();</span><br><span class="line">    	two=<span class="keyword">new</span> DelScore(three);</span><br><span class="line">    	one= <span class="keyword">new</span> InputScore(two);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">givePersonScore</span><span class="params">()</span></span>&#123; </span><br><span class="line">       one.inputScore();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ComputerAver</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">giveAver</span><span class="params">(<span class="keyword">double</span> [] b)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">double</span> sum=<span class="number">0</span>;</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span>;i&lt;b.length;i++) &#123;  </span><br><span class="line">         sum = sum+ b[i];</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">double</span> aver=sum/b.length;</span><br><span class="line">      System.out.print(<span class="string">&quot;选手最后得分&quot;</span>+aver);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DelScore</span> </span>&#123;</span><br><span class="line">   ComputerAver computer ;</span><br><span class="line">   DelScore(ComputerAver computer) &#123;</span><br><span class="line">       <span class="keyword">this</span>.computer = computer;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doDelete</span><span class="params">(<span class="keyword">double</span> [] a)</span> </span>&#123;</span><br><span class="line">       <span class="comment">/** <span class="doctag">TODO:</span> 数组a从小到大排序 **/</span></span><br><span class="line">       java.util.Arrays.sort(a);</span><br><span class="line">      System.out.print(<span class="string">&quot;去掉一个最高分:&quot;</span>+a[a.length-<span class="number">1</span>]+<span class="string">&quot;，&quot;</span>);</span><br><span class="line">      System.out.print(<span class="string">&quot;去掉一个最低分:&quot;</span>+a[<span class="number">0</span>]+<span class="string">&quot;。&quot;</span>);  </span><br><span class="line">      <span class="keyword">double</span> b[] =<span class="keyword">new</span> <span class="keyword">double</span>[a.length-<span class="number">2</span>];</span><br><span class="line">       <span class="comment">/** <span class="doctag">TODO:</span> 给b赋值，去掉最高分和最低分 **/</span></span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;a.length-<span class="number">2</span>;i++) &#123;<span class="comment">//去掉最高分和最低分</span></span><br><span class="line">  		b[i] = a[i+<span class="number">1</span>];</span><br><span class="line">      &#125;</span><br><span class="line">      computer.giveAver(b);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <div>
+       
+        <div>
+     
+        <div style="text-align:center;color:#bfbfbf;font-size:16px;"> 
+            <span>-------- 本文结束 </span>
+                <i class="fa fa-balance-scale" aria-hidden="true"></i> 
+            <span> 感谢阅读 --------</span> 
+        </div> 
+    
+</div> 
+      
+    </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+              <a href="/tags/%E7%BB%83%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 练习</a>
+          </div>
+
+      <div>
+        
+          
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/java_study_note_2/">【Java】Java学习笔记（2）Java面向对象基础作业函数题</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问  的个人博客"></a></p>
+  <p><span>发布时间:</span>2020年07月18日 - 15:07</p>
+  <p><span>最后更新:</span>2022年08月27日 - 14:08</p>
+  <p><span>原始链接:</span><a href="/java_study_note_2/" title="【Java】Java学习笔记（2）Java面向对象基础作业函数题">https://megalomania.icu/java_study_note_2/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://megalomania.icu/java_study_note_2/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"  aria-hidden="true"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+	  $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
+        
+      </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/java_study_note_1/" rel="prev" title="【Java】Java学习笔记（1）Java语言基础作业函数题">
+      <i class="fa fa-chevron-left"></i> 【Java】Java学习笔记（1）Java语言基础作业函数题
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/java_study_note_3/" rel="next" title="【Java】Java学习笔记（3）Java继承作业函数题">
+      【Java】Java学习笔记（3）Java继承作业函数题 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E6%B1%82%E4%B8%A4%E4%B8%AA%E6%95%B0%E5%80%BC%E4%B9%8B%E5%92%8C"><span class="nav-text">1、求两个数值之和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E6%A8%A1%E6%8B%9F%E6%94%B6%E9%9F%B3%E6%9C%BA%E7%94%B5%E6%B1%A0%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5"><span class="nav-text">2、模拟收音机电池使用情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E6%B1%82%E5%9C%86%E9%94%A5%E7%9A%84%E4%BD%93%E7%A7%AF"><span class="nav-text">3、求圆锥的体积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E6%A8%A1%E6%8B%9F%E6%89%8B%E6%9C%BA%E5%92%8CSIM%E5%8D%A1%E7%9A%84%E7%BB%84%E5%90%88%E5%85%B3%E7%B3%BB"><span class="nav-text">4、模拟手机和SIM卡的组合关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81%E6%A2%AF%E5%BD%A2%E5%85%B1%E4%BA%AB%E4%B8%80%E4%B8%AA%E4%B8%8B%E5%BA%95%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-text">5、梯形共享一个下底的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%E3%80%81%E4%BA%8C%E5%88%86%E6%B3%95%E6%9F%A5%E8%AF%A2"><span class="nav-text">6、二分法查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7%E3%80%81%E7%B1%BB%E4%B8%AD%E6%96%B9%E6%B3%95%E9%87%8D%E8%BD%BD%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-text">7、类中方法重载的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8%E3%80%81%E6%B1%82%E5%9C%86%E5%92%8C%E6%A2%AF%E5%BD%A2%E7%9A%84%E9%9D%A2%E7%A7%AF"><span class="nav-text">8、求圆和梯形的面积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9%E3%80%81%E6%A0%B9%E6%8D%AE%E8%BE%93%E5%85%A5%E7%9A%84%E5%90%8D%E5%AD%97%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AF%B9%E8%B1%A1"><span class="nav-text">9、根据输入的名字初始化对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10%E3%80%81%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2"><span class="nav-text">10、大小写转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11%E3%80%81%E6%B1%82%E7%9F%A9%E5%BD%A2%E5%92%8C%E6%A2%AF%E5%BD%A2%E7%9A%84%E9%9D%A2%E7%A7%AF"><span class="nav-text">11、求矩形和梯形的面积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12%E3%80%81%E5%88%86%E6%95%B0%E8%BF%90%E7%AE%97"><span class="nav-text">12、分数运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13%E3%80%81%E6%B1%82%E5%89%8Dn%E9%A1%B9%E4%B9%8B%E5%92%8C"><span class="nav-text">13、求前n项之和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14%E3%80%81%E6%B1%82%E5%88%86%E6%95%B0%E8%AF%84%E5%AE%9A%E7%9A%84%E6%9C%80%E5%90%8E%E5%BE%97%E5%88%86"><span class="nav-text">14、求分数评定的最后得分</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Shaw Wei"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Shaw Wei</p>
+  <div class="site-description" itemprop="description">Just do it.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Shaw-W" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Shaw-W" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:shaw.wei@qq.com" title="E-Mail → mailto:shaw.wei@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/weixin_44544583" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_44544583" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">粤ICP备20050867号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-balance-scale"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shaw Wei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+<span id="sitetime"></span>
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* 
+		Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+		year - 作为date对象的年份，为4位年份值
+		month - 0-11之间的整数，做为date对象的月份
+		day - 1-31之间的整数，做为date对象的天数
+		hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+		minutes - 0-59之间的整数，做为date对象的分钟数
+		seconds - 0-59之间的整数，做为date对象的秒数
+		microseconds - 0-999之间的整数，做为date对象的毫秒数
+        */
+		var t1 = Date.UTC(2020,06,01,04,00,00); //北京时间2018-2-13 00:00:00
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML="| 已运行"+/*diffYears+" 年 "+*/diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+	}
+	siteTime();
+</script>
+
+<div>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+</div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              Counter('post', '/classes/Counter', { title, url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"r97PRG7qR4NHLbPKyHG6SI78-gzGzoHsz","app_key":"soFAbA0hxFx9sMHAnF3ExDYu","server_url":null,"security":false};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
